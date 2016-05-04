@@ -13,5 +13,46 @@ namespace MooseMus.Controllers
         {
             return View();
         }
+
+        public ActionResult selectProject()
+        {
+            return View();
+        }
+
+        public ActionResult selectProjectPart()
+        {
+            return View();
+        }
+
+        //Nemandi fer í skilasvæði
+        public ActionResult submitAProjectPart()
+        {
+            return View();
+        }
+
+        //Nemandi skilar inn
+        public ActionResult submitProjectPart()
+        {
+            return View();
+        }
+        public ActionResult uploadProjectPart()
+        {
+            return View();
+        }
+
+        public ActionResult goBackToProjects()
+        {
+            return View();
+        }
+
+        public ActionResult goBackToProjectParts()
+        {
+            return View();
+        }
+
+        public ActionResult goBackToCourses()
+        {
+            return View();
+        }
     }
 }
