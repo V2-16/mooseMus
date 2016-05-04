@@ -5,8 +5,11 @@ using System.Web;
 
 namespace MooseMus.Models.ViewModels
 {
-    public class ProjectViewModel
+    public class AddUserViewMode
     {
+        public int userID { get; set; }
         public string name { get; set; }
+        public string email { get; set; }
+        public string password { get; set; }
     }
 }

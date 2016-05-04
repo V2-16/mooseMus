@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MooseMus.Models.ViewModels
 {
-    public class ProjectViewModel
+    public class CourseViewModel
     {
         public string name { get; set; }
     }
