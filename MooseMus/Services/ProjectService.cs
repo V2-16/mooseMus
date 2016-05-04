@@ -12,7 +12,6 @@ namespace MooseMus.Services
         {
             _db = new ApplicationDbContext();
         }
-
         /****************** KENNARI & NEMANDI **************************/
         //Skilar lista af öllum verkefnum í námskeið.
         public List<CourseViewModel> getProjectsByCourseID(int courseID)
