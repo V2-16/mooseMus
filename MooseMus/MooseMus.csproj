@@ -202,7 +202,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Entities\Project.cs" />
+    <Compile Include="Models\Entities\CourseModel.cs" />
+    <Compile Include="Models\Entities\CourseStudentModel.cs" />
+    <Compile Include="Models\Entities\CourseTeacherModel.cs" />
+    <Compile Include="Models\Entities\ProjectModel.cs" />
+    <Compile Include="Models\Entities\ProjectPartModel.cs" />
+    <Compile Include="Models\Entities\ResultModel.cs" />
+    <Compile Include="Models\Entities\UserModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\ProjectViewModel.cs" />
@@ -221,9 +227,6 @@
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
