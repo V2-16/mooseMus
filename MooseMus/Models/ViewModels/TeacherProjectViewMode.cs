@@ -5,8 +5,9 @@ using System.Web;
 
 namespace MooseMus.Models.ViewModels
 {
-    public class ProjectViewModel
+    public class TeacherProjectViewMode
     {
-        public string name { get; set; }
+        public List<UserViewModel> students { get; set; }
+
     }
 }
