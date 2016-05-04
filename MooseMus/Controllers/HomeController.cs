@@ -8,19 +8,19 @@ namespace MooseMus.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult index()
+        public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult about()
+        public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
-        public ActionResult contact()
+        public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
