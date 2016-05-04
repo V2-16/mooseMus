@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MooseMus.Models.ViewModels
 {
-    public class TeacherAddEditViewMode
+    public class TeacherAddEditViewModel
     {
         public int courseID { get; set; }
         public int projectID { get; set; }
