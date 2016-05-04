@@ -14,6 +14,10 @@ namespace MooseMus.Controllers
             return View();
         }
 
+        public ActionResult AdminView()
+        {
+            return View();
+        }
         public ActionResult addUser()
         {
             return View();
