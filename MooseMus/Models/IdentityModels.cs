@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MooseMus.Models.Entities;
 
 namespace MooseMus.Models
 {
@@ -20,6 +21,15 @@ namespace MooseMus.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<CourseModel> course { get; set; }
+        public DbSet<CourseStudentModel> courseStudent { get; set; }
+        public DbSet<CourseTeacherModel> courseTeacher { get; set; }
+        public DbSet<ProjectModel> project { get; set; }
+        public DbSet<ProjectPartModel> projectPart { get; set; }
+        public DbSet<ResultModel> result { get; set; }
+        public DbSet<UserModel> user { get; set; }
+
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
