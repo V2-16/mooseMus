@@ -13,5 +13,40 @@ namespace MooseMus.Controllers
         {
             return View();
         }
+<<<<<<< HEAD
+
+        public ActionResult addUser()
+        {
+            return View();
+        }
+
+        public ActionResult editUser()
+        {
+            return View();
+        }
+
+        public ActionResult addCourse()
+        {
+            return View();
+        }
+
+        public ActionResult editCourse()
+        {
+            return View();
+        }
+
+        //Admin tengir nemanda við námskeið
+        public ActionResult addStudent()
+        {
+            return View();
+        }
+
+        //Admin tengir kennara við námskeið
+        public ActionResult addTeacher()
+        {
+            return View();
+        }
+=======
+>>>>>>> master
     }
 }

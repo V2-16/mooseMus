@@ -26,5 +26,15 @@ namespace MooseMus.Controllers
 
             return View();
         }
+
+        public ActionResult login()
+        {
+            return View();
+        }
+
+        public ActionResult selectCourse()
+        {
+            return View();
+        }
     }
 }
