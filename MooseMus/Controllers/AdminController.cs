@@ -13,7 +13,6 @@ namespace MooseMus.Controllers
         {
             return View();
         }
-<<<<<<< HEAD
 
         public ActionResult addUser()
         {
@@ -46,7 +45,5 @@ namespace MooseMus.Controllers
         {
             return View();
         }
-=======
->>>>>>> master
     }
 }
