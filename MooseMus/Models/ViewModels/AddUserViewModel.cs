@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MooseMus.Models.ViewModels
 {
-    public class AddUserViewMode
+    public class AddUserViewModel
     {
         public int userID { get; set; }
         public string name { get; set; }
