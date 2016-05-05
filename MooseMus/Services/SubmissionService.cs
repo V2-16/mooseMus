@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MooseMus.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,6 +8,12 @@ namespace MooseMus.Services
 {
     public class SubmissionService
     {
+        private ApplicationDbContext _db;
+
+        public SubmissionService() 
+        {
+            _db = new ApplicationDbContext();
+        }
         //skilar inntaki/úttaki forrits sem var sent inn
         public string getFeedback()
         {

@@ -7,8 +7,8 @@ namespace MooseMus.Models.Entities
 {
     public class ResultModel
     {
-        public int submissionID { get; set; }
-        public int partID { get; set; }
+        public int ID { get; set; }
+        public int projectPartID { get; set; }
         public int studentID { get; set; }
         public string result { get; set; }
         public bool accepted { get; set; }

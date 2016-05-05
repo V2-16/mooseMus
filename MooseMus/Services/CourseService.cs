@@ -11,7 +11,7 @@ namespace MooseMus.Services
     {
         private ApplicationDbContext _db;
 
-        public void AssignmentsService() //er ekki alveg viss hvort þetta eigi að vera void
+        public CourseService() 
         {
             _db = new ApplicationDbContext();
         }
