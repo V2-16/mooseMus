@@ -9,4 +9,8 @@
 
         <ol>
             <li>Listi af námskeiðum</li>
+            @foreach (var course in Model.courses)
+            {
+                @course.name
+            }
         </ol>
