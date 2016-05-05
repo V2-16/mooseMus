@@ -11,7 +11,7 @@ namespace MooseMus.Services
     {
         private ApplicationDbContext _db;
 
-        public UserService()
+        public UserService() 
         {
             _db = new ApplicationDbContext();
         }
