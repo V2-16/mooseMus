@@ -32,7 +32,7 @@ namespace MooseMus.Controllers
 
         public ActionResult addUser()
         {
-            return View();
+            return View("Partial/addUser");
         }
 
         public ActionResult editUser()
