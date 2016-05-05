@@ -1,8 +1,26 @@
 ﻿@model MooseMus.Models.ViewModels.AdminHomeViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Admin - Home";
 }
 
-<h2>Index</h2>
+<h2>Admin - home</h2>
 
+<div>
+        <ul>
+            <li>@Html.ActionLink("Create user", "adduser", "Admin")</li>
+            <li>
+                <a href="javascript:addUser();">Create User</a>
+                <script type="text/javascript">
+                    function addUser() {
+                        $('#divResult').load("@Url.Action("addUser","Admin")");
+                    }
+                </script>
+            </li>
+            <li>Edit user</li>
+            <li>Create course</li>
+            <li>Edit course</li>
+        </ul>
+</div>
+<div id="divResult">
+</div>
