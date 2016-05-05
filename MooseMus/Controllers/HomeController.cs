@@ -12,9 +12,22 @@ namespace MooseMus.Controllers
     {
         private UserService _service = new UserService();
 
-        public ActionResult Index()
+        public ActionResult Index(FrontPageViewModel user)
         {
-            return View();
+            if (user == null)
+            {
+                return View();
+            }
+            else
+            {
+                var userID1 = _service.getUserIDByPassword(user.password);
+                var userID2 = _service.getUserIDByUserName(user.userName);
+                if (userID1.Equals(userID2))
+                {
+                    return View();
+                }
+                return View();
+            }
         }
 
         public ActionResult About()
@@ -31,23 +44,10 @@ namespace MooseMus.Controllers
             return View();
         }
 
-        public ActionResult login(FrontPageViewModel user)
+        public ActionResult Login()
         {
-            if(user == null)
-            {
-                return View();
-            }
-            else
-            {
-                var userID1 = _service.getUserIDByPassword(user.password);
-                var userID2 = _service.getUserIDByUserName(user.userName);
-                if (userID1.Equals(userID2))
-                {
-                    return View();
-                }
-                return View();
-            }
-           
+            return View();
+
         }
 
         public ActionResult selectCourse()
