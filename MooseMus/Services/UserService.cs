@@ -32,7 +32,7 @@ namespace MooseMus.Services
 
         public int getUserIDByUserName(string name)
         {
-            var user = _db.user.SingleOrDefault(x => x.name == "us");
+            var user = _db.user.SingleOrDefault(x => x.name == name);
             if(user == null)
             {
                 return 0;
@@ -42,15 +42,13 @@ namespace MooseMus.Services
 
         public int getUserIDByPassword(string password)
         {
-           var user = _db.user.SingleOrDefault(x => x.password == "pass");
+           var user = _db.user.SingleOrDefault(x => x.password == password);
            if (user == null)
            {
                 return 0;
            }
            return user.ID;
         }
-
-        
 
         public string getPasswordByID(int userID)
         {

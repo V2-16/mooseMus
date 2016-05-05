@@ -7,8 +7,9 @@ namespace MooseMus.Models.ViewModels
 {
     public class UserHomeViewModel
     {
+        public int userID { get; set; }
         public string name { get; set; }
         public string email { get; set; }
-        public List<TeacherProjectViewModel> courses { get; set; }
+        public List<CourseViewModel> courses { get; set; }
     }
 }
