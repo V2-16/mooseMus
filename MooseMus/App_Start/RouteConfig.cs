@@ -21,8 +21,8 @@ namespace MooseMus
 
             routes.MapRoute(
                 name: "Admin-login",
-                url: "admin.ru.is",
-                defaults: new { controller = "Admin", action = "index"}
+                url: "Admin/login",
+                defaults: new { controller = "Admin", action = "Index"}
                 );
         }
     }
