@@ -12,9 +12,22 @@ namespace MooseMus.Controllers
     {
         private UserService _service = new UserService();
         // GET: Admin
-        public ActionResult Index()
+        public ActionResult Index(AdminFrontPageViewModel user)
         {
-            return View();
+            if (user == null)
+            {
+                return View();
+            }
+            else
+            {
+                var userID1 = _service.getUserIDByPassword(user.password);
+                var userID2 = _service.getUserIDByUserName(user.userName);
+                if (userID1.Equals(userID2))
+                {
+                    return View();
+                }
+                return View();
+            }
         }
 
         public ActionResult addUser()
@@ -49,23 +62,9 @@ namespace MooseMus.Controllers
             return View();
         }
 
-        public ActionResult login(AdminFrontPageViewModel user)
+        public ActionResult login()
         {
-            if(user == null)
-            {
-                return View();
-            }
-            else
-            {
-                var userID1 = _service.getUserIDByPassword(user.password);
-                var userID2 = _service.getUserIDByUserName(user.userName);
-                if (userID1.Equals(userID2))
-                {
-                    return View();
-                }
-                return View();
-            }
-           
+            return View();
         }
     }
 }
