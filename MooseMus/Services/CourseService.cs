@@ -11,18 +11,11 @@ namespace MooseMus.Services
     {
         private ApplicationDbContext _db;
 
-<<<<<<< HEAD
         public CourseService() 
         {
             _db = new ApplicationDbContext();
         }
-=======
-        public void AssignmentsService() //er ekki alveg viss hvort þetta eigi að vera void
-        {
-            _db = new ApplicationDbContext();
-        }
 
->>>>>>> master
         public void getCourseByID(int courseID)
         {
 
