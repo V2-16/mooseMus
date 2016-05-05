@@ -8,7 +8,6 @@
 
 <div>
         <ul>
-            <li>@Html.ActionLink("Create user", "adduser", "Admin")</li>
             <li>
                 <a href="javascript:addUser();">Create User</a>
                 <script type="text/javascript">
@@ -17,8 +16,17 @@
                     }
                 </script>
             </li>
-            <li>Edit user</li>
-            <li>Create course</li>
+            <li>
+                Edit User
+            </li>
+            <li>
+                <a href="javascript:addCourse();">Create Course</a>
+                <script type="text/javascript">
+                    function addCourse() {
+                        $('#divResult').load("@Url.Action("addCourse","Admin")");
+                    }
+                </script>
+            </li>
             <li>Edit course</li>
         </ul>
 </div>

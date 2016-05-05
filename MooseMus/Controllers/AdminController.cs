@@ -42,7 +42,7 @@ namespace MooseMus.Controllers
 
         public ActionResult addCourse()
         {
-            return View();
+            return View("Partial/addCourse");
         }
 
         public ActionResult editCourse()
