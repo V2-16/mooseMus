@@ -1,4 +1,5 @@
-﻿using MooseMus.Models.ViewModels;
+﻿using MooseMus.Models;
+using MooseMus.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,12 @@ namespace MooseMus.Services
 {
     public class CourseService
     {
+        private ApplicationDbContext _db;
+
+        public CourseService() 
+        {
+            _db = new ApplicationDbContext();
+        }
         public void getCourseByID(int courseID)
         {
 

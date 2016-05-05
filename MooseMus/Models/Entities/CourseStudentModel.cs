@@ -7,7 +7,9 @@ namespace MooseMus.Models.Entities
 {
     public class CourseStudentModel
     {
-        public int courseID { get; set; }
         public int studentID { get; set; }
+        public int courseID { get; set; }
+        public int ID { get; set; }
+
     }
 }

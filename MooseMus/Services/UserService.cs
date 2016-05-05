@@ -11,7 +11,7 @@ namespace MooseMus.Services
     {
         private ApplicationDbContext _db;
 
-        public void AssignmentsService() //er ekki alveg viss hvort þetta eigi að vera void
+        public UserService()
         {
             _db = new ApplicationDbContext();
         }
@@ -30,14 +30,36 @@ namespace MooseMus.Services
 
         }
 
-        public int getUserIDByUserName(string username)
+        public int getUserIDByUserName(string name)
         {
-            return 0;
+            var user = _db.user.SingleOrDefault(x => x.name == "us");
+            if(user == null)
+            {
+                return 0;
+            }
+            return user.ID;
         }
+
+        public int getUserIDByPassword(string password)
+        {
+           var user = _db.user.SingleOrDefault(x => x.password == "pass");
+           if (user == null)
+           {
+                return 0;
+           }
+           return user.ID;
+        }
+
+        
 
         public string getPasswordByID(int userID)
         {
-            return null;
+            var user = _db.user.SingleOrDefault(x => x.ID == userID);
+            if(user == null)
+            {
+                return "0";
+            }
+            return user.password;
         }
 
         //Sækir lista af námskeiðum sem notandi er skráður í (sem nemandi eða kennari)
