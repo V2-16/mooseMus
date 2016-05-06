@@ -4,12 +4,14 @@
     ViewBag.Title = "Login";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>@Model.name</h2>
+<h3>@Model.email</h3>
 
 <ul>      
-    @foreach (var course in Model.courses)
-    {
-        <li>@course.name</li>
-    }
+            @foreach (var course in Model.courses)
+            {
+                var courseName = course.name;
+                <li>@Html.ActionLink(courseName, "CourseChoose", "Home", new { userID = Model.userID, course = courseName }, null)</li>
+            }
 </ul>
 
