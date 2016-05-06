@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MooseMus.Models.ViewModels;
+using MooseMus.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,15 +10,29 @@ namespace MooseMus.Controllers
 {
     public class AdminController : Controller
     {
+        private UserService _service = new UserService();
         // GET: Admin
-        public ActionResult Index()
+        public ActionResult Index(AdminFrontPageViewModel user)
         {
-            return View();
+            if (user == null)
+            {
+                return View();
+            }
+            else
+            {
+                var userID1 = _service.getUserIDByPassword(user.password);
+                var userID2 = _service.getUserIDByUserName(user.userName);
+                if (userID1.Equals(userID2))
+                {
+                    return View();
+                }
+                return View();
+            }
         }
 
         public ActionResult addUser()
         {
-            return View();
+            return View("Partial/addUser");
         }
 
         public ActionResult editUser()
@@ -26,7 +42,7 @@ namespace MooseMus.Controllers
 
         public ActionResult addCourse()
         {
-            return View();
+            return View("Partial/addCourse");
         }
 
         public ActionResult editCourse()
@@ -42,6 +58,11 @@ namespace MooseMus.Controllers
 
         //Admin tengir kennara við námskeið
         public ActionResult addTeacher()
+        {
+            return View();
+        }
+
+        public ActionResult login()
         {
             return View();
         }

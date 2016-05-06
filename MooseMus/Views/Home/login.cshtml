@@ -1,15 +1,15 @@
 ﻿@using MooseMus.Models.ViewModels
 @model UserHomeViewModel
-
 @{
-    ViewBag.Title = "login";
+    ViewBag.Title = "Login";
 }
 
-        <h2>Courses</h2>
+<h2>@ViewBag.Title.</h2>
 
-        <ul>      
-            @foreach (var course in Model.courses)
-            {
-                <li>@course.name</li>
-            }
-        </ul>
+<ul>      
+    @foreach (var course in Model.courses)
+    {
+        <li>@course.name</li>
+    }
+</ul>
+
