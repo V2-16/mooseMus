@@ -37,7 +37,7 @@ namespace MooseMus.Controllers
 
         public ActionResult editUser()
         {
-            return View();
+            return View("Partial/editUser");
         }
 
         public ActionResult addCourse()
@@ -47,7 +47,7 @@ namespace MooseMus.Controllers
 
         public ActionResult editCourse()
         {
-            return View();
+            return View("Partial/editCourse");
         }
 
         //Admin tengir nemanda við námskeið
