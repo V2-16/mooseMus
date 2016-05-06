@@ -18,6 +18,7 @@ namespace MooseMus.Services
         public UserHomeViewModel getUserByID(int userID)
         {
             var user = _db.user.SingleOrDefault(x => x.ID == userID);
+
             List<CourseViewModel> courseNames = getCoursesByUser(userID);
             
             var model = new UserHomeViewModel
@@ -59,6 +60,16 @@ namespace MooseMus.Services
                 return 0;
            }
            return user.ID;
+        }
+
+        public int getUserIDByPasswordAndConfirm(string password, int userID)
+        {
+            var user = _db.user.SingleOrDefault(x => x.password == password && x.ID == userID);
+            if (user == null)
+            {
+                return 0;
+            }
+            return user.ID;
         }
 
         public string getPasswordByID(int userID)
