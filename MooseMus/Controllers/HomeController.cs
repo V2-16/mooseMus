@@ -23,11 +23,14 @@ namespace MooseMus.Controllers
         {
             var userID1 = _service.getUserIDByPassword(user.password);
             var userID2 = _service.getUserIDByUserName(user.userName);
+            if(userID1 == 0)
+            {
+                return View();
+            }
             if (userID1.Equals(userID2))
             {
-                var modell = _service.getUserByID(userID1);
-               // UserHomeViewModel modell = _service.get
-                return View("Login", modell);
+                var model = _service.getUserByID(userID1);
+                return View("Login", model);
             }
             return View();
         }

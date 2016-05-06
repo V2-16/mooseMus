@@ -7,10 +7,9 @@
 
         <h2>Courses</h2>
 
-        <ol>
-            <li>Listi af námskeiðum</li>
+        <ul>      
             @foreach (var course in Model.courses)
             {
-                @course.name
+                <li>@course.name</li>
             }
-        </ol>
+        </ul>
