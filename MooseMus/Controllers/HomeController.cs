@@ -12,9 +12,29 @@ namespace MooseMus.Controllers
     {
         private UserService _service = new UserService();
 
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(FrontPageViewModel user)
+        {
+            var userID1 = _service.getUserIDByPassword(user.password);
+            var userID2 = _service.getUserIDByUserName(user.userName);
+            if (userID1.Equals(userID2))
+            {
+                var modell = _service.getUserByID(userID1);
+               // UserHomeViewModel modell = _service.get
+                return View("Login", modell);
+            }
+            return View();
+        }
+
+        public ActionResult Login(UserHomeViewModel user)
+        {
+            return View(user);
         }
 
         public ActionResult About()
@@ -28,43 +48,6 @@ namespace MooseMus.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
-            return View();
-        }
-
-        public ActionResult login(FrontPageViewModel user)
-        {
-            if(user == null)
-            {
-                return View();
-            }
-            else
-            {
-                List < CourseViewModel > course = new List<CourseViewModel>
-                {
-                    new CourseViewModel {name = "course"}
-                };
-
-                var model = new UserHomeViewModel
-                {
-                    userID = 0,
-                    name = "maria",
-                    email = "maria",
-                    courses = course
-
-                };
-                var userID1 = _service.getUserIDByPassword(user.password);
-                var userID2 = _service.getUserIDByUserName(user.userName);
-                if (userID1.Equals(userID2))
-                {
-                    return View(model);
-                }
-                return View();
-            }
-           
-        }
-
-        public ActionResult selectCourse()
-        {
             return View();
         }
     }
