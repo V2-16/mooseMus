@@ -7,11 +7,14 @@
 <h2>@Model.name</h2>
 <h3>@Model.email</h3>
 
-<ul>      
-            @foreach (var course in Model.courses)
+<ul>
+        @if(Model.courses != null)
+        {
+            foreach (var course in @Model.courses)
             {
                 var courseName = course.name;
                 <li>@Html.ActionLink(courseName, "CourseChoose", "Home", new { userID = Model.userID, course = courseName }, null)</li>
             }
+        }
 </ul>
 
