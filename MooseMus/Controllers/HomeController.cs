@@ -47,6 +47,15 @@ namespace MooseMus.Controllers
             return View(user);
         }
 
+        public ActionResult CourseChoose(int userID, string course)
+        {
+            var user = _service.teacherOrStudent(userID, course);
+            if(user == "teacher")
+            {
+                return RedirectToAction("Index", "Teacher");
+            }
+            return RedirectToAction("Index", "Student");
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

@@ -18,14 +18,8 @@ namespace MooseMus.Services
         public UserHomeViewModel getUserByID(int userID)
         {
             var user = _db.user.SingleOrDefault(x => x.ID == userID);
-            var courses = _db.courseStudent.Where(x => x.studentID == userID).ToList();
-            List<CourseViewModel> courseNames = new List<CourseViewModel> { };
-            foreach(var i in courses)
-            {
-                var course = _db.course.SingleOrDefault(x => x.Id == i.ID);
-                courseNames.Add(new CourseViewModel { name = course.name });
-            };
-
+            List<CourseViewModel> courseNames = getCoursesByUser(userID);
+            
             var model = new UserHomeViewModel
             {
                 userID = user.ID,
@@ -78,9 +72,34 @@ namespace MooseMus.Services
         }
 
         //Sækir lista af námskeiðum sem notandi er skráður í (sem nemandi eða kennari)
-        public UserViewModel getCoursesByUser(int userID)
+        public List<CourseViewModel> getCoursesByUser(int userID)
         {
-            return null;
+            var coursesS = _db.courseStudent.Where(x => x.studentID == userID).ToList();
+            var coursesT = _db.courseTeacher.Where(x => x.teacherID == userID).ToList();
+            List<CourseViewModel> courseNames = new List<CourseViewModel> { };
+            foreach (var i in coursesS)
+            {
+                var course = _db.course.SingleOrDefault(x => x.Id == i.ID);
+                courseNames.Add(new CourseViewModel { name = course.name });
+            };
+            foreach (var i in coursesT)
+            {
+                var course = _db.course.SingleOrDefault(x => x.Id == i.ID);
+                courseNames.Add(new CourseViewModel { name = course.name });
+            };
+            return courseNames;
+        }
+
+        public string teacherOrStudent(int userID, string course)
+        {
+            var theCourse = _db.course.SingleOrDefault(x => x.name == course);
+
+            var user = _db.courseStudent.SingleOrDefault(x => x.studentID == userID && x.courseID == theCourse.Id);
+            if(user == null)
+            {
+                return "teacher";
+            }
+            return "student";
         }
     }
 }
