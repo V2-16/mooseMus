@@ -12,22 +12,39 @@ namespace MooseMus.Controllers
     {
         private UserService _service = new UserService();
 
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult Index(FrontPageViewModel user)
         {
-            if (user == null)
-            {
-                return View();
-            }
-            else
+            if (ModelState.IsValid)
             {
                 var userID1 = _service.getUserIDByPassword(user.password);
                 var userID2 = _service.getUserIDByUserName(user.userName);
-                if (userID1.Equals(userID2))
+                if (userID1.Equals(userID2) && userID1 != 0) //Athuga hvort password og notendanafn stemmi
                 {
-                    return View();
+                    var model = _service.getUserByID(userID1);
+                    return View("Login", model);
                 }
-                return View();
             }
+            
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult nameInDatabase(string userName)
+        {
+            var user = _service.getUserIDByUserName(userName);
+            return Json(user > 0, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Login(UserHomeViewModel user)
+        {
+            return View(user);
         }
 
         public ActionResult About()
@@ -41,17 +58,6 @@ namespace MooseMus.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
-            return View();
-        }
-
-        public ActionResult Login()
-        {
-            return View();
-
-        }
-
-        public ActionResult selectCourse()
-        {
             return View();
         }
     }

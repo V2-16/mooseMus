@@ -17,7 +17,24 @@ namespace MooseMus.Services
         }
         public UserHomeViewModel getUserByID(int userID)
         {
-            return null;
+            var user = _db.user.SingleOrDefault(x => x.ID == userID);
+            var courses = _db.courseStudent.Where(x => x.studentID == userID).ToList();
+            List<CourseViewModel> courseNames = new List<CourseViewModel> { };
+            foreach(var i in courses)
+            {
+                var course = _db.course.SingleOrDefault(x => x.Id == i.ID);
+                courseNames.Add(new CourseViewModel { name = course.name });
+            };
+
+            var model = new UserHomeViewModel
+            {
+                userID = user.ID,
+                name = user.name,
+                email = user.email,
+                courses = courseNames
+            };
+
+            return model;
         }
 
         public void addUserByID(AddUserViewModel newUser)
