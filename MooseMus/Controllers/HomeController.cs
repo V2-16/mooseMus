@@ -21,18 +21,25 @@ namespace MooseMus.Controllers
         [HttpPost]
         public ActionResult Index(FrontPageViewModel user)
         {
-            var userID1 = _service.getUserIDByPassword(user.password);
-            var userID2 = _service.getUserIDByUserName(user.userName);
-            if(userID1 == 0)
+            if (ModelState.IsValid)
             {
-                return View();
+                var userID1 = _service.getUserIDByPassword(user.password);
+                var userID2 = _service.getUserIDByUserName(user.userName);
+                if (userID1.Equals(userID2) && userID1 != 0) //Athuga hvort password og notendanafn stemmi
+                {
+                    var model = _service.getUserByID(userID1);
+                    return View("Login", model);
+                }
             }
-            if (userID1.Equals(userID2))
-            {
-                var model = _service.getUserByID(userID1);
-                return View("Login", model);
-            }
+            
             return View();
+        }
+
+        [HttpPost]
+        public JsonResult nameInDatabase(string userName)
+        {
+            var user = _service.getUserIDByUserName(userName);
+            return Json(user > 0, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Login(UserHomeViewModel user)
