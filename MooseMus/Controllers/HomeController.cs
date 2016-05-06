@@ -23,9 +23,9 @@ namespace MooseMus.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userID1 = _service.getUserIDByPassword(user.password);
-                var userID2 = _service.getUserIDByUserName(user.userName);
-                if (userID1.Equals(userID2) && userID1 != 0) //Athuga hvort password og notendanafn stemmi
+                var userID1 = _service.getUserIDByUserName(user.userName);
+                var userID2 = _service.getUserIDByPasswordAndConfirm(user.password, userID1);
+                if (userID2 != 0) //Athuga hvort password og notendanafn stemmi
                 {
                     var model = _service.getUserByID(userID1);
                     return View("Login", model);
