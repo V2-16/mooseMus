@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MooseMus.Models.ViewModels;
+using MooseMus.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,20 +10,31 @@ namespace MooseMus.Controllers
 {
     public class TeacherController : Controller
     {
+        private CourseService _cservice = new CourseService();
+
         // GET: Teacher
-        public ActionResult Index()
+        public ActionResult Index(string course)
+        {
+            var cour = course;
+            var courseID = _cservice.getCourseIDByName(course);
+            var model = _cservice.getCourseProjects(courseID);
+            return View(model);
+        }
+
+        //Kennari fer inná svæði til þess að bæta við verkefni
+        public ActionResult addProject()
         {
             return View();
         }
 
-        //Kennari fer inná svæði til þess að bæta við eða breyta verkefni
-        public ActionResult addEditProject()
+        //Kennari fer inná svæði til þess að breyta verkefni
+        public ActionResult goToEditProject()
         {
             return View();
         }
 
         //Kennari velur að bæta við verkefni
-        public ActionResult addProject()
+        public ActionResult goToAddProject()
         {
             return View();
         }
@@ -50,6 +63,11 @@ namespace MooseMus.Controllers
             return View();
         }
 
+        public ActionResult viewProjectsByCourse()
+        {
+            return View();
+        }
+
         public ActionResult viewProjectByStudent()
         {
             return View();
@@ -60,7 +78,7 @@ namespace MooseMus.Controllers
             return View();
         }
 
-        public ActionResult selectSTudent()
+        public ActionResult selectStudent()
         {
             return View();
         }

@@ -1,7 +1,48 @@
-﻿
+﻿@using MooseMus.Models.ViewModels
+@model CourseProjectsViewModel
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Yay, I'm teaching this course!</h2>
 
+<nav class="navbar navbar-light bg-faded" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">Ég vil</a>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="#">Bæta við Verkefni</a>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Breyta verkefni<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    @if (Model.projects != null)
+                    {
+                        foreach (var project in @Model.projects)
+                        {
+                            var projectName = project.name;
+                            <li>@Html.ActionLink(projectName, "Index", "Teacher", projectName, null)</li>
+                        }
+                    }
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Skoða verkefni<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    @if (Model.projects != null)
+                    {
+                        foreach (var project in @Model.projects)
+                        {
+                            var projectName = project.name;
+                            <li>@Html.ActionLink(projectName, "Index", "Teacher", projectName, null)</li>
+                        }
+                    }
+               </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="navbar-collapse collapse">
+</div>
