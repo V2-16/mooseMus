@@ -11,6 +11,7 @@ namespace MooseMus.Controllers
     public class AdminController : Controller
     {
         private UserService _service = new UserService();
+        private CourseService _courseService = new CourseService();
         // GET: Admin
         public ActionResult Index(AdminFrontPageViewModel user)
         {
@@ -45,17 +46,25 @@ namespace MooseMus.Controllers
 
         public ActionResult editUser()
         {
-            return View("Partial/editUser");
+            return PartialView("Partial/editUser");
         }
 
+        [HttpGet]
         public ActionResult addCourse()
         {
-            return View("Partial/addCourse");
+            return PartialView("Partial/addCourse");
+        }
+
+        [HttpPost]
+        public ActionResult addCourse(AddCourseViewModel Course)
+        {
+            _courseService.addCourseByID(Course);
+            return View("Index");
         }
 
         public ActionResult editCourse()
         {
-            return View("Partial/editCourse");
+            return PartialView("Partial/editCourse");
         }
 
         //Admin tengir nemanda við námskeið

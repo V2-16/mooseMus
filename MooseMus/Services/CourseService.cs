@@ -1,5 +1,6 @@
 ﻿using MooseMus.Models;
 using MooseMus.Models.ViewModels;
+using MooseMus.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,25 @@ namespace MooseMus.Services
 
         public void addCourseByID(AddCourseViewModel courseToUpdate)
         {
+            CourseModel newCourse = new CourseModel();
 
+            newCourse.name = courseToUpdate.name;
+            newCourse.semester = courseToUpdate.semester;
+            newCourse.school = courseToUpdate.school;
+
+            if (courseToUpdate != null)
+            {
+                _db.course.Add(newCourse);
+            }
+
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+
+            }
         }
 
         public void updateCourseByID(AddCourseViewModel courseToUpdate)
