@@ -14,6 +14,7 @@
                     function addUser()
                     {
                         $('#divResult').load("@Url.Action("addUser","Admin")");
+                        
                     }
                 </script>
             </li>
@@ -23,6 +24,7 @@
                     function editUser()
                     {
                         $('#divResult').load("@Url.Action("editUser","Admin")");
+                        
                     }
                 </script>
             </li>
@@ -40,11 +42,13 @@
                 <script type="text/javascript">
                     function editCourse()
                     {
-                        $('#divResult').load("@Url.Action("editCourse","Admin")");
+                        $('#divResult').load("@Url.Action("searchCourse","Admin")","@Url.Action("editCourse","Admin")");
                     }
                 </script>
             </li>
+         
         </ul>
 </div>
 <div id="divResult">
 </div>
+
