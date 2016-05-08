@@ -18,7 +18,13 @@
                 </script>
             </li>
             <li>
-                Edit User
+                <a href="javascript:editUser();">Edit User</a>
+                <script type="text/javascript">
+                    function editUser()
+                    {
+                        $('#divResult').load("@Url.Action("editUser","Admin")");
+                    }
+                </script>
             </li>
             <li>
                 <a href="javascript:addCourse();">Create Course</a>
@@ -29,7 +35,15 @@
                     }
                 </script>
             </li>
-            <li>Edit course</li>
+            <li>
+                <a href="javascript:editCourse();">Edit Course</a>
+                <script type="text/javascript">
+                    function editCourse()
+                    {
+                        $('#divResult').load("@Url.Action("editCourse","Admin")");
+                    }
+                </script>
+            </li>
         </ul>
 </div>
 <div id="divResult">

@@ -73,6 +73,7 @@ a:hover {
 h1 {
   margin: 0.67em 0;
   font-size: 2em;
+  color:red;
 }
 
 abbr[title] {
@@ -512,6 +513,7 @@ h6 {
 h1,
 .h1 {
   font-size: 36px;
+
 }
 
 h2,
@@ -3822,9 +3824,9 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .nav > li > a:hover,
-.nav > li > a:focus {
+.nav > li > a:focus { 
   text-decoration: none;
-  background-color: #eeeeee;
+  background-color: none;
 }
 
 .nav > li.disabled > a {
