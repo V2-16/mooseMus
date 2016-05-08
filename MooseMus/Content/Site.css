@@ -36,5 +36,19 @@ textarea {
     padding-top: 5 px;
 }
 
+#footer{
+    position:fixed;
+    height:50px;
+    background-color:linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+    bottom:0px;
+    left:0px;
+    right:0px;
+    margin-bottom:0px;
+}
+
+body{
+    margin-bottom:50px;
+}
+
 
 
