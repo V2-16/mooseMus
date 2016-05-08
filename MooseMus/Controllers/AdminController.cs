@@ -30,9 +30,17 @@ namespace MooseMus.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult addUser()
         {
-            return View("Partial/addUser");
+            return PartialView("Partial/addUser");
+        }
+
+        [HttpPost]
+        public ActionResult addUser(AddUserViewModel User)
+        {
+            _service.addUserByID(User);
+            return View("Index");
         }
 
         public ActionResult editUser()

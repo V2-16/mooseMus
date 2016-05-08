@@ -1,9 +1,11 @@
 ﻿using MooseMus.Models;
+using MooseMus.Models.Entities;
 using MooseMus.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace MooseMus.Services
 {
@@ -34,6 +36,25 @@ namespace MooseMus.Services
 
         public void addUserByID(AddUserViewModel newUser)
         {
+            UserModel nUser = new UserModel();
+            
+            nUser.name = newUser.name;
+            nUser.email = newUser.email;
+            nUser.password = newUser.password;
+            nUser.ssn = newUser.ssn;
+
+            if(newUser != null)
+            {
+                _db.user.Add(nUser);
+            }
+
+            try {
+                _db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+              
+            }
 
         }
 

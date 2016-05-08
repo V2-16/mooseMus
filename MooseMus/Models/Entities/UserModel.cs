@@ -11,5 +11,6 @@ namespace MooseMus.Models.Entities
         public string name { get; set; }
         public string email { get; set; }
         public string password { get; set; }
+        public string ssn { get; set; }
     }
 }

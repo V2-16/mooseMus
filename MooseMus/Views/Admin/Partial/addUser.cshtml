@@ -1,33 +1,81 @@
 ﻿@model MooseMus.Models.ViewModels.AddUserViewModel
-<!DOCTYPE html>
-<html>
-<head>
-    <title>CREATE USER</title>
-</head>
-<body>
-    <form action="Form.html" method="post">
-        <fieldset>
-            <p>Create user</p>
-            <div>
-                <label for="Name">Name:</label>
-                <input type="text" id="Name" name="Name" />
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("addUser" , "Admin"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
             </div>
-            <div>
-                <label for="SSN">SSN:</label>
-                <input type="text" id="SSN" name="SSN" />
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ssn, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ssn, new { htmlAttributes = new { @class = "form-control input-lg" } })
+                @Html.ValidationMessageFor(model => model.ssn, "", new { @class = "text-danger" })
             </div>
-            <div>
-                <label for="Email">Email:</label>
-                <input type="email" id="Email" name="Email" />
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control input-lg" } })
+                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
             </div>
-            <div>
-                <label for="LinkToPage">Link to page:</label><br />
-                <input type="text" id="LinkToPage" name="LinkToPage" />
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control input-lg" } })
+                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
             </div>
-            <div>
-                <input type="submit" value="Submit / Send">
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
-        </fieldset>
-    </form>
-</body>
-</html>
+        </div>
+     </div>
+}
+
+       <!-- <!DOCTYPE html>
+        <html>
+        <head>
+            <title>CREATE USER</title>
+        </head>
+        <body>
+            <form action="Form.html" method="post">
+                <fieldset>
+                    <p>Create user</p>
+                    <div>
+                        <label for="Name">Name:</label>
+                        <input type="text" id="Name" name="Name" />
+                    </div>
+                    <div>
+                        <label for="SSN">SSN:</label>
+                        <input type="text" id="SSN" name="SSN" />
+                    </div>
+                    <div>
+                        <label for="Email">Email:</label>
+                        <input type="email" id="Email" name="Email" />
+                    </div>
+                    <div>
+                        <label for="LinkToPage">Link to page:</label><br />
+                        <input type="text" id="LinkToPage" name="LinkToPage" />
+                    </div>
+                    <div>
+                        <input type="submit" value="Submit / Send">
+                    </div>
+                </fieldset>
+            </form>
+        </body>
+    </html>-->
