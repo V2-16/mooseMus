@@ -18,9 +18,14 @@ namespace MooseMus.Services
 
         public int getCourseIDByName(string courseName)
         {
-            var courseNa = courseName;
             var course = _db.course.SingleOrDefault(x => x.name == courseName);
             return course.Id;
+        }
+
+        public string getCourseNameByID(int courseID)
+        {
+            var course = _db.course.SingleOrDefault(x => x.Id == courseID);
+            return course.name;
         }
 
         public CourseProjectsViewModel getCourseProjects(int courseID)
@@ -32,7 +37,8 @@ namespace MooseMus.Services
             var model = new CourseProjectsViewModel
             {
                 name = course.name,
-                projects = projectNames 
+                projects = projectNames, 
+                created = false
             };
 
             return model;

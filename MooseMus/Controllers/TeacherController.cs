@@ -15,7 +15,6 @@ namespace MooseMus.Controllers
         // GET: Teacher
         public ActionResult Index(string course)
         {
-            var cour = course;
             var courseID = _cservice.getCourseIDByName(course);
             var model = _cservice.getCourseProjects(courseID);
             return View(model);
@@ -34,13 +33,33 @@ namespace MooseMus.Controllers
         }
 
         //Kennari velur að bæta við verkefni
-        public ActionResult goToAddProject()
+        public ActionResult goToAddProject(string course)
         {
-            return View();
+            var courseId = _cservice.getCourseIDByName(course);
+            var model = new TeacherAddEditViewModel()
+            {
+                courseID = courseId,
+                projectID = 0,
+                title = "",
+                projectDescription = "",
+                created = false
+            };
+            return PartialView("createProject", model);
+        }
+
+        [HttpPost]
+        public ActionResult goToAddProject(TeacherAddEditViewModel project)
+        {
+            var models = new CourseProjectsViewModel()
+            {
+                projects = _cservice.getProjectsByCourse(project.courseID),
+                created = true
+            };
+            return View("Index", models);
         }
 
         //Kennari bætir við verkefni
-        public ActionResult projectAdd()
+        public ActionResult projectAdded()
         {
             return View();
         }

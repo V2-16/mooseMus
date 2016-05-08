@@ -1,0 +1,24 @@
+﻿@using MooseMus.Models.ViewModels
+@model TeacherAddEditViewModel
+
+<div class="form-group">
+    @Html.LabelFor(m => m.partDescription, "Verkefnalýsing fyrir lið", new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextAreaFor(m => m.partDescription, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.partDescription, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.input, "Inntak", new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextAreaFor(m => m.input, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.input, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.output, "Úttak", new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextAreaFor(m => m.output, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.input, "", new { @class = "text-danger" })
+    </div>
+</div>

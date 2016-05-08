@@ -312,7 +312,9 @@
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Admin\Partial\editUser.cshtml" />
     <Content Include="Views\Admin\Partial\editCourse.cshtml" />
-    <Content Include="Views\Teacher\_TeacherPartial.cshtml" />
+    <Content Include="Views\Teacher\CreateProject.cshtml" />
+    <Content Include="Views\Teacher\ProjectCreated.cshtml" />
+    <Content Include="Views\Teacher\CreateProjectParts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
