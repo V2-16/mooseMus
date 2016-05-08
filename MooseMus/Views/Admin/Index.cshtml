@@ -40,11 +40,16 @@
                 <script type="text/javascript">
                     function editCourse()
                     {
-                        $('#divResult').load("@Url.Action("editCourse","Admin")");
+                        $('#divResult').load("@Url.Action("searchCourse","Admin")");
+                        $('#divResult2').load("@Url.Action("editCourse","Admin")")
                     }
                 </script>
             </li>
+         
         </ul>
 </div>
 <div id="divResult">
+</div>
+</div>
+<div id="divResult2">
 </div>

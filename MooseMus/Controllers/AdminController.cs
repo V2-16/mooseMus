@@ -5,12 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MooseMus.Models.Entities;
 
 namespace MooseMus.Controllers
 {
     public class AdminController : Controller
     {
         private UserService _service = new UserService();
+        private CourseService _courseService = new CourseService();
+        
         // GET: Admin
         public ActionResult Index(AdminFrontPageViewModel user)
         {
@@ -47,16 +50,47 @@ namespace MooseMus.Controllers
         {
             return View("Partial/editUser");
         }
-
-        public ActionResult addCourse()
+        [HttpGet]
+        public ActionResult searchCourse()
         {
-            return View("Partial/addCourse");
+            return PartialView("Partial/searchCourse");
         }
 
+        [HttpPost]
+        public ActionResult searchCourse(AddCourseViewModel course)
+        {
+            if (ModelState.IsValid)
+            {
+                var courseID = _courseService.getCourseIDByCourseName(course.name);
+                if ( courseID != 0) //Athuga hvort password og notendanafn stemmi
+                {
+                    var model = _courseService.getCourseByID(courseID);
+                    return View("Partial/editCourse", model);
+                }
+            }
+
+            return View();
+
+
+        }
+        [HttpGet]
         public ActionResult editCourse()
         {
-            return View("Partial/editCourse");
+            return PartialView("Partial/editCourse");
         }
+
+        [HttpPost]
+        public ActionResult editCourse(AddCourseViewModel Course)
+        {
+            if (ModelState.IsValid)
+            {
+               _courseService.updateCourseByID(Course);
+                return View("Index");
+            }
+
+            return View("Index");
+        }
+
 
         //Admin tengir nemanda við námskeið
         public ActionResult addStudent()
