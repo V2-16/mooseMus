@@ -13,7 +13,7 @@ namespace MooseMus.Controllers
     {
         private UserService _service = new UserService();
         private CourseService _courseService = new CourseService();
-        
+
         // GET: Admin
         public ActionResult Index(AdminFrontPageViewModel user)
         {
@@ -48,12 +48,25 @@ namespace MooseMus.Controllers
 
         public ActionResult editUser()
         {
-            return View("Partial/editUser");
+            return PartialView("Partial/editUser");
         }
+
         [HttpGet]
         public ActionResult searchCourse()
         {
             return PartialView("Partial/searchCourse");
+
+        [HttpGet]
+        public ActionResult addCourse()
+        {
+            return PartialView("Partial/addCourse");
+        }
+
+        [HttpPost]
+        public ActionResult addCourse(AddCourseViewModel Course)
+        {
+            _courseService.addCourseByID(Course);
+            return View("Index");
         }
 
         [HttpPost]
@@ -62,7 +75,7 @@ namespace MooseMus.Controllers
             if (ModelState.IsValid)
             {
                 var courseID = _courseService.getCourseIDByCourseName(course.name);
-                if ( courseID != 0) //Athuga hvort password og notendanafn stemmi
+                if ( courseID != 0) 
                 {
                     var model = _courseService.getCourseByID(courseID);
                     return View("Partial/editCourse", model);
@@ -70,9 +83,8 @@ namespace MooseMus.Controllers
             }
 
             return View();
-
-
         }
+
         [HttpGet]
         public ActionResult editCourse()
         {
