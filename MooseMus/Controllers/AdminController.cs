@@ -55,6 +55,7 @@ namespace MooseMus.Controllers
         public ActionResult searchCourse()
         {
             return PartialView("Partial/searchCourse");
+        }
 
         [HttpGet]
         public ActionResult addCourse()
