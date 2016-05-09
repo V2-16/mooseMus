@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using MooseMus.Models.ViewModels;
 using MooseMus.Models;
+using MooseMus.Models.Entities;
+using System;
+using System.Linq;
 
 namespace MooseMus.Services
 {
@@ -34,6 +37,11 @@ namespace MooseMus.Services
             return null;
         }
 
+        public int getProjectIDByName(string name)
+        {
+
+            return 9;
+        }
         /****************** KENNARI **************************/
         //Skilar öllum nemendum sem hafa skilað tilteknu verkefni
         public TeacherProjectViewModel getStudentsInProject(int projectID)
@@ -65,7 +73,62 @@ namespace MooseMus.Services
         //Kennari bætir við verkefni í námskeiði
         public void addProject(TeacherAddEditViewModel projectToAdd)
         {
-            //TODO;
+            ProjectModel nProject = new ProjectModel();
+            int? proID = _db.project.Max(m => (int?)m.ID) + 1;
+            if(proID == null)
+            {
+                proID = 1;
+            }
+            nProject.ID = proID.Value;
+            nProject.title = projectToAdd.title;
+            nProject.description = projectToAdd.projectDescription;
+            nProject.courseID = projectToAdd.courseID;
+            nProject.deadline = DateTime.Today;
+
+            if (projectToAdd != null)
+            {
+                _db.project.Add(nProject);
+            }
+
+            try
+            {
+                _db.SaveChanges();
+            }
+
+            catch (Exception e)
+            {
+
+            }
         }
+        public void addProjectPart(TeacherAddProjectPartViewModel partToAdd)
+        {
+            ProjectPartModel nPPart = new ProjectPartModel();
+            int? proParID = _db.project.Max(m => (int?)m.ID) + 1;
+            var proID = _db.project.SingleOrDefault(m => m.ID == partToAdd.projectName);
+
+            nPPart.ID = proParID.Value;
+            nPPart.projectID = proID.ID;
+            nPPart.title = partToAdd.partName;
+            nPPart.description = partToAdd.partDescription;
+            nPPart.input = partToAdd.input;
+            nPPart.output = partToAdd.output;
+            nPPart.value = partToAdd.value;
+
+            if (partToAdd != null)
+            {
+                _db.projectPart.Add(nPPart);
+            }
+
+            try
+            {
+                _db.SaveChanges();
+            }
+
+            catch (Exception e)
+            {
+
+            }
+        }
+
     }
 }

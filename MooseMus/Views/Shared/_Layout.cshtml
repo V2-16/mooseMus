@@ -3,42 +3,47 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
-        <div>
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                        
-</div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a class="navbar-brand" href='@Url.Action("Index","Home")'><img src="~/Content/Images/mooseMus_logo-01.png" alt="Logo" width="150" height="150"></a></li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>
-                    @Html.Partial("_LoginPartial")
+            <div>
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a class="navbar-brand" href='@Url.Action("Index","Home")'><img src="~/Content/Images/mooseMus_logo-01.png" alt="Logo" width="150" height="150"></a></li>
+                            <li>@Html.ActionLink("About", "About", "Home", new { style = "color:black" })</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home", new { style = "color:black" })</li>
+
+                        </ul>
+                        @Html.Partial("_LoginPartial")
+                    </div>
                 </div>
             </div>
-        </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; MooseMus - @DateTime.Now.Year - tel: +354 555 0000 -  email: moosemus@ru.is</p>
-        </footer>
-    </div>
+            <div class="container body-content">
+                @RenderBody()
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+                <footer>
+                    <section id="footer">
+                        <div class="container">
+                            <p>&copy; MooseMus   @DateTime.Now.Year   tel: +354 555 0000    email: moosemus@ru.is</p>
+                </footer>
+            </div>
+
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)
+        </div>
+    </section>
+
 </body>
 </html>

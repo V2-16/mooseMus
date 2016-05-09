@@ -52,9 +52,9 @@ namespace MooseMus.Controllers
             var user = _service.teacherOrStudent(userID, course);
             if(user == "teacher")
             {
-                return RedirectToAction("Index", "Teacher");
+                return RedirectToAction("Index", "Teacher", new { course = course });
             }
-            return RedirectToAction("Index", "Student");
+            return RedirectToAction("Index", "Student", course);
         }
         public ActionResult About()
         {

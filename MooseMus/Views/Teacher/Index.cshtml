@@ -1,7 +1,74 @@
-﻿
+﻿@using MooseMus.Models.ViewModels
+@model CourseProjectsViewModel
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = @Model.name;
 }
 
-<h2>Yay, I'm teaching this course!</h2>
+<nav class="navbar navbar-light bg-faded" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">@Model.name</a>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            
+             <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nýtt verkefni<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="javascript:addProject();">Bæta við verkefni</a>
+                        <script type="text/javascript">
+                            function addProject()
+                            {
+                                $('#proj').load("@Url.Action("goToAddProject","Teacher", new { course = @Model.name })");
+                            }
+                        </script>
+                    </li> 
+                    <li>
+                        <a href="javascript:addProjectPart();">Bæta við lið</a>
+                        <script type="text/javascript">
+                            function addProjectPart()
+                            {
+                                $('#proj').load("@Url.Action("createProjectPart","Teacher", new { course = @Model.name })");
+                            }
+                        </script>
+                    </li>     
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Breyta verkefni<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    @if (Model.projects != null)
+                    {
+                        foreach (var project in @Model.projects)
+                        {
+                            var projectName = project.name;
+                            <li>@Html.ActionLink(projectName, "Index", "Teacher", projectName, null)</li>
+                        }
+                    }
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Skoða verkefni<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    @if (Model.projects != null)
+                    {
+                        foreach (var project in @Model.projects)
+                        {
+                            var projectName = project.name;
+                            <li>@Html.ActionLink(projectName, "Index", "Teacher", projectName, null)</li>
+                        }
+                    }
+               </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
 
+@if (ViewBag.Success != null && ViewBag.Success == true)
+{
+    Html.RenderPartial("CreatedSuccessfully");
+}
+
+<div id="proj">
+</div>

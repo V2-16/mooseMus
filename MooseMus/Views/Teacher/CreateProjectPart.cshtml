@@ -1,0 +1,79 @@
+﻿@using MooseMus.Models.ViewModels
+@model TeacherAddProjectPartViewModel
+
+<h2>Nýr liður</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <section id="loginForm">
+            @using (Html.BeginForm("createProjectPart", "Teacher", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Upplýsingar um lið</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.projectName, "Verkefni", new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        <select class="form-control">
+                            @if (Model.projects != null)
+                            {
+                                foreach (var project in @Model.projects)
+                                {
+                                    var proname = project.name;
+                                    <option value=proname>@project.name</option>
+                                }
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(m => m.projectName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.partName, "Titill", new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.partName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.partName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.partDescription, "Lýsing", new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.partDescription, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.partDescription, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.input, "Inntak", new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(m => m.input, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.input, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.output, "Úttak", new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(m => m.output, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.output, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.value, "Gildi", new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(i => i.value, new { @type = "number", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.value, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <input type="hidden" name="courseID" value=@Model.courseID>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Búa til" class="btn btn-default" />
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
