@@ -151,7 +151,7 @@ namespace MooseMus.Controllers
             return PartialView("Partial/addTeacher", tuple);
         }
 
-        [HttpPost]
+    /*    [HttpPost]
         public ActionResult addTeacher(Tuple<List<UserModel>, List<CourseModel>> tuple)
         {
             var userID = _userService.getUserIDByUserName("Rakel");
@@ -167,7 +167,7 @@ namespace MooseMus.Controllers
                 }
             }
             return View();
-        }
+        }*/
         public ActionResult login()
         {
             return View();

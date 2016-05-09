@@ -1,4 +1,5 @@
-﻿body {
+﻿body 
+{
     padding-top: 5px;
     padding-bottom: 20px;
     font-family: 'Open Sans', sans-serif;
@@ -10,7 +11,8 @@
 }
 
 /* Set padding to keep content from hitting the edges */
-.body-content {
+.body-content 
+{
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -18,36 +20,42 @@
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
-.dl-horizontal dt {
+.dl-horizontal dt 
+{
     white-space: normal;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
-textarea {
+textarea 
+{
     max-width: 280px;
 }
 
 
-.navbar-brand > img {
+.navbar-brand > img 
+{
     float:left;
     display:block;
     width: 100px;
     height:100px;
 }
-.navbar-nav > li > a {
+.navbar-nav > li > a 
+{
     line-height: 90px;
     text-decoration:none;
     color: black;
     hover: white; 
 }
 
-.navbar-collapse collapse > ul {
+.navbar-collapse collapse > ul 
+{
     padding-top: 5px;
 }
 
-#footer{
+#footer
+{
     position:fixed;
     height:50px;
     bottom:0px;
@@ -57,30 +65,36 @@ textarea {
     color:black;
 }
 
-body{
+body
+{
     margin-bottom:50px;
 }
 
 
-label {
+label 
+{
     text-transform:lowercase;
 }
 
-label:first-letter {
+label:first-letter 
+{
     text-transform: uppercase;
 }
 
-a {
+a 
+{
     text-decoration: none;
     color: #000000;
 }
 
-a:hover {
+a:hover 
+{
     text-decoration: none;
     color: #ffffff;
 }
 
-li:hover a{
+li:hover a
+{
     text-decoration: none;
     color: #ffffff;
 }
@@ -90,7 +104,8 @@ a.htmlactionlink
     color: white;
 }
 
-.navbar-brand:hover a{
+.navbar-brand:hover a
+{
     text-decoration: none;
     color: #ffffff;
 }
