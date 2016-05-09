@@ -229,6 +229,7 @@
     <Compile Include="Models\ViewModels\StudentSubmitViewModel.cs" />
     <Compile Include="Models\ViewModels\SubmissionViewModel.cs" />
     <Compile Include="Models\ViewModels\TeacherAddEditViewModel.cs" />
+    <Compile Include="Models\ViewModels\TeacherAddProjectPartViewModel.cs" />
     <Compile Include="Models\ViewModels\TeacherCourseViewModel.cs" />
     <Compile Include="Models\ViewModels\TeacherProjectPartViewModel.cs" />
     <Compile Include="Models\ViewModels\TeacherProjectStudentViewModel.cs" />
@@ -313,8 +314,10 @@
     <Content Include="Views\Admin\Partial\editUser.cshtml" />
     <Content Include="Views\Admin\Partial\editCourse.cshtml" />
     <Content Include="Views\Teacher\CreateProject.cshtml" />
-    <Content Include="Views\Teacher\ProjectCreated.cshtml" />
-    <Content Include="Views\Teacher\CreateProjectParts.cshtml" />
+    <Content Include="Views\Teacher\CreateProjectPart.cshtml" />
+    <Content Include="Views\Admin\Partial\searchCourse.cshtml" />
+    <Content Include="Views\Admin\Partial\searchUser.cshtml" />
+    <Content Include="Views\Teacher\CreatedSuccessfully.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

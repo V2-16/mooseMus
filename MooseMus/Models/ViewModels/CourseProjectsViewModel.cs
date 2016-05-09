@@ -9,6 +9,5 @@ namespace MooseMus.Models.ViewModels
     {
        public string name { get; set; }
        public List<ProjectViewModel> projects { get; set; }
-       public bool created { get; set; }
     }
 }

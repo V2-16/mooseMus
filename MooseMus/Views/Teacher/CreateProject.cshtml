@@ -1,5 +1,8 @@
 ﻿@using MooseMus.Models.ViewModels
 @model TeacherAddEditViewModel
+@{ 
+    ViewBag.Title = "New Project";
+}
 
 <h2>Nýtt verkefni</h2>
 
@@ -26,6 +29,7 @@
                         @Html.ValidationMessageFor(m => m.projectDescription, "", new { @class = "text-danger" })
                     </div>
                 </div>
+                <input type="hidden" name="courseID" value=@Model.courseID>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Búa til" class="btn btn-default" />

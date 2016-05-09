@@ -1,9 +1,11 @@
 ﻿using MooseMus.Models;
+using MooseMus.Models.Entities;
 using MooseMus.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace MooseMus.Services
 {
@@ -34,17 +36,58 @@ namespace MooseMus.Services
 
         public void addUserByID(AddUserViewModel newUser)
         {
+            UserModel nUser = new UserModel();
+            
+            nUser.name = newUser.name;
+            nUser.email = newUser.email;
+            nUser.password = newUser.password;
+            nUser.ssn = newUser.ssn;
 
+            if(newUser != null)
+            {
+                _db.user.Add(nUser);
+            }
+
+            try
+            {
+                _db.SaveChanges();
+            }
+
+            catch (Exception e)
+            {
+              
+            }
         }
 
         public void updateUserByID(AddUserViewModel editUser)
         {
+            var id = getUserIDByUserSSN(editUser.ssn);
+            UserModel user = _db.user.Where(x => x.ID == id).SingleOrDefault();
 
+            if (user != null)
+            {
+                user.ID = id;
+                user.name = editUser.name;
+                user.password = editUser.password;
+                user.ssn = editUser.ssn;
+                _db.SaveChanges();
+            }
+            return;
         }
 
         public int getUserIDByUserName(string name)
         {
             var user = _db.user.SingleOrDefault(x => x.name == name);
+            if(user == null)
+            {
+                return 0;
+            }
+            return user.ID;
+        }
+
+        public int getUserIDByUserSSN(string ssn)
+        {
+            var user = _db.user.SingleOrDefault(x => x.ssn == ssn);
             if(user == null)
             {
                 return 0;
@@ -70,6 +113,20 @@ namespace MooseMus.Services
                 return 0;
             }
             return user.ID;
+        }
+
+        public AddUserViewModel getAddUserViewModelByID(int id)
+        {
+            var user = _db.user.SingleOrDefault(x => x.ID == id);
+
+            var model = new AddUserViewModel
+            {
+                name = user.name,
+                ssn = user.ssn,
+                email = user.email,
+                password = user.password
+            };
+            return model;
         }
 
         public string getPasswordByID(int userID)

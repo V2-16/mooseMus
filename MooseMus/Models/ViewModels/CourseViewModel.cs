@@ -8,5 +8,7 @@ namespace MooseMus.Models.ViewModels
     public class CourseViewModel
     {
         public string name { get; set; }
+        public string semester { get; set; }
+        public string school { get; set; }
     }
 }

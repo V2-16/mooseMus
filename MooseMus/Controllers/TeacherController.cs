@@ -11,19 +11,21 @@ namespace MooseMus.Controllers
     public class TeacherController : Controller
     {
         private CourseService _cservice = new CourseService();
+        private ProjectService _pservice = new ProjectService();
 
         // GET: Teacher
         public ActionResult Index(string course)
         {
+            ViewBag.Success = false;
             var courseID = _cservice.getCourseIDByName(course);
             var model = _cservice.getCourseProjects(courseID);
             return View(model);
         }
 
         //Kennari fer inná svæði til þess að bæta við verkefni
-        public ActionResult addProject()
+        public ActionResult addProjectPart()
         {
-            return View();
+            return PartialView("ProjectPartCreated");
         }
 
         //Kennari fer inná svæði til þess að breyta verkefni
@@ -35,6 +37,7 @@ namespace MooseMus.Controllers
         //Kennari velur að bæta við verkefni
         public ActionResult goToAddProject(string course)
         {
+            ViewBag.Success = false;
             var courseId = _cservice.getCourseIDByName(course);
             var model = new TeacherAddEditViewModel()
             {
@@ -42,7 +45,6 @@ namespace MooseMus.Controllers
                 projectID = 0,
                 title = "",
                 projectDescription = "",
-                created = false
             };
             return PartialView("createProject", model);
         }
@@ -50,13 +52,30 @@ namespace MooseMus.Controllers
         [HttpPost]
         public ActionResult goToAddProject(TeacherAddEditViewModel project)
         {
-            var models = new CourseProjectsViewModel()
-            {
-                projects = _cservice.getProjectsByCourse(project.courseID),
-                created = true
-            };
-            return View("Index", models);
+            
+            ViewBag.Success = true;
+            var model = _cservice.getCourseProjects(project.courseID);
+            _pservice.addProject(project);
+            return View("Index", model);
         }
+
+        public ActionResult createProjectPart(string course)
+        {
+            var cID = _cservice.getCourseIDByName(course);
+            var model = new TeacherAddProjectPartViewModel()
+            {
+                courseID = cID,
+                projects = _cservice.getProjectsByCourse(cID),
+                partName = "",
+                partDescription = "",
+                projectPartID = 0,
+                projectID = 9,
+                input = "",
+                output = ""
+            };
+            return PartialView("CreateProjectPart", model);
+        }
+
 
         //Kennari bætir við verkefni
         public ActionResult projectAdded()
