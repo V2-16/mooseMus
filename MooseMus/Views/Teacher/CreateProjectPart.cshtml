@@ -15,13 +15,13 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.projectName, "Verkefni", new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        <select>
+                        <select class="form-control">
                             @if (Model.projects != null)
                             {
                                 foreach (var project in @Model.projects)
                                 {
                                     var proname = project.name;
-                                    <option value=proname>proname</option>
+                                    <option value=proname>@project.name</option>
                                 }
                             }
                         </select>

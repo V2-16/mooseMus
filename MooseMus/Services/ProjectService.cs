@@ -85,7 +85,7 @@ namespace MooseMus.Services
             nProject.courseID = projectToAdd.courseID;
             nProject.deadline = DateTime.Today;
 
-            if (nProject != null)
+            if (projectToAdd != null)
             {
                 _db.project.Add(nProject);
             }
@@ -100,9 +100,34 @@ namespace MooseMus.Services
 
             }
         }
-        public void addProjectPart(TeacherAddProjectPartViewModel projectToAdd)
+        public void addProjectPart(TeacherAddProjectPartViewModel partToAdd)
         {
+            ProjectPartModel nPPart = new ProjectPartModel();
+            int? proParID = _db.project.Max(m => (int?)m.ID) + 1;
+            var proID = _db.project.SingleOrDefault(m => m.ID == partToAdd.projectName);
 
+            nPPart.ID = proParID.Value;
+            nPPart.projectID = proID.ID;
+            nPPart.title = partToAdd.partName;
+            nPPart.description = partToAdd.partDescription;
+            nPPart.input = partToAdd.input;
+            nPPart.output = partToAdd.output;
+            nPPart.value = partToAdd.value;
+
+            if (partToAdd != null)
+            {
+                _db.projectPart.Add(nPPart);
+            }
+
+            try
+            {
+                _db.SaveChanges();
+            }
+
+            catch (Exception e)
+            {
+
+            }
         }
 
     }
