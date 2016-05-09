@@ -153,7 +153,7 @@ namespace MooseMus.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userID = _service.getUserIDByUserName(user.name);
+                var userID = _userService.getUserIDByUserName(user.name);
                 var courseID = _courseService.getCourseIDByCourseName(course.name);
                 if (courseID != 0)
                 {
