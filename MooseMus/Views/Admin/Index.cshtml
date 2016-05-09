@@ -41,7 +41,16 @@
                 <script type="text/javascript">
                     function editCourse()
                     {
-                        $('#divResult').load("@Url.Action("searchCourse","Admin")","@Url.Action("editCourse","Admin")");
+                        $('#divResult').load("@Url.Action("searchCourse","Admin")");
+                    }
+                </script>
+            </li>
+            <li>
+                <a href="javascript:addTeacher();">Link Teacher to Course</a>
+                <script type="text/javascript">
+                    function addTeacher()
+                    {
+                        $('#divResult').load("@Url.Action("addTeacher","Admin")");
                     }
                 </script>
             </li>

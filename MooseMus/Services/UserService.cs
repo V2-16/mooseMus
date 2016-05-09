@@ -169,5 +169,10 @@ namespace MooseMus.Services
             }
             return "student";
         }
+
+        public List<UserModel> getAllUsers()
+        {
+            return _db.user.ToList();
+        }
     }
 }
