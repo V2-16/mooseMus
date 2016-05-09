@@ -2,9 +2,11 @@
     padding-top: 5px;
     padding-bottom: 20px;
     font-family: 'Open Sans', sans-serif;
+    background-attachment: fixed;
     background-image: url("Images/BG-01.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
+
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -41,13 +43,12 @@ textarea {
 }
 
 .navbar-collapse collapse > ul {
-    padding-top: 5 px;
+    padding-top: 5px;
 }
 
 #footer{
     position:fixed;
     height:50px;
-    background-color:linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
     bottom:0px;
     left:0px;
     right:0px;
