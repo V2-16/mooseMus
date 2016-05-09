@@ -1,7 +1,10 @@
 ﻿body {
     padding-top: 5px;
     padding-bottom: 20px;
-    background: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+    font-family: 'Open Sans', sans-serif;
+    background-image: url("Images/BG-01.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -30,6 +33,11 @@ textarea {
     display:block;
     width: 100px;
     height:100px;
+}
+.navbar-nav > li > a {
+    line-height: 90px;
+    text-decoration:none;
+    color: black;
 }
 
 .navbar-collapse collapse > ul {
