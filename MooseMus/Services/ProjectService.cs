@@ -100,5 +100,10 @@ namespace MooseMus.Services
 
             }
         }
+        public void addProjectPart(TeacherAddProjectPartViewModel projectToAdd)
+        {
+
+        }
+
     }
 }
