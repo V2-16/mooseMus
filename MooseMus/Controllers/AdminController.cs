@@ -145,23 +145,23 @@ namespace MooseMus.Controllers
         //Admin tengir kennara við námskeið
         public ActionResult addTeacher()
         {
-            return PartialView("Partial/addTeacher");
+            var courseList = _courseService.getAllCourses();
+            var userList = _userService.getAllUsers();
+            Tuple<List<UserModel>, List<CourseModel>> tuple = new Tuple<List<UserModel>, List<CourseModel>>(userList, courseList);
+            return PartialView("Partial/addTeacher", tuple);
         }
 
         [HttpPost]
-        public ActionResult addTeacher(UserModel user, CourseModel course)
+        public ActionResult addTeacher(Tuple<List<UserModel>, List<CourseModel>> tuple)
         {
-            if (ModelState.IsValid)
+            var userID = _userService.getUserIDByUserName("Rakel");
+            var courseID = _courseService.getCourseIDByCourseName("Forritun");
+            if (courseID != 0)
             {
-                var userID = _service.getUserIDByUserName(user.name);
-                var courseID = _courseService.getCourseIDByCourseName(course.name);
-                if (courseID != 0)
-                {
-                    _courseService.addTeacherToCourse(userID, courseID);
-                    return View("Index");
-                }
-            }
+                _courseService.addTeacherToCourse(userID, courseID);
+                return View("Index");
 
+            }
             return View();
         }
         public ActionResult login()
