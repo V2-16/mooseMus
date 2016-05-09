@@ -4,6 +4,10 @@
     ViewBag.Title = "Link teacher and course";
 }
 
+<p>preparing to link</p>
+
+
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -14,17 +18,17 @@
 
 
         <div class="form-group">
-            @Html.LabelFor(tuple => tuple.Item1.ssn, "Student SSN", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(tuple => tuple.Item1.name, "Student SSN", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(tuple => tuple.Item1.ssn, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(tuple => tuple.Item1.ssn, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(tuple => tuple.Item1, ViewData["Index"] as List<SelectListItem>, new{ @class="form-control"})
+                @Html.ValidationMessageFor(tuple => tuple.Item1.name, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(tuple => tuple.Item2.name, "Course Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(tuple => tuple.Item2.name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(tuple => tuple.Item2, ViewData["Index"] as List<SelectListItem>, new { @class = "form-control" })
                 @Html.ValidationMessageFor(tuple => tuple.Item2.name, "", new { @class = "text-danger" })
             </div>
         </div>
