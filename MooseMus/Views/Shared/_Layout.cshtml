@@ -20,9 +20,9 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li><a class="navbar-brand" href='@Url.Action("Index","Home")'><img src="~/Content/Images/mooseMus_logo-01.png" alt="Logo" width="150" height="150"></a></li>
-                            <li>@Html.ActionLink("About", "About", "Home", new { style = "color:black" })</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home", new { style = "color:black" })</li>
+                            <li><a class="navbar-brand" href='@Url.Action("Index", "Home")'><img src="~/Content/Images/mooseMus_logo-01.png" alt="Logo" width="150" height="150"></a></li>
+                            <li>@Html.ActionLink("About", "About", "Home", new { style = "color:black" }, new { @class = "htmlactionlink" })</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home", new { style = "color:black" }, new { @class = "htmlactionlink" })</li>
 
                         </ul>
                         @Html.Partial("_LoginPartial")

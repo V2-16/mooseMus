@@ -40,6 +40,7 @@ textarea {
     line-height: 90px;
     text-decoration:none;
     color: black;
+    hover: white; 
 }
 
 .navbar-collapse collapse > ul {
@@ -53,6 +54,7 @@ textarea {
     left:0px;
     right:0px;
     margin-bottom:0px;
+    color:black;
 }
 
 body{
@@ -60,4 +62,36 @@ body{
 }
 
 
+label {
+    text-transform:lowercase;
+}
+
+label:first-letter {
+    text-transform: uppercase;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+li:hover a{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+a.htmlactionlink 
+{
+    color: white;
+}
+
+.navbar-brand:hover a{
+    text-decoration: none;
+    color: #ffffff;
+}
 
