@@ -84,7 +84,16 @@ namespace MooseMus.Services
 
         public void addStudentToCourse(int userID, int courseID)
         {
-
+            CourseTeacherModel courseTeacher = new CourseTeacherModel();
+            
+            courseTeacher.teacherID = userID;
+            courseTeacher.courseID = courseID;
+            
+            if (userID != null && courseID != null)
+            {
+                _db.courseTeacher.Add(courseTeacher);
+            }
+            _db.SaveChanges();
         }
 
         public void addTeacherToCourse(int userID, int courseID)

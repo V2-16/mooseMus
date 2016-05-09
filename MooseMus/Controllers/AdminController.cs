@@ -111,12 +111,29 @@ namespace MooseMus.Controllers
             return View();
         }
 
+        [HttpGet]
         //Admin tengir kennara við námskeið
         public ActionResult addTeacher()
         {
-            return View();
+            return PartialView("Partial/addTeacher");
         }
 
+        [HttpPost]
+        public ActionResult addTeacher(UserModel user, CourseModel course)
+        {
+            if (ModelState.IsValid)
+            {
+                var userID = _service.getUserIDByUserName(user.name);
+                var courseID = _courseService.getCourseIDByCourseName(course.name);
+                if (courseID != 0)
+                {
+                    _courseService.addTeacherToCourse(userID, courseID);
+                    return View("Index");
+                }
+            }
+
+            return View();
+        }
         public ActionResult login()
         {
             return View();
