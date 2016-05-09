@@ -11,9 +11,10 @@ namespace MooseMus.Models.ViewModels
         public List<ProjectViewModel> projects { get; set; }
         public string partName { get; set; }
         public string partDescription { get; set; }
-        public int projectPartID { get; set; }
-        public int projectID { get; set; }
+        public int projectName { get; set; }
         public string input { get; set; }
         public string output { get; set; }
+        public int value { get; set; }
+
     }
 }

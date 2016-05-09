@@ -68,14 +68,20 @@ namespace MooseMus.Controllers
                 projects = _cservice.getProjectsByCourse(cID),
                 partName = "",
                 partDescription = "",
-                projectPartID = 0,
-                projectID = 9,
                 input = "",
                 output = ""
             };
             return PartialView("CreateProjectPart", model);
         }
 
+        [HttpPost]
+        public ActionResult createProjectPart(TeacherAddProjectPartViewModel part)
+        {
+            ViewBag.Success = true;
+            _pservice.addProjectPart(part);
+            string courseName = _cservice.getCourseNameByID(part.courseID);
+            return RedirectToAction("Index", "Teacher", new { course = courseName });
+        }
 
         //Kennari bætir við verkefni
         public ActionResult projectAdded()

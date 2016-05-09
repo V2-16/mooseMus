@@ -13,6 +13,7 @@ namespace MooseMus.Models.Entities
         public string description { get; set; }
         public string input { get; set; }
         public string output { get; set; }
+        public int value { get; set; }
 
     }
 }
