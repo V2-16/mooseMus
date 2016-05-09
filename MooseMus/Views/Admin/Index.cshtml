@@ -7,22 +7,21 @@
 <h2>Admin - home</h2>
 
 <div>
+    <div class="navleft">
         <ul>
             <li>
                 <a href="javascript:addUser();">Create User</a>
                 <script type="text/javascript">
-                    function addUser()
-                    {
+                    function addUser() {
                         $('#divResult').load("@Url.Action("addUser","Admin")");
-                        
+
                     }
                 </script>
             </li>
             <li>
                 <a href="javascript:editUser();">Edit User</a>
                 <script type="text/javascript">
-                    function editUser()
-                    {
+                    function editUser() {
                         $('#divResult').load("@Url.Action("searchUser","Admin")");
                     }
                 </script>
@@ -30,8 +29,7 @@
             <li>
                 <a href="javascript:addCourse();">Create Course</a>
                 <script type="text/javascript">
-                    function addCourse()
-                    {
+                    function addCourse() {
                         $('#divResult').load("@Url.Action("addCourse","Admin")");
                     }
                 </script>
@@ -39,8 +37,7 @@
             <li>
                 <a href="javascript:editCourse();">Edit Course</a>
                 <script type="text/javascript">
-                    function editCourse()
-                    {
+                    function editCourse() {
                         $('#divResult').load("@Url.Action("searchCourse","Admin")");
                     }
                 </script>
@@ -48,15 +45,17 @@
             <li>
                 <a href="javascript:addTeacher();">Link Teacher to Course</a>
                 <script type="text/javascript">
-                    function addTeacher()
-                    {
+                    function addTeacher() {
                         $('#divResult').load("@Url.Action("addTeacher","Admin")");
                     }
                 </script>
             </li>
-         
+
         </ul>
+    </div>
+    <div id="divResult">
+    </div>
 </div>
-<div id="divResult">
-</div>
+
+
 

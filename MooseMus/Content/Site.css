@@ -110,3 +110,18 @@ a.htmlactionlink
     color: #ffffff;
 }
 
+.form-horizontal
+{
+    float:right;
+    width: 800px;
+    border: solid;
+   border-radius: 16px;
+   padding: 8px;
+}
+
+.navleft
+{
+    float: left;
+    width: 200px;
+}
+
