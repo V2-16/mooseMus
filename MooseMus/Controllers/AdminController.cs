@@ -158,7 +158,6 @@ namespace MooseMus.Controllers
             var courseID = _courseService.getCourseIDByCourseName("Forritun");
             if (courseID != 0)
             {
-<<<<<<< HEAD
                 var userID = _userService.getUserIDByUserName(user.name);
                 var courseID = _courseService.getCourseIDByCourseName(course.name);
                 if (courseID != 0)
@@ -166,12 +165,6 @@ namespace MooseMus.Controllers
                     _courseService.addTeacherToCourse(userID, courseID);
                     return View("Index");
                 }
-            }
-=======
-                _courseService.addTeacherToCourse(userID, courseID);
-                return View("Index");
->>>>>>> 0410cf3fab0f1548b4c266ccfe02c07e7e2df4c7
-
             }
             return View();
         }
