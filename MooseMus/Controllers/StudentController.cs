@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MooseMus.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -50,9 +51,27 @@ namespace MooseMus.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult submission()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult submission(StudentSubmitViewModel model)
+        {
+
+            return View();
+        }
+
+
+
+
         public ActionResult goBackToCourses()
         {
             return View();
         }
     }
+
+
 }

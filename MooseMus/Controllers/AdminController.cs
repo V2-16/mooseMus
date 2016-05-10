@@ -147,27 +147,34 @@ namespace MooseMus.Controllers
         {
             var courseList = _courseService.getAllCourses();
             var userList = _userService.getAllUsers();
-            Tuple<List<UserModel>, List<CourseModel>> tuple = new Tuple<List<UserModel>, List<CourseModel>>(userList, courseList);
-            return PartialView("Partial/addTeacher", tuple);
+
+            TeacherCourseViewModel model = new TeacherCourseViewModel { courses = courseList, users = userList  };
+            return PartialView("Partial/addTeacher", model);
         }
 
-    /*    [HttpPost]
-        public ActionResult addTeacher(Tuple<List<UserModel>, List<CourseModel>> tuple)
+
+        public ActionResult linkUser()
         {
-            var userID = _userService.getUserIDByUserName("Rakel");
-            var courseID = _courseService.getCourseIDByCourseName("Forritun");
-            if (courseID != 0)
-            {
-                var userID = _userService.getUserIDByUserName(user.name);
-                var courseID = _courseService.getCourseIDByCourseName(course.name);
-                if (courseID != 0)
-                {
-                    _courseService.addTeacherToCourse(userID, courseID);
-                    return View("Index");
-                }
-            }
-            return View();
-        }*/
+            var courseList = _courseService.getAllCourses();
+
+            CourseUsersViewModel model = new CourseUsersViewModel { courses = courseList };
+            return PartialView("Partial/linkUser", model);
+        }
+
+        [HttpPost]
+        public ActionResult linkUser(CourseUsersViewModel model)
+        {
+            var enrolledModel = _userService.getUserByCourse(model.courseID);
+            return PartialView("Partial/courseEnrollmentTable", enrolledModel);
+        }
+
+        [HttpPost]
+        public ActionResult addUserToCourse(EnrolledCourseModel model)
+        {
+            _courseService.addUserToCourse(model);
+            return PartialView("Index");
+        }
+
         public ActionResult login()
         {
             return View();
