@@ -41,12 +41,20 @@ textarea
     width: 100px;
     height:100px;
 }
-.navbar-nav > li > a 
+.navbar-nav > li > a:hover 
 {
-    line-height: 90px;
+    /*line-height: 90px;*/
     text-decoration:none;
     color: black;
-    hover: white; 
+    background-color: transparent !important;
+}
+
+.navbar-nav > li > a {
+    background-color: transparent !important;
+}
+
+.navbar-nav > li > a:focus {
+    background-color: transparent !important;
 }
 
 .navbar-collapse collapse > ul 
@@ -54,16 +62,16 @@ textarea
     padding-top: 5px;
 }
 
-#footer
+/*#footer
 {
-    position:fixed;
+    position:absolute;
     height:50px;
     bottom:0px;
     left:0px;
     right:0px;
     margin-bottom:0px;
     color:black;
-}
+}*/
 
 body
 {
@@ -110,3 +118,23 @@ a.htmlactionlink
     color: #ffffff;
 }
 
+nav.navbar ul li > ul {
+  background: transparent;
+  box-shadow: none;
+}
+
+ .btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active,
+ .open .dropdown-toggle.btn-default 
+ {
+  color: transparent;
+  background-color: transparent;
+  border-color: black;
+}
+
+ footer {
+     position: absolute;
+     bottom: 0;
+ }

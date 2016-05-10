@@ -16,14 +16,14 @@
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(m => m.title, "Titill", new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.title, "Title", new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(m => m.title, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.title, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.projectDescription, "Verkefnalýsing", new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.projectDescription, "Description", new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.TextAreaFor(m => m.projectDescription, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.projectDescription, "", new { @class = "text-danger" })
