@@ -1,11 +1,18 @@
-﻿body {
+﻿body 
+{
     padding-top: 5px;
     padding-bottom: 20px;
-    background: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+    font-family: 'Open Sans', sans-serif;
+    background-attachment: fixed;
+    background-image: url("Images/BG-01.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
 }
 
 /* Set padding to keep content from hitting the edges */
-.body-content {
+.body-content 
+{
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -13,42 +20,108 @@
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
-.dl-horizontal dt {
+.dl-horizontal dt 
+{
     white-space: normal;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
-textarea {
+textarea 
+{
     max-width: 280px;
 }
 
 
-.navbar-brand > img {
+.navbar-brand > img 
+{
     float:left;
     display:block;
     width: 100px;
     height:100px;
 }
-
-.navbar-collapse collapse > ul {
-    padding-top: 5 px;
+.navbar-nav > li > a 
+{
+    line-height: 90px;
+    text-decoration:none;
+    color: black;
+    hover: white; 
 }
 
-#footer{
+.navbar-collapse collapse > ul 
+{
+    padding-top: 5px;
+}
+
+#footer
+{
     position:fixed;
     height:50px;
-    background-color:linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
     bottom:0px;
     left:0px;
     right:0px;
     margin-bottom:0px;
+    color:black;
 }
 
-body{
+body
+{
     margin-bottom:50px;
 }
 
 
+label 
+{
+    text-transform:lowercase;
+}
+
+label:first-letter 
+{
+    text-transform: uppercase;
+}
+
+a 
+{
+    text-decoration: none;
+    color: #000000;
+}
+
+a:hover 
+{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+li:hover a
+{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+a.htmlactionlink 
+{
+    color: white;
+}
+
+.navbar-brand:hover a
+{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.form-horizontal
+{
+    float:right;
+    width: 800px;
+    border: solid;
+   border-radius: 16px;
+   padding: 8px;
+}
+
+.navleft
+{
+    float: left;
+    width: 200px;
+}
 
