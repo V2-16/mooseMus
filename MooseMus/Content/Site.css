@@ -107,9 +107,10 @@ li:hover a
     color: #ffffff;
 }
 
-a.htmlactionlink 
+htmlactionlink:hover
 {
-    color: white;
+    text-decoration: none;
+    color: #ffffff;
 }
 
 .navbar-brand:hover a
@@ -118,7 +119,6 @@ a.htmlactionlink
     color: #ffffff;
 }
 
-<<<<<<< HEAD
 nav.navbar ul li > ul {
   background: transparent;
   box-shadow: none;
@@ -135,18 +135,18 @@ nav.navbar ul li > ul {
   border-color: black;
 }
 
- footer {
-     position: absolute;
-     bottom: 0;
- }
-=======
+footer {
+     position: fixed !important;
+     bottom: 0 !important;
+}
+
 .form-horizontal
 {
     float:right;
     width: 800px;
     border: solid;
-   border-radius: 16px;
-   padding: 8px;
+    border-radius: 16px;
+    padding: 8px;
 }
 
 .navleft
@@ -155,4 +155,4 @@ nav.navbar ul li > ul {
     width: 200px;
 }
 
->>>>>>> fa50397900c44658a997d214cc8e0809d97a9b3a
+
