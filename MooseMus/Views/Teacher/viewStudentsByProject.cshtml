@@ -16,7 +16,7 @@
             @foreach (var stu in @Model.students)
             {
                 <tr>
-                    <td><a href="#" onclick="getStudent(@stu.userID)">@stu.name</a></td>
+                    <td><a href="#" onclick="getStudent(@stu.userID, @Model.projectID)">@stu.name</a></td>
                     <td>@stu.ssn</td>
                     <td><a href="mailto:@stu.email">Send mail</a></td>
                 </tr>
@@ -26,9 +26,9 @@
 </div>
 
 <script type="text/javascript">
-    function getStudent(st)
+    function getStudent(st, pr)
     {
-        $('#proj').load("@Url.Action("viewProjectByStudent", "Teacher", new {studentID = 1}, null)");
+        $('#proj').load('/Teacher/viewProjectByStudent?studentID=' + st + '&projID=' + pr);
         return false;
     }
 </script>

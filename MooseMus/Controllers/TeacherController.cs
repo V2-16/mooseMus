@@ -108,26 +108,43 @@ namespace MooseMus.Controllers
             return View();
         }
 
-        public ActionResult viewStudentsByProject(string projectName)
+        public ActionResult viewStudentsByProject(int projectID)
         {
+            var pro = _pservice.getProjectByID(projectID);
             var model = new TeacherProjectViewModel()
             {
-                project = projectName,
-                students = _pservice.getStudentsInProject(projectName)
+                projectID = projectID,
+                project = pro.title,
+                students = _pservice.getStudentsInProject(projectID)
             };
             return PartialView(model);
         }
 
-        public ActionResult viewProjectByStudent(int studentID)
+        public ActionResult viewProjectByStudent(int studentID, int projID)
         {
-            string projName = "Verkefni 1";
             var student = _uservice.getUserByID(studentID);
-            List<SubmissionViewModel> part = _pservice.getBestSubmissionsByStudent(studentID, projName);
+            var project = _pservice.getProjectByID(projID);
+            List<SubmissionViewModel> part = _pservice.getBestSubmissionsByStudent(studentID, projID);
             var model = new TeacherProjectStudentViewModel()
             {
                 studentName = student.name,
-                projectName = projName,
+                projectName = project.title,
                 parts = part
+            };
+            return PartialView(model);
+        }
+
+        public ActionResult viewProjectPartByStudent(int studentID, int projectPartID)
+        {
+            var project = _pservice.getProjectPartByID(projectPartID);
+            var student = _uservice.getUserByID(studentID);
+            List<SubmissionViewModel> sub = _pservice.getSubmissionsByStudentAndPart(studentID, projectPartID);
+            var model = new StudentProjectPartViewModel()
+            {
+                partName = project.title,
+                projectPartID = projectPartID,
+                studentName = student.name,
+                submissions = sub
             };
             return PartialView(model);
         }

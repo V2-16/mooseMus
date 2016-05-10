@@ -9,6 +9,8 @@
     <table class="table table-hover">
         <thead>
             <tr>
+                <th>Liður</th>
+                <th>Vægi</th>
                 <th>Afhending</th>
                 <th>Samþykkt</th>
             </tr>
@@ -17,6 +19,8 @@
             @foreach (var pro in @Model.parts)
             {
                 <tr>
+                    <td><a href="#"  onclick="getProjectPart(@pro.studentID, @pro.projParID)">@pro.title</a></td>
+                    <td>@pro.value</td>
                     <td>@pro.submission</td>
                     <td>@pro.accepted</td>
                 </tr>
@@ -24,3 +28,12 @@
         </tbody>
     </table>
 </div>
+
+<script type="text/javascript">
+    function getProjectPart(st, pr)
+    {
+        $('#proj').load('/Teacher/viewProjectPartByStudent?studentID=' + st + '&projectPartID=' + pr);
+        return false;
+    }
+</script>
+
