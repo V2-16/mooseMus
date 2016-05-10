@@ -20,8 +20,16 @@ namespace MooseMus.Services
 
         public int getCourseIDByName(string courseName)
         {
-            var course = _db.course.FirstOrDefault(x => x.name == courseName);
-            return course.Id;
+            try
+            {
+                var course = _db.course.FirstOrDefault(x => x.name == courseName);
+                return course.Id;
+
+            }
+            catch
+            {
+                return 0;
+            }
         }
 
         public string getCourseNameByID(int courseID)

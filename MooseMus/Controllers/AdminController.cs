@@ -161,25 +161,6 @@ namespace MooseMus.Controllers
             return PartialView("Partial/linkUser", model);
         }
 
-<<<<<<< HEAD
-    /*    [HttpPost]
-        public ActionResult addTeacher(Tuple<List<UserModel>, List<CourseModel>> tuple)
-        {
-            var userID = _userService.getUserIDByUserName("Rakel");
-            var courseID = _courseService.getCourseIDByCourseName("Forritun");
-            if (courseID != 0)
-            {
-                var userID = _userService.getUserIDByUserName(user.name);
-                var courseID = _courseService.getCourseIDByCourseName(course.name);
-                if (courseID != 0)
-                {
-                    _courseService.addTeacherToCourse(userID, courseID);
-                    return View("Index");
-                }
-            }
-            return View();
-        }*/
-=======
         [HttpPost]
         public ActionResult linkUser(CourseUsersViewModel model)
         {
@@ -193,7 +174,7 @@ namespace MooseMus.Controllers
             _courseService.addUserToCourse(model);
             return PartialView("Index");
         }
->>>>>>> linkingTeacher
+
         public ActionResult login()
         {
             return View();
