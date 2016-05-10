@@ -55,11 +55,11 @@ namespace MooseMus.Services
             return course.Id;
         }
 
-        public CourseProjectsViewModel getCourseProjects(int courseID)
+        public CourseProjectsViewModel getCourseProjects(int cID)
         {
-            var course = _db.course.SingleOrDefault(x => x.Id == courseID);
+            var course = _db.course.SingleOrDefault(x => x.Id == cID);
 
-            List<ProjectViewModel> projectNames = getProjectsByCourse(courseID);
+            List<ProjectViewModel> projectNames = getProjectsByCourse(cID);
 
             var model = new CourseProjectsViewModel
             {
@@ -73,13 +73,18 @@ namespace MooseMus.Services
         public List<ProjectViewModel> getProjectsByCourse(int courseID)
         {
             var projects = _db.project.Where(x => x.courseID == courseID).ToList();
-            List<ProjectViewModel> projectNames = new List<ProjectViewModel> { };
+            List<ProjectViewModel> projectList = new List<ProjectViewModel> { };
             foreach (var i in projects)
             {
-                projectNames.Add(new ProjectViewModel { name = i.title });
+                var model = new ProjectViewModel()
+                {
+                    name = i.title,
+                    projectID = i.ID
+                };
+                projectList.Add(model);
             };
 
-            return projectNames;
+            return projectList;
         }
         public void addCourseByID(AddCourseViewModel courseToUpdate)
         {

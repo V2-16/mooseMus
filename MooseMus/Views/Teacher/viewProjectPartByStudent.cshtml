@@ -1,0 +1,34 @@
+﻿@using MooseMus.Models.ViewModels
+@model StudentProjectPartViewModel
+
+<h2>@Model.partName</h2>
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Submission</th>
+                <th>Acceptec</th>
+                <th>Best Submission</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sub in @Model.submissions)
+            {
+                <tr>
+                    <td><a href="#" onclick="getProject(@sub.submission)">@sub.submission</a></td>
+                    <td>@sub.accepted</td>
+                    <td>@sub.best</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    function getProject(st)
+    {
+        $('#proj').load("/Teacher/viewProjectByStudent?studentID" + st);
+        return false;
+    }
+</script>

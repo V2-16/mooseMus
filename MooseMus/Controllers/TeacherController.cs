@@ -12,6 +12,7 @@ namespace MooseMus.Controllers
     {
         private CourseService _cservice = new CourseService();
         private ProjectService _pservice = new ProjectService();
+        private UserService _uservice = new UserService();
 
         // GET: Teacher
         public ActionResult Index(string course)
@@ -107,14 +108,45 @@ namespace MooseMus.Controllers
             return View();
         }
 
-        public ActionResult viewProjectsByCourse()
+        public ActionResult viewStudentsByProject(int projectID)
         {
-            return View();
+            var pro = _pservice.getProjectByID(projectID);
+            var model = new TeacherProjectViewModel()
+            {
+                projectID = projectID,
+                project = pro.title,
+                students = _pservice.getStudentsInProject(projectID)
+            };
+            return PartialView(model);
         }
 
-        public ActionResult viewProjectByStudent()
+        public ActionResult viewProjectByStudent(int studentID, int projID)
         {
-            return View();
+            var student = _uservice.getUserByID(studentID);
+            var project = _pservice.getProjectByID(projID);
+            List<SubmissionViewModel> part = _pservice.getBestSubmissionsByStudent(studentID, projID);
+            var model = new TeacherProjectStudentViewModel()
+            {
+                studentName = student.name,
+                projectName = project.title,
+                parts = part
+            };
+            return PartialView(model);
+        }
+
+        public ActionResult viewProjectPartByStudent(int studentID, int projectPartID)
+        {
+            var project = _pservice.getProjectPartByID(projectPartID);
+            var student = _uservice.getUserByID(studentID);
+            List<SubmissionViewModel> sub = _pservice.getSubmissionsByStudentAndPart(studentID, projectPartID);
+            var model = new StudentProjectPartViewModel()
+            {
+                partName = project.title,
+                projectPartID = projectPartID,
+                studentName = student.name,
+                submissions = sub
+            };
+            return PartialView(model);
         }
 
         public ActionResult selectProject()

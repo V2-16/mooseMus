@@ -53,10 +53,9 @@
                 <ul class="dropdown-menu">
                     @if (Model.projects != null)
                     {
-                        foreach (var project in @Model.projects)
+                        foreach (var pro in @Model.projects)
                         {
-                            var projectName = project.name;
-                            <li>@Html.ActionLink(projectName, "Index", "Teacher", projectName, null)</li>
+                            <li><a href="#" onclick="viewProject(@pro.projectID)">@pro.name</a></li>
                         }
                     }
                </ul>
@@ -69,6 +68,13 @@
 {
     Html.RenderPartial("CreatedSuccessfully");
 }
+
+<script type="text/javascript">
+    function viewProject(pr)
+    {      
+        $('#proj').load('/Teacher/viewStudentsByProject?projectID=' + pr);
+    }
+</script>
 
 <div id="proj">
 </div>

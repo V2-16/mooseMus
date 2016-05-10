@@ -23,31 +23,96 @@ namespace MooseMus.Services
             return null;
         }
 
-        //Skilar lista af öllum liðum í verkefni
-        public List<ProjectViewModel> getProjectByID(int projectID)
+        public ProjectModel getProjectByID(int projectID)
         {
-            //TODO;
-            return null;
+            var project = _db.project.SingleOrDefault(x => x.ID == projectID);
+            return project;
         }
 
         //Sækir öll skil nemanda í tilteknum lið
-        public StudentProjectPartViewModel getProjectPartByStudent(int studentID, int projectPartID)
+        public ProjectPartModel getProjectPartByID(int projectPartID)
         {
-            //TODO;
-            return null;
+            var projectPart = _db.projectPart.SingleOrDefault(x => x.ID == projectPartID);
+            return projectPart;
         }
 
         public int getProjectIDByName(string name)
         {
+            var proj = _db.project.SingleOrDefault(x => x.title == name);
+            return proj.ID;
+        }
 
-            return 9;
+        public List<SubmissionViewModel> getBestSubmissionsByStudent(int stuID, int projID)
+        {
+            List<SubmissionViewModel> best = new List<SubmissionViewModel>();
+            var parts = _db.projectPart.Where(x => x.projectID == projID).ToList();
+
+            foreach (var sub in parts)
+            {
+                var submission = _db.result.FirstOrDefault(x => x.projectPartID == sub.ID && x.studentID == stuID && x.bestResult == true);
+                if(submission != null)
+                {
+                    var model = new SubmissionViewModel()
+                    {
+                        studentID = submission.studentID,
+                        submission = submission.ID,
+                        accepted = submission.accepted,
+                        best = submission.bestResult,
+                        title = sub.title,
+                        projParID = submission.projectPartID,
+                        value = sub.value
+                    };
+                    best.Add(model);
+                }    
+            }
+            return best;
+        }
+
+        public List<SubmissionViewModel> getSubmissionsByStudentAndPart(int stuID, int proPartID)
+        {
+            List<SubmissionViewModel> best = new List<SubmissionViewModel>();
+            var submissions = _db.result.Where(x => x.projectPartID == proPartID && x.studentID == stuID).ToList();
+
+            foreach (var sub in submissions)
+            {
+                var model = new SubmissionViewModel()
+                {
+                    studentID = stuID,
+                    submission = sub.ID,
+                    accepted = sub.accepted,
+                    best = sub.bestResult
+                };
+                best.Add(model);
+            }
+            return best;
         }
         /****************** KENNARI **************************/
         //Skilar öllum nemendum sem hafa skilað tilteknu verkefni
-        public TeacherProjectViewModel getStudentsInProject(int projectID)
+        public List<UserViewModel> getStudentsInProject(int project)
         {
-            //TODO;
-            return null;
+            var proj = _db.project.SingleOrDefault(x => x.ID == project);
+            var studentInCourse = _db.courseStudent.Where(x => x.courseID == proj.courseID).Select(x => x.studentID).ToList();
+            List<UserViewModel> student = new List<UserViewModel>();
+
+            foreach(var stu in studentInCourse)
+            {           
+                var stuInCourse = _db.user.SingleOrDefault(x => x.ID == stu);
+                var model = new UserViewModel()
+                {
+                    ssn = stuInCourse.ssn,
+                    name = stuInCourse.name,
+                    email = stuInCourse.email,
+                    userID = stuInCourse.ID
+                };
+                student.Add(model);
+            }
+            return student;
+        }
+
+        public string getUserByID(int userID)
+        {
+            var model = _db.user.SingleOrDefault(x => x.ID == userID);
+            return model.name;
         }
 
         //Sækir bestu skil í hverjum lið hjá nemanda
