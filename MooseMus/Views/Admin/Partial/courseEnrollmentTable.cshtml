@@ -1,0 +1,20 @@
+﻿@model MooseMus.Models.Entities.EnrolledCourseModel
+@{
+    ViewBag.Title = "Course Enrollement";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        <ul>
+            @foreach (var item in Model.enrolledUsers)
+            {
+                <li>@item.name</li>
+            }   
+        </ul>
+    </div>
+   
+}
+

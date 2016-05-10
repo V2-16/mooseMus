@@ -158,6 +158,20 @@ namespace MooseMus.Services
             return courseNames;
         }
 
+        public EnrolledCourseModel getUserByCourse(int courseID)
+        {
+            var courseUsers = _db.courseUser.Where(x => x.courseID == courseID).ToList();
+            var usersIds = courseUsers.Select(x => x.userID);
+            var usersNotIn = _db.user.Where(x => !usersIds.Contains(x.ID)).ToList();
+            var usersIn = _db.user.Where(x => usersIds.Contains(x.ID)).ToList();
+
+            EnrolledCourseModel model = new EnrolledCourseModel { enrolledUsers = usersIn, unEnrolledUsers = usersNotIn };
+            
+            return model;
+                
+            
+        }
+
         public string teacherOrStudent(int userID, string course)
         {
             var theCourse = _db.course.SingleOrDefault(x => x.name == course);

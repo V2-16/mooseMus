@@ -46,11 +46,11 @@
                 </script>
             </li>
             <li>
-                <a href="javascript:addTeacher();">Link Teacher to Course</a>
+                <a href="javascript:linkUser();">Link User to Course</a>
                 <script type="text/javascript">
-                    function addTeacher()
+                    function linkUser()
                     {
-                        $('#divResult').load("@Url.Action("addTeacher","Admin")");
+                        $('#divResult').load("@Url.Action("linkUser","Admin")");
                     }
                 </script>
             </li>
