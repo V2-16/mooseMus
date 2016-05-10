@@ -25,20 +25,20 @@ namespace MooseMus.Services
 
         public ProjectModel getProjectByID(int projectID)
         {
-            var project = _db.project.SingleOrDefault(x => x.ID == projectID);
+            var project = _db.project.FirstOrDefault(x => x.ID == projectID);
             return project;
         }
 
         //Sækir öll skil nemanda í tilteknum lið
         public ProjectPartModel getProjectPartByID(int projectPartID)
         {
-            var projectPart = _db.projectPart.SingleOrDefault(x => x.ID == projectPartID);
+            var projectPart = _db.projectPart.FirstOrDefault(x => x.ID == projectPartID);
             return projectPart;
         }
 
         public int getProjectIDByName(string name)
         {
-            var proj = _db.project.SingleOrDefault(x => x.title == name);
+            var proj = _db.project.FirstOrDefault(x => x.title == name);
             return proj.ID;
         }
 
@@ -90,13 +90,13 @@ namespace MooseMus.Services
         //Skilar öllum nemendum sem hafa skilað tilteknu verkefni
         public List<UserViewModel> getStudentsInProject(int project)
         {
-            var proj = _db.project.SingleOrDefault(x => x.ID == project);
+            var proj = _db.project.FirstOrDefault(x => x.ID == project);
             var studentInCourse = _db.courseStudent.Where(x => x.courseID == proj.courseID).Select(x => x.studentID).ToList();
             List<UserViewModel> student = new List<UserViewModel>();
 
             foreach(var stu in studentInCourse)
             {           
-                var stuInCourse = _db.user.SingleOrDefault(x => x.ID == stu);
+                var stuInCourse = _db.user.FirstOrDefault(x => x.ID == stu);
                 var model = new UserViewModel()
                 {
                     ssn = stuInCourse.ssn,
@@ -111,7 +111,7 @@ namespace MooseMus.Services
 
         public string getUserByID(int userID)
         {
-            var model = _db.user.SingleOrDefault(x => x.ID == userID);
+            var model = _db.user.FirstOrDefault(x => x.ID == userID);
             return model.name;
         }
 
@@ -139,12 +139,7 @@ namespace MooseMus.Services
         public void addProject(TeacherAddEditViewModel projectToAdd)
         {
             ProjectModel nProject = new ProjectModel();
-            int? proID = _db.project.Max(m => (int?)m.ID) + 1;
-            if(proID == null)
-            {
-                proID = 1;
-            }
-            nProject.ID = proID.Value;
+            
             nProject.title = projectToAdd.title;
             nProject.description = projectToAdd.projectDescription;
             nProject.courseID = projectToAdd.courseID;
@@ -168,11 +163,7 @@ namespace MooseMus.Services
         public void addProjectPart(TeacherAddProjectPartViewModel partToAdd)
         {
             ProjectPartModel nPPart = new ProjectPartModel();
-            int? proParID = _db.project.Max(m => (int?)m.ID) + 1;
-            var proID = _db.project.SingleOrDefault(m => m.ID == partToAdd.projectName);
-
-            nPPart.ID = proParID.Value;
-            nPPart.projectID = proID.ID;
+            nPPart.projectID = partToAdd.projectID;
             nPPart.title = partToAdd.partName;
             nPPart.description = partToAdd.partDescription;
             nPPart.input = partToAdd.input;

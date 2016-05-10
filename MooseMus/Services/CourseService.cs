@@ -20,19 +20,19 @@ namespace MooseMus.Services
 
         public int getCourseIDByName(string courseName)
         {
-            var course = _db.course.SingleOrDefault(x => x.name == courseName);
+            var course = _db.course.FirstOrDefault(x => x.name == courseName);
             return course.Id;
         }
 
         public string getCourseNameByID(int courseID)
         {
-            var course = _db.course.SingleOrDefault(x => x.Id == courseID);
+            var course = _db.course.FirstOrDefault(x => x.Id == courseID);
             return course.name;
         }
 
         public AddCourseViewModel getCourseByID(int courseID)
         {
-            var course = _db.course.SingleOrDefault(x => x.Id == courseID);
+            var course = _db.course.FirstOrDefault(x => x.Id == courseID);
 
             var model = new AddCourseViewModel
             {
@@ -46,7 +46,7 @@ namespace MooseMus.Services
 
         public int getCourseIDByCourseName(string name) //erum með tvö svona föll, þurfum að sameina. 
         {
-            var course = _db.course.SingleOrDefault(x => x.name == name);
+            var course = _db.course.FirstOrDefault(x => x.name == name);
             if (course == null)
             {
                 //should we implement error catch here?
@@ -57,7 +57,7 @@ namespace MooseMus.Services
 
         public CourseProjectsViewModel getCourseProjects(int cID)
         {
-            var course = _db.course.SingleOrDefault(x => x.Id == cID);
+            var course = _db.course.FirstOrDefault(x => x.Id == cID);
 
             List<ProjectViewModel> projectNames = getProjectsByCourse(cID);
 
@@ -112,7 +112,7 @@ namespace MooseMus.Services
         public void updateCourseByID(AddCourseViewModel courseToUpdate)
         {
             var id = getCourseIDByCourseName(courseToUpdate.name);
-            CourseModel course = _db.course.Where(x => x.Id == id).SingleOrDefault();
+            CourseModel course = _db.course.Where(x => x.Id == id).FirstOrDefault();
             if(course != null)
             {
                 course.Id = id;

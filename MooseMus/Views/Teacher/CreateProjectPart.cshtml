@@ -13,18 +13,18 @@
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(m => m.projectName, "Project", new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.projectID, "Project", new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        <select class="form-control">
+                        <select name="projectID" class="form-control">
                             @if (Model.projects != null)
                             {
                                 foreach (var project in @Model.projects)
                                 {
-                                    <option value=proname>@project.name</option>
+                                    <option value=@project.projectID>@project.name</option>
                                 }
                             }
                         </select>
-                        @Html.ValidationMessageFor(m => m.projectName, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.projectID, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
