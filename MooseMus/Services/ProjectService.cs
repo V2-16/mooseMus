@@ -39,15 +39,57 @@ namespace MooseMus.Services
 
         public int getProjectIDByName(string name)
         {
+            var proj = _db.project.SingleOrDefault(x => x.title == name);
+            return proj.ID;
+        }
 
-            return 9;
+        public List<SubmissionViewModel> getBestSubmissionsByStudent(int studentID, string projectName)
+        {
+            var projID = getProjectIDByName(projectName);
+            List<SubmissionViewModel> best = new List<SubmissionViewModel>();
+            var submissions = _db.projectPart.Where(x => x.projectID == projID).ToList();
+
+            foreach (var sub in submissions)
+            {
+                var submission = _db.result.SingleOrDefault(x => x.projectPartID == sub.ID && x.bestResult == true);
+                var model = new SubmissionViewModel()
+                {
+                    studentID = submission.studentID,
+                    submission = submission.ID,
+                    accepted = submission.accepted,
+                    best = submission.accepted
+                };
+                best.Add(model);
+            }
+            return best;
         }
         /****************** KENNARI **************************/
         //Skilar öllum nemendum sem hafa skilað tilteknu verkefni
-        public TeacherProjectViewModel getStudentsInProject(int projectID)
+        public List<UserViewModel> getStudentsInProject(string project)
         {
-            //TODO;
-            return null;
+            var proj = _db.project.SingleOrDefault(x => x.title == project);
+            var studentInCourse = _db.courseStudent.Where(x => x.courseID == proj.courseID).Select(x => x.studentID).ToList();
+            List<UserViewModel> student = new List<UserViewModel>();
+
+            foreach(var stu in studentInCourse)
+            {           
+                var stuInCourse = _db.user.SingleOrDefault(x => x.ID == stu);
+                var model = new UserViewModel()
+                {
+                    ssn = stuInCourse.ssn,
+                    name = stuInCourse.name,
+                    email = stuInCourse.email,
+                    userID = stuInCourse.ID
+                };
+                student.Add(model);
+            }
+            return student;
+        }
+
+        public string getUserByID(int userID)
+        {
+            var model = _db.user.SingleOrDefault(x => x.ID == userID);
+            return model.name;
         }
 
         //Sækir bestu skil í hverjum lið hjá nemanda
