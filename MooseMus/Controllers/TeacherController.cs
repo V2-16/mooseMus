@@ -12,6 +12,7 @@ namespace MooseMus.Controllers
     {
         private CourseService _cservice = new CourseService();
         private ProjectService _pservice = new ProjectService();
+        private UserService _uservice = new UserService();
 
         // GET: Teacher
         public ActionResult Index(string course)
@@ -107,14 +108,28 @@ namespace MooseMus.Controllers
             return View();
         }
 
-        public ActionResult viewProjectsByCourse()
+        public ActionResult viewStudentsByProject(string projectName)
         {
-            return View();
+            var model = new TeacherProjectViewModel()
+            {
+                project = projectName,
+                students = _pservice.getStudentsInProject(projectName)
+            };
+            return PartialView(model);
         }
 
-        public ActionResult viewProjectByStudent()
+        public ActionResult viewProjectByStudent(int studentID)
         {
-            return View();
+            string projName = "Verkefni 1";
+            var student = _uservice.getUserByID(studentID);
+            List<SubmissionViewModel> part = _pservice.getBestSubmissionsByStudent(studentID, projName);
+            var model = new TeacherProjectStudentViewModel()
+            {
+                studentName = student.name,
+                projectName = projName,
+                parts = part
+            };
+            return PartialView(model);
         }
 
         public ActionResult selectProject()

@@ -1,0 +1,34 @@
+﻿@using MooseMus.Models.ViewModels
+@model TeacherProjectViewModel
+
+<h2>@Model.project</h2>
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nafn</th>
+                <th>Kennitala</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var stu in @Model.students)
+            {
+                <tr>
+                    <td><a href="#" onclick="getStudent(@stu.userID)">@stu.name</a></td>
+                    <td>@stu.ssn</td>
+                    <td><a href="mailto:@stu.email">Send mail</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    function getStudent(st)
+    {
+        $('#proj').load("@Url.Action("viewProjectByStudent", "Teacher", new {studentID = 1}, null)");
+        return false;
+    }
+</script>

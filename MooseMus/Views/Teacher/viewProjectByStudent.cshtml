@@ -1,0 +1,26 @@
+﻿
+@using MooseMus.Models.ViewModels
+@model TeacherProjectStudentViewModel
+
+<h3>@Model.projectName</h3>
+
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Afhending</th>
+                <th>Samþykkt</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pro in @Model.parts)
+            {
+                <tr>
+                    <td>@pro.submission</td>
+                    <td>@pro.accepted</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
