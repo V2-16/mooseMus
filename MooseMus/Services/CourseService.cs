@@ -20,6 +20,7 @@ namespace MooseMus.Services
 
         public int getCourseIDByName(string courseName)
         {
+            // XXX(snaedis): The page was faulting due to this, not sure how to handle
             try
             {
                 var course = _db.course.FirstOrDefault(x => x.name == courseName);
