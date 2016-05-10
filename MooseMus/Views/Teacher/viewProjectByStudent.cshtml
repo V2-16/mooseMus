@@ -9,10 +9,10 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>Liður</th>
-                <th>Vægi</th>
-                <th>Afhending</th>
-                <th>Samþykkt</th>
+                <th>Part</th>
+                <th>Value</th>
+                <th>Submission</th>
+                <th>Accepted</th>
             </tr>
         </thead>
         <tbody>
@@ -20,7 +20,7 @@
             {
                 <tr>
                     <td><a href="#"  onclick="getProjectPart(@pro.studentID, @pro.projParID)">@pro.title</a></td>
-                    <td>@pro.value</td>
+                    <td>@pro.value %</td>
                     <td>@pro.submission</td>
                     <td>@pro.accepted</td>
                 </tr>
