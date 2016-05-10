@@ -55,15 +55,7 @@
                     {
                         foreach (var pro in @Model.projects)
                         {
-                            <li>   
-                                <a href="javascript:viewProject();">@pro.name</a>
-                                <script type="text/javascript">
-                                    function viewProject()
-                                    {
-                                        $('#proj').load("@Url.Action("viewStudentsByProject", "Teacher", new { projectName = "Verkefni 1" })");
-                                    }
-                                </script>
-                            </li>
+                            <li><a href="#" onclick="viewProject(@pro.projectID)">@pro.name</a></li>
                         }
                     }
                </ul>
@@ -76,6 +68,13 @@
 {
     Html.RenderPartial("CreatedSuccessfully");
 }
+
+<script type="text/javascript">
+    function viewProject(pr)
+    {      
+        $('#proj').load('/Teacher/viewStudentsByProject?projectID=' + pr);
+    }
+</script>
 
 <div id="proj">
 </div>

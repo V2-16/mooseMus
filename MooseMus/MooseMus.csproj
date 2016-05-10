@@ -320,6 +320,7 @@
     <Content Include="Views\Teacher\CreatedSuccessfully.cshtml" />
     <Content Include="Views\Teacher\viewStudentsByProject.cshtml" />
     <Content Include="Views\Teacher\viewProjectByStudent.cshtml" />
+    <Content Include="Views\Teacher\viewProjectPartByStudent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

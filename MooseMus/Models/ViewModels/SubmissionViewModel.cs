@@ -11,6 +11,8 @@ namespace MooseMus.Models.ViewModels
         public int submission { get; set; }
         public bool accepted { get; set; }
         public bool best { get; set; }
+        public string title { get; set; }
+        public int projParID { get; set; }
 
     }
 }

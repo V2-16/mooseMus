@@ -10,6 +10,8 @@ namespace MooseMus.Models.ViewModels
     {
         public List<UserViewModel> students { get; set; }
         public string project { get; set; }
+        public int projectID { get; set; }
+
 
     }
 }
