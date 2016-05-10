@@ -57,7 +57,8 @@ namespace MooseMus.Services
                     accepted = submission.accepted,
                     best = submission.bestResult,
                     title = sub.title,
-                    projParID = submission.projectPartID
+                    projParID = submission.projectPartID,
+                    value = sub.value
                 };
                 best.Add(model);
             }

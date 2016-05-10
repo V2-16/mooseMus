@@ -13,6 +13,7 @@ namespace MooseMus.Models.ViewModels
         public bool best { get; set; }
         public string title { get; set; }
         public int projParID { get; set; }
+        public int value { get; set; }
 
     }
 }
