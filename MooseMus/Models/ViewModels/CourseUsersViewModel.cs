@@ -7,12 +7,12 @@ using System.Web.Mvc;
 
 namespace MooseMus.Models.ViewModels
 {
-    public class CourseUserViewModel
+    public class CourseUsersViewModel
     {
         public int userID { get; set; }
         public int courseID { get; set; }
         public string role { get; set; }
-
+        public List<UserModel> users { get; set; }
         public List<CourseModel> courses { get; set; }
         public IEnumerable<SelectListItem> courseNames
         {

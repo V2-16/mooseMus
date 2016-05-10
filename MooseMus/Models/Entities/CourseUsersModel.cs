@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MooseMus.Models.Entities
 {
-    public class CourseUserModel
+    public class CourseUsersModel
     {
         public int ID { get; set; }
         public int userID { get; set; }

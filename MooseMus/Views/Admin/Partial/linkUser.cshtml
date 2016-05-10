@@ -1,4 +1,4 @@
-﻿@model MooseMus.Models.ViewModels.CourseUserViewModel
+﻿@model MooseMus.Models.ViewModels.CourseUsersViewModel
 @{
     ViewBag.Title = "Link user and course";
 }
@@ -20,23 +20,20 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" id="find-course" value="Find" class="btn btn-default" />
+                <input type="button" id="find-course" value="Find" class="btn btn-default" />
             </div>
         </div>
     </div>
 
-    <div id="result-table"></div>
-
     <script type="text/javascript">
         $("#find-course").on('click', function (e) {
-            
             $.post("@Url.Action("linkUser", "Admin")", {'courseId': $("#courses").val()}, function(resp) {
                 console.log(resp);
                 $("#result-table").html(resp);
-
             });
             return false;
         })
     </script>
 }
+<div id="result-table"></div>
 

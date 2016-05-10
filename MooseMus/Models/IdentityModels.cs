@@ -28,7 +28,7 @@ namespace MooseMus.Models
         public DbSet<ProjectPartModel> projectPart { get; set; }
         public DbSet<ResultModel> result { get; set; }
         public DbSet<UserModel> user { get; set; }
-        public DbSet<CourseUserModel> courseUser { get; set; }
+        public DbSet<CourseUsersModel> courseUser { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

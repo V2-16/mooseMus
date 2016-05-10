@@ -3,7 +3,7 @@
     ViewBag.Title = "Course Enrollement";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("addUserToCourse" , "Admin"))
 {
     @Html.AntiForgeryToken()
 
@@ -14,6 +14,34 @@
                 <li>@item.name</li>
             }   
         </ul>
+    </div>
+    <div>
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.courseID)
+            <div class="form-group">
+                @Html.LabelFor(model => model.userID, "Users Not Enrolled", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.userID, Model.userNames)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.role, "Role", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Label("Student")
+                    @Html.RadioButtonFor(model => model.role, "Student")
+                    @Html.Label("Teacher")
+                    @Html.RadioButtonFor(model => model.role, "Teacher")
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" id="find-course" value="Submit" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
     </div>
    
 }

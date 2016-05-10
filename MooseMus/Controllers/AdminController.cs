@@ -157,17 +157,23 @@ namespace MooseMus.Controllers
         {
             var courseList = _courseService.getAllCourses();
 
-            CourseUserViewModel model = new CourseUserViewModel { courses = courseList };
+            CourseUsersViewModel model = new CourseUsersViewModel { courses = courseList };
             return PartialView("Partial/linkUser", model);
         }
 
         [HttpPost]
-        public ActionResult linkUser(CourseUserViewModel model)
+        public ActionResult linkUser(CourseUsersViewModel model)
         {
             var enrolledModel = _userService.getUserByCourse(model.courseID);
-            return PartialView("Partial/courseEnrollementTable", enrolledModel);
+            return PartialView("Partial/courseEnrollmentTable", enrolledModel);
         }
 
+        [HttpPost]
+        public ActionResult addUserToCourse(EnrolledCourseModel model)
+        {
+            _courseService.addUserToCourse(model);
+            return PartialView("Index");
+        }
         public ActionResult login()
         {
             return View();

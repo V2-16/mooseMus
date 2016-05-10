@@ -208,7 +208,7 @@
     <Compile Include="Models\Entities\CourseModel.cs" />
     <Compile Include="Models\Entities\CourseStudentModel.cs" />
     <Compile Include="Models\Entities\CourseTeacherModel.cs" />
-    <Compile Include="Models\Entities\CourseUserModel.cs" />
+    <Compile Include="Models\Entities\CourseUsersModel.cs" />
     <Compile Include="Models\Entities\EnrolledCourseModel.cs" />
     <Compile Include="Models\Entities\ProjectModel.cs" />
     <Compile Include="Models\Entities\ProjectPartModel.cs" />
@@ -221,7 +221,7 @@
     <Compile Include="Models\ViewModels\AdminFrontPageViewModel.cs" />
     <Compile Include="Models\ViewModels\AdminHomeViewModel.cs" />
     <Compile Include="Models\ViewModels\CourseProjectsViewModel.cs" />
-    <Compile Include="Models\ViewModels\CourseUserViewModel.cs" />
+    <Compile Include="Models\ViewModels\CourseUsersViewModel.cs" />
     <Compile Include="Models\ViewModels\CourseViewModel.cs" />
     <Compile Include="Models\ViewModels\FrontPageViewModel.cs" />
     <Compile Include="Models\ViewModels\ProjectPartViewModel.cs" />
