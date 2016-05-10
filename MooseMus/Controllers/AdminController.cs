@@ -147,10 +147,21 @@ namespace MooseMus.Controllers
         {
             var courseList = _courseService.getAllCourses();
             var userList = _userService.getAllUsers();
-            Tuple<List<UserModel>, List<CourseModel>> tuple = new Tuple<List<UserModel>, List<CourseModel>>(userList, courseList);
-            return PartialView("Partial/addTeacher", tuple);
+
+            TeacherCourseViewModel model = new TeacherCourseViewModel { courses = courseList, users = userList  };
+            return PartialView("Partial/addTeacher", model);
         }
 
+
+        public ActionResult linkUser()
+        {
+            var courseList = _courseService.getAllCourses();
+
+            CourseUsersViewModel model = new CourseUsersViewModel { courses = courseList };
+            return PartialView("Partial/linkUser", model);
+        }
+
+<<<<<<< HEAD
     /*    [HttpPost]
         public ActionResult addTeacher(Tuple<List<UserModel>, List<CourseModel>> tuple)
         {
@@ -168,6 +179,21 @@ namespace MooseMus.Controllers
             }
             return View();
         }*/
+=======
+        [HttpPost]
+        public ActionResult linkUser(CourseUsersViewModel model)
+        {
+            var enrolledModel = _userService.getUserByCourse(model.courseID);
+            return PartialView("Partial/courseEnrollmentTable", enrolledModel);
+        }
+
+        [HttpPost]
+        public ActionResult addUserToCourse(EnrolledCourseModel model)
+        {
+            _courseService.addUserToCourse(model);
+            return PartialView("Index");
+        }
+>>>>>>> linkingTeacher
         public ActionResult login()
         {
             return View();
