@@ -208,6 +208,8 @@
     <Compile Include="Models\Entities\CourseModel.cs" />
     <Compile Include="Models\Entities\CourseStudentModel.cs" />
     <Compile Include="Models\Entities\CourseTeacherModel.cs" />
+    <Compile Include="Models\Entities\CourseUsersModel.cs" />
+    <Compile Include="Models\Entities\EnrolledCourseModel.cs" />
     <Compile Include="Models\Entities\ProjectModel.cs" />
     <Compile Include="Models\Entities\ProjectPartModel.cs" />
     <Compile Include="Models\Entities\ResultModel.cs" />
@@ -219,6 +221,7 @@
     <Compile Include="Models\ViewModels\AdminFrontPageViewModel.cs" />
     <Compile Include="Models\ViewModels\AdminHomeViewModel.cs" />
     <Compile Include="Models\ViewModels\CourseProjectsViewModel.cs" />
+    <Compile Include="Models\ViewModels\CourseUsersViewModel.cs" />
     <Compile Include="Models\ViewModels\CourseViewModel.cs" />
     <Compile Include="Models\ViewModels\FrontPageViewModel.cs" />
     <Compile Include="Models\ViewModels\ProjectPartViewModel.cs" />
@@ -315,16 +318,18 @@
     <Content Include="Views\Teacher\CreateProject.cshtml" />
     <Content Include="Views\Teacher\CreateProjectPart.cshtml" />
     <Content Include="Views\Admin\Partial\searchCourse.cshtml" />
-    <Content Include="Views\Admin\Partial\addTeacher.cshtml" />
+    <Content Include="Views\Admin\Partial\linkUser.cshtml" />
     <Content Include="Views\Admin\Partial\searchUser.cshtml" />
     <Content Include="Views\Teacher\CreatedSuccessfully.cshtml" />
     <Content Include="Views\Teacher\viewStudentsByProject.cshtml" />
     <Content Include="Views\Teacher\viewProjectByStudent.cshtml" />
     <Content Include="Views\Teacher\viewProjectPartByStudent.cshtml" />
     <Content Include="Views\Student\submission.cshtml" />
+    <Content Include="Views\Admin\Partial\courseEnrollmentTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\CourseUser\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

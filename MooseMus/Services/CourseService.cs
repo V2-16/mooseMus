@@ -124,23 +124,28 @@ namespace MooseMus.Services
             return;
         }
 
-        public void addStudentToCourse(int userID, int courseID)
+     
+        public void addUserToCourse(EnrolledCourseModel model)
         {
-            
-        }
+            CourseUsersModel newConnect = new CourseUsersModel();
 
-        public void addTeacherToCourse(int userID, int courseID)
-        {
-            CourseTeacherModel courseTeacher = new CourseTeacherModel();
-            
-            courseTeacher.teacherID = userID;
-            courseTeacher.courseID = courseID;
-            
-            if (userID != 0 && courseID != 0)
+            newConnect.userID = model.userID;
+            newConnect.courseID = model.courseID;
+            newConnect.role = model.role;
+
+            if (model != null)
             {
-                _db.courseTeacher.Add(courseTeacher);
+                _db.courseUser.Add(newConnect);
             }
-            _db.SaveChanges();
+
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+
+            }
         }
 
         public List<CourseModel> getAllCourses()
