@@ -1,9 +1,7 @@
 ﻿@model MooseMus.Models.ViewModels.AddUserViewModel
-
 @{
     ViewBag.Title = "editUser";
 }
-
 @using (Html.BeginForm("editUser", "Admin"))
 {
     @Html.AntiForgeryToken()

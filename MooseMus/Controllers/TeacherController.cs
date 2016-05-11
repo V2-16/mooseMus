@@ -145,7 +145,7 @@ namespace MooseMus.Controllers
             return PartialView(model);
         }
 
-        //Kennari velur að breyta verkefni
+        //Kennari breytir lið
         public ActionResult updateProjectPart(TeacherAddProjectPartViewModel toEdit)
         {
             if (ModelState.IsValid)

@@ -1,6 +1,6 @@
 ﻿body 
 {
-    padding-top: 5px;
+    padding-top: 2px;
     padding-bottom: 20px;
     font-family: 'Open Sans', sans-serif;
     background-attachment: fixed;
@@ -43,7 +43,6 @@ textarea
 }
 .navbar-nav > li > a:hover 
 {
-    /*line-height: 90px;*/
     text-decoration:none;
     color: black;
     background-color: transparent !important;
@@ -51,6 +50,7 @@ textarea
 
 .navbar-nav > li > a {
     background-color: transparent !important;
+    padding-top: 15px;
 }
 
 .navbar-nav > li > a:focus {
@@ -62,22 +62,10 @@ textarea
     padding-top: 5px;
 }
 
-/*#footer
-{
-    position:absolute;
-    height:50px;
-    bottom:0px;
-    left:0px;
-    right:0px;
-    margin-bottom:0px;
-    color:black;
-}*/
-
 body
 {
     margin-bottom:50px;
 }
-
 
 label 
 {
@@ -98,55 +86,39 @@ a
 a:hover 
 {
     text-decoration: none;
-    color: #ffffff;
+    color: black;
+    font-size: 150%;
 }
 
 li:hover a
 {
     text-decoration: none;
-    color: #ffffff;
+    color: black;
+    font-size: 150%;
 }
 
-a.htmlactionlink 
-{
-    color: white;
-}
 
 .navbar-brand:hover a
 {
     text-decoration: none;
-    color: #ffffff;
+    color: #black;
+    font-size: 150%;
 }
 
-<<<<<<< HEAD
-nav.navbar ul li > ul {
-  background: transparent;
-  box-shadow: none;
-}
-
- .btn-default:hover,
-.btn-default:focus,
-.btn-default:active,
-.btn-default.active,
- .open .dropdown-toggle.btn-default 
- {
-  color: transparent;
-  background-color: transparent;
-  border-color: black;
-}
-
- footer {
-     position: absolute;
+ footer 
+{
+     position: fixed;
      bottom: 0;
- }
+}
 
 .form-horizontal
 {
-    float:right;
-    width: 800px;
+    margin-right:auto; 
+    margin-left:auto;
+    width: 400px;
     border: solid;
-   border-radius: 16px;
-   padding: 8px;
+    border-radius: 16px;
+    padding: 8px;
 }
 
 .navleft
@@ -155,3 +127,66 @@ nav.navbar ul li > ul {
     width: 200px;
 }
 
+.actionlink:hover
+{
+    font-size: 150%;
+}
+
+div
+{
+  margin-top:10px;
+}
+
+.actionlink
+{
+  margin:40px;
+}
+
+a:visited
+{
+    text-decoration: none;
+    color: black !important;
+}
+
+.dropdown-menu:hover
+{
+      background-color: transparent;
+      text-decoration: none;
+      font-size: 65%;
+      text-color: black;
+}
+
+.dropdown-menu
+{
+    background-color: transparent;
+     text-decoration: none;
+      font-size: 65%;
+      text-color: black;
+}
+
+.dropdown-toggle.visited
+{
+    text-decoration: none;
+    color: black;
+}
+
+.navleft:visited
+{
+    text-decoration: none;
+    color: black;
+}
+
+.makeblack:visited
+{
+    color: black !important;
+}
+
+.makeblack:focus
+{
+    color: black !important;
+}
+
+.makeblack:active
+{
+    color: black !important;
+}

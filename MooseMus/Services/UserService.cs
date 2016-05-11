@@ -12,6 +12,7 @@ namespace MooseMus.Services
     public class UserService
     {
         private ApplicationDbContext _db;
+        private CourseService _courseService = new CourseService();
 
         public UserService() 
         {
@@ -153,36 +154,33 @@ namespace MooseMus.Services
             return courseNames;
         }
 
-        public EnrolledCourseModel getUserByCourse(int courseID)
+        public CourseUsersViewModel getUserByCourse(int courseID)
         {
             var courseUsers = _db.courseUser.Where(x => x.courseID == courseID).ToList();
-            List<UserModel> userIds = new List<UserModel> { };
-            var allUsers = _db.user.ToList();
+            List<UserModel> usersIn = new List<UserModel> { };
             foreach (var i in courseUsers)
             {
                 var user = _db.user.SingleOrDefault(x => x.ID == i.userID);
-                userIds.Add(new UserModel {  ID = user.ID , name = user.name });
+                usersIn.Add(user);
             };
-            List<UserModel> usersNotIn = new List<UserModel> { };
-            foreach (var i in allUsers)
+            List<UserModel> teachersIn = new List<UserModel> { };
+            foreach(var i in usersIn)
             {
-                foreach(var j in userIds)
+                if(teacherOrStudent(i.ID, _courseService.getCourseNameByID(courseID)) == "teacher")
                 {
-                    var user = _db.user.Where(x => x.ID != j.ID && x.ID == i.ID).FirstOrDefault();
-                    if(user != null)
-                    {
-                        usersNotIn.Add(new UserModel { ID = user.ID, name = user.name });
-                    }
-                };
-            };
-            List<UserModel> usersIn = new List<UserModel> { };
-            foreach (var i in userIds)
+                    teachersIn.Add(i);
+                }
+            }
+            List<UserModel> studentsIn = usersIn.Except(teachersIn).ToList();
+            var allUsers = _db.user.ToList();
+            List<UserModel> usersNotIn =  allUsers.Except(usersIn).ToList();
+
+            CourseUsersViewModel model = new CourseUsersViewModel
             {
-                var user = _db.user.Where(x => x.name == i.name).FirstOrDefault();
-                usersIn.Add(new UserModel { ID = user.ID , name = user.name });
+                teachers = teachersIn,
+                students = studentsIn,
+                unEnrolledUsers = usersNotIn
             };
-            EnrolledCourseModel model = new EnrolledCourseModel { enrolledUsers = usersIn, unEnrolledUsers = usersNotIn };
-            
             return model;
         }
 

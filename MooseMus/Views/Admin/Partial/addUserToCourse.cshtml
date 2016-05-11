@@ -1,23 +1,33 @@
-﻿@model MooseMus.Models.Entities.EnrolledCourseModel
+﻿@model MooseMus.Models.ViewModels.CourseUsersViewModel
 @{
-    ViewBag.Title = "Course Enrollement";
+    ViewBag.Title = "Populating course";
 }
-
-@using (Html.BeginForm("addUserToCourse" , "Admin"))
+@using (Html.BeginForm("addUserToCourse", "Admin"))
 {
     @Html.AntiForgeryToken()
-
-    <div>
-        <ul>
-            @foreach (var item in Model.enrolledUsers)
-            {
-                <li>@item.name</li>
-            }   
-        </ul>
-    </div>
-    <div>
-        <div class="form-horizontal">
-            <hr />
+    <div class="form-horizontal">
+        <hr />
+        <div>
+            <dl>
+                @if (Model.teachers != null)
+                {
+                    <dt>Teachers in course</dt>
+                    foreach (var item in Model.teachers)
+                    {
+                        <dd>@item.name</dd>
+                    }
+                }
+                @if (Model.students != null)
+                {
+                    <dt>Students in course</dt>
+                    foreach (var item in Model.students)
+                    {
+                        <dd>@item.name</dd>
+                    }
+                }
+            </dl>
+        </div>
+        <div>
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.courseID)
             <div class="form-group">
@@ -35,7 +45,6 @@
                     @Html.RadioButtonFor(model => model.role, "Teacher")
                 </div>
             </div>
-
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" id="find-course" value="Submit" class="btn btn-default" />
@@ -43,6 +52,5 @@
             </div>
         </div>
     </div>
-   
 }
 

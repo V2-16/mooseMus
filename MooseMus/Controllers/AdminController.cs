@@ -164,12 +164,12 @@ namespace MooseMus.Controllers
         [HttpPost]
         public ActionResult linkUser(CourseUsersViewModel model)
         {
-            var enrolledModel = _userService.getUserByCourse(model.courseID);
-            return PartialView("Partial/courseEnrollmentTable", enrolledModel);
+            var courseUsersModel = _userService.getUserByCourse(model.courseID);
+            return PartialView("Partial/addUserToCourse", courseUsersModel);
         }
 
         [HttpPost]
-        public ActionResult addUserToCourse(EnrolledCourseModel model)
+        public ActionResult addUserToCourse(CourseUsersViewModel model)
         {
             _courseService.addUserToCourse(model);
             return PartialView("Index");
