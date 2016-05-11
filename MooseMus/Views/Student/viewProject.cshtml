@@ -19,7 +19,7 @@
             @foreach (var pro in @Model.parts)
             {
                 <tr>
-                    <td><a href="#"  onclick="getProjectPart(@pro.studentID, @pro.projParID)">@pro.title</a></td>
+                    <td><a href="#" onclick="viewProjectPart(@pro.studentID, @pro.projParID)">@pro.title</a></td>
                     <td>@pro.value %</td>
                     <td>@pro.submission</td>
                     <td>@pro.accepted</td>
@@ -30,10 +30,8 @@
 </div>
 
 <script type="text/javascript">
-    function getProjectPart(st, pr)
-    {
-        $('#proj').load('/Teacher/viewProjectPartByStudent?studentID=' + st + '&projectPartID=' + pr);
+    function viewProjectPart(st, pp) {
+        $('#proj').load('/Teacher/viewProjectPartByStudent?studentID=' + st + '&projectPartID=' + pp);
         return false;
     }
 </script>
-

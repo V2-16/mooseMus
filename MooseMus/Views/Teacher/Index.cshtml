@@ -20,7 +20,7 @@
                         <script type="text/javascript">
                             function addProject()
                             {
-                                $('#proj').load("@Url.Action("goToAddProject", "Teacher", new { course = @Model.name })");
+                                $('#proj').load("@Url.Action("createProject", "Teacher", new { course = @Model.name })");
                             }
                         </script>
                     </li> 
@@ -40,10 +40,9 @@
                 <ul class="dropdown-menu">
                     @if (Model.projects != null)
                     {
-                        foreach (var project in @Model.projects)
+                        foreach (var pro in @Model.projects)
                         {
-                            var projectName = project.name;
-                            <li>@Html.ActionLink(projectName, "Index", "Teacher", projectName, null)</li>
+                            <li><a href="#" onclick="viewProjectToEdit(@pro.projectID)">@pro.name</a></li>
                         }
                     }
                 </ul>
@@ -55,7 +54,7 @@
                     {
                         foreach (var pro in @Model.projects)
                         {
-                            <li><a href="#" onclick="viewProject(@pro.projectID)">@pro.name</a></li>
+                            <li><a href="#" onclick="viewProject(@Model.studentID, @pro.projectID)">@pro.name</a></li>
                         }
                     }
                </ul>
@@ -70,9 +69,9 @@
 }
 
 <script type="text/javascript">
-    function viewProject(pr)
+    function viewProject(st, pr)
     {      
-        $('#proj').load('/Teacher/viewStudentsByProject?projectID=' + pr);
+        $('#proj').load('/Student/viewProject?stuID=' + st + '&proj=' + pr);
     }
 </script>
 

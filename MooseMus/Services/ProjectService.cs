@@ -4,6 +4,7 @@ using MooseMus.Models;
 using MooseMus.Models.Entities;
 using System;
 using System.Linq;
+using System.Diagnostics;
 
 namespace MooseMus.Services
 {
@@ -15,18 +16,44 @@ namespace MooseMus.Services
         {
             _db = new ApplicationDbContext();
         }
+
         /****************** KENNARI & NEMANDI **************************/
-        //Skilar lista af öllum verkefnum í námskeið.
-        public List<CourseViewModel> getProjectsByCourseID(int courseID)
+
+        public CourseModel getCourseByProjectID(int projID)
         {
-            //TODOO;
-            return null;
+            var project = _db.project.FirstOrDefault(x => x.ID == projID);
+            var course = _db.course.FirstOrDefault(x => x.Id == project.courseID);
+            return course;
         }
 
         public ProjectModel getProjectByID(int projectID)
         {
             var project = _db.project.FirstOrDefault(x => x.ID == projectID);
             return project;
+        }
+
+        public ProjectPartsViewModel getProjectPartsByID(int projID)
+        {
+            var project = _db.project.FirstOrDefault(x => x.ID == projID);
+            var list = _db.projectPart.Where(x => x.projectID == projID).ToList();
+            List<ProjectPartsListViewModel> listOfParts = new List<ProjectPartsListViewModel>();
+            foreach(var par in list)
+            {
+                var part = new ProjectPartsListViewModel()
+                {
+                    projectPartID = par.ID,
+                    projectPartName = par.title
+                };
+                listOfParts.Add(part);
+            };
+            var model = new ProjectPartsViewModel()
+            {
+                projectID = projID,
+                projectName = project.title,
+                parts = listOfParts
+            };
+            
+            return model;
         }
 
         //Sækir öll skil nemanda í tilteknum lið
@@ -68,6 +95,46 @@ namespace MooseMus.Services
             return best;
         }
 
+        public List<SubmissionViewModel> getBestSubmissionsAndNoSubByStudent(int stuID, int projID)
+        {
+            List<SubmissionViewModel> best = new List<SubmissionViewModel>();
+            var parts = _db.projectPart.Where(x => x.projectID == projID).ToList();
+
+            foreach (var sub in parts)
+            {
+                var submission = _db.result.FirstOrDefault(x => x.projectPartID == sub.ID && x.studentID == stuID && x.bestResult == true);
+                if (submission != null)
+                {
+                    var model = new SubmissionViewModel()
+                    {
+                        studentID = submission.studentID,
+                        submission = submission.ID,
+                        accepted = submission.accepted,
+                        best = submission.bestResult,
+                        title = sub.title,
+                        projParID = submission.projectPartID,
+                        value = sub.value
+                    };
+                    best.Add(model);
+                }
+                else
+                {
+                    var model = new SubmissionViewModel()
+                    {
+                        studentID = stuID,
+                        submission = 0,
+                        accepted = false,
+                        best = false,
+                        title = sub.title,
+                        projParID = sub.ID,
+                        value = sub.value
+                    };
+                    best.Add(model);
+                }
+            }
+            return best;
+        }
+
         public List<SubmissionViewModel> getSubmissionsByStudentAndPart(int stuID, int proPartID)
         {
             List<SubmissionViewModel> best = new List<SubmissionViewModel>();
@@ -86,12 +153,14 @@ namespace MooseMus.Services
             }
             return best;
         }
+
         /****************** KENNARI **************************/
         //Skilar öllum nemendum sem hafa skilað tilteknu verkefni
         public List<UserViewModel> getStudentsInProject(int project)
         {
             var proj = _db.project.FirstOrDefault(x => x.ID == project);
-            var studentInCourse = _db.courseStudent.Where(x => x.courseID == proj.courseID).Select(x => x.studentID).ToList();
+            var cID = proj.courseID;
+            var studentInCourse = _db.courseUser.Where(x => x.courseID == cID && x.role == "Student").Select(x => x.userID).ToList();
             List<UserViewModel> student = new List<UserViewModel>();
 
             foreach(var stu in studentInCourse)
@@ -129,17 +198,36 @@ namespace MooseMus.Services
             return null;
         }
 
-        //Kennari uppfærir verkefni í námskeiði
-        public void updateProject(TeacherAddEditViewModel projectToEdit)
+        //Kennari uppfærir verkefnispart í námskeiði
+        public void updateProjectPart(TeacherAddProjectPartViewModel projParToEdit)
         {
-            //TODO;
+            ProjectPartModel project = _db.projectPart.Where(x => x.ID == projParToEdit.ID).FirstOrDefault();
+            if (project != null)
+            {
+                project.projectID = projParToEdit.projectID;
+                project.title = projParToEdit.partName;
+                project.description = projParToEdit.partDescription;
+                project.input = projParToEdit.input;
+                project.output = projParToEdit.output;
+                project.value = projParToEdit.value;
+                try
+                {
+                    _db.SaveChanges();
+                }
+
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+            return;
         }
 
         //Kennari bætir við verkefni í námskeiði
         public void addProject(TeacherAddEditViewModel projectToAdd)
         {
             ProjectModel nProject = new ProjectModel();
-            
+
             nProject.title = projectToAdd.title;
             nProject.description = projectToAdd.projectDescription;
             nProject.courseID = projectToAdd.courseID;
@@ -147,7 +235,7 @@ namespace MooseMus.Services
 
             if (projectToAdd != null)
             {
-                _db.project.Add(nProject);
+                    _db.project.Add(nProject);
             }
 
             try
@@ -155,14 +243,15 @@ namespace MooseMus.Services
                 _db.SaveChanges();
             }
 
-            catch (Exception e)
+            catch (Exception ex)
             {
-
+                Debug.WriteLine(ex.Message);
             }
         }
         public void addProjectPart(TeacherAddProjectPartViewModel partToAdd)
         {
             ProjectPartModel nPPart = new ProjectPartModel();
+
             nPPart.projectID = partToAdd.projectID;
             nPPart.title = partToAdd.partName;
             nPPart.description = partToAdd.partDescription;
@@ -180,9 +269,9 @@ namespace MooseMus.Services
                 _db.SaveChanges();
             }
 
-            catch (Exception e)
+            catch (Exception ex)
             {
-
+                Debug.WriteLine(ex.Message);
             }
         }
 

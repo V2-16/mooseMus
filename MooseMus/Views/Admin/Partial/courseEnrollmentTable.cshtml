@@ -6,18 +6,18 @@
 @using (Html.BeginForm("addUserToCourse" , "Admin"))
 {
     @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        <div>
+            <ul>
+                @foreach (var item in Model.enrolledUsers)
+                {
+                    <li>@item.name</li>
+                }
+            </ul>
+        </div>
+        <div>
 
-    <div>
-        <ul>
-            @foreach (var item in Model.enrolledUsers)
-            {
-                <li>@item.name</li>
-            }   
-        </ul>
-    </div>
-    <div>
-        <div class="form-horizontal">
-            <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.courseID)
             <div class="form-group">
@@ -43,6 +43,6 @@
             </div>
         </div>
     </div>
-   
+
 }
 

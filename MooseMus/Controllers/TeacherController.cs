@@ -23,20 +23,56 @@ namespace MooseMus.Controllers
             return View(model);
         }
 
-        //Kennari fer inná svæði til þess að bæta við verkefni
-        public ActionResult addProjectPart()
+        /********************** KENNARi SKOÐAR SKIL *********************/
+
+        //Kennari skoðar öll skil í lið hjá nemanda
+        public ActionResult viewProjectPartByStudent(int studentID, int projectPartID)
         {
-            return PartialView("ProjectPartCreated");
+            var project = _pservice.getProjectPartByID(projectPartID);
+            var student = _uservice.getUserByID(studentID);
+            List<SubmissionViewModel> sub = _pservice.getSubmissionsByStudentAndPart(studentID, projectPartID);
+            var model = new StudentProjectPartViewModel()
+            {
+                partName = project.title,
+                projectPartID = projectPartID,
+                studentName = student.name,
+                submissions = sub
+            };
+            return PartialView(model);
         }
 
-        //Kennari fer inná svæði til þess að breyta verkefni
-        public ActionResult goToEditProject()
+        //Kennari skoðar alla nemendur sem skráðir eru í tiltekið námskeið/verkefni
+        public ActionResult viewStudentsByProject(int projectID)
         {
-            return View();
+            var pro = _pservice.getProjectByID(projectID);
+            var model = new TeacherProjectViewModel()
+            {
+                projectID = projectID,
+                project = pro.title,
+                students = _pservice.getStudentsInProject(projectID)
+            };
+            return PartialView(model);
         }
+
+        //Kennari skoðar bestu skil nemenda í tilteknu verkefni
+        public ActionResult viewProjectByStudent(int studentID, int projID)
+        {
+            var student = _uservice.getUserByID(studentID);
+            var project = _pservice.getProjectByID(projID);
+            List<SubmissionViewModel> part = _pservice.getBestSubmissionsByStudent(studentID, projID);
+            var model = new TeacherProjectStudentViewModel()
+            {
+                studentName = student.name,
+                projectName = project.title,
+                parts = part
+            };
+            return PartialView(model);
+        }
+
+        /********************** KENNARY BÆTIR VIÐ VERKEFNI *********************/
 
         //Kennari velur að bæta við verkefni
-        public ActionResult goToAddProject(string course)
+        public ActionResult createProject(string course)
         {
             ViewBag.Success = false;
             var courseId = _cservice.getCourseIDByName(course);
@@ -51,14 +87,16 @@ namespace MooseMus.Controllers
         }
 
         [HttpPost]
-        public ActionResult goToAddProject(TeacherAddEditViewModel project)
+        public ActionResult createProject(TeacherAddEditViewModel project)
         {
-            
+
             ViewBag.Success = true;
             var model = _cservice.getCourseProjects(project.courseID);
             _pservice.addProject(project);
             return View("Index", model);
         }
+
+        /********************** KENNARY BÆTIR VIÐ LIÐ *********************/
 
         public ActionResult createProjectPart(string course)
         {
@@ -84,109 +122,39 @@ namespace MooseMus.Controllers
             return RedirectToAction("Index", "Teacher", new { course = courseName });
         }
 
-        //Kennari bætir við verkefni
-        public ActionResult projectAdded()
-        {
-            return View();
-        }
-
-        //Kennari velur að breyta verkefni
-        public ActionResult editProject()
-        {
-            return View();
-        }
-
+        /********************** KENNARI BREYTIR LIÐ *********************/
         //Kennari velur verkefni til að breyta
-        public ActionResult selectProjectToEdit()
+        public ActionResult projectSelectedToEdit(int projID)
         {
-            return View();
+            var model = _pservice.getProjectPartsByID(projID);
+            return PartialView(model);
         }
 
-        //Kennari breytir verkefni
-        public ActionResult projectEdit()
+        public ActionResult editProjectPart(int projParID)
         {
-            return View();
-        }
-
-        public ActionResult viewStudentsByProject(int projectID)
-        {
-            var pro = _pservice.getProjectByID(projectID);
-            var model = new TeacherProjectViewModel()
+            var ppart = _pservice.getProjectPartByID(projParID);
+            var model = new TeacherAddProjectPartViewModel()
             {
-                projectID = projectID,
-                project = pro.title,
-                students = _pservice.getStudentsInProject(projectID)
+                ID = ppart.ID,
+                projectID = ppart.projectID,
+                partName = ppart.title,
+                partDescription = ppart.description,
+                input = ppart.input,
+                output = ppart.output
             };
             return PartialView(model);
         }
 
-        public ActionResult viewProjectByStudent(int studentID, int projID)
+        //Kennari breytir lið
+        public ActionResult updateProjectPart(TeacherAddProjectPartViewModel toEdit)
         {
-            var student = _uservice.getUserByID(studentID);
-            var project = _pservice.getProjectByID(projID);
-            List<SubmissionViewModel> part = _pservice.getBestSubmissionsByStudent(studentID, projID);
-            var model = new TeacherProjectStudentViewModel()
+            if (ModelState.IsValid)
             {
-                studentName = student.name,
-                projectName = project.title,
-                parts = part
-            };
-            return PartialView(model);
+                _pservice.updateProjectPart(toEdit);
+            }
+            var course = _pservice.getCourseByProjectID(toEdit.projectID);
+            return RedirectToAction("Index", "Teacher", new { course = course.name });
         }
 
-        public ActionResult viewProjectPartByStudent(int studentID, int projectPartID)
-        {
-            var project = _pservice.getProjectPartByID(projectPartID);
-            var student = _uservice.getUserByID(studentID);
-            List<SubmissionViewModel> sub = _pservice.getSubmissionsByStudentAndPart(studentID, projectPartID);
-            var model = new StudentProjectPartViewModel()
-            {
-                partName = project.title,
-                projectPartID = projectPartID,
-                studentName = student.name,
-                submissions = sub
-            };
-            return PartialView(model);
-        }
-
-        public ActionResult selectProject()
-        {
-            return View();
-        }
-
-        public ActionResult selectStudent()
-        {
-            return View();
-        }
-
-        public ActionResult selectProjectPart()
-        {
-            return View();
-        }
-
-        public ActionResult goBackHome()
-        {
-            return View();
-        }
-
-        public ActionResult goBackToCourses()
-        {
-            return View();
-        }
-
-        public ActionResult goBackToProjects()
-        {
-            return View();
-        }
-
-        public ActionResult goBackToStudents()
-        {
-            return View();
-        }
-
-        public ActionResult goBackToProject()
-        {
-            return View();
-        }
     }
 }

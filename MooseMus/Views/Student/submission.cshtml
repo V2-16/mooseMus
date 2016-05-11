@@ -10,25 +10,25 @@
         <div class="form-group">s
             <h2>submission</h2>
 
-@using (Html.BeginForm("submission", "Student", FormMethod.Post, new { @class = "bla"}))
-{
-    // @Html.AntiForgeryToken()
-    //<h4>Use your received account to log in.</h4>
+                @using (Html.BeginForm("submission", "Student", FormMethod.Post, new { @class = "bla"}))
+                {
+                    // @Html.AntiForgeryToken()
+                    //<h4>Use your received account to log in.</h4>
 
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.code, "Code", new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(m => m.code, new { @class = "form-control" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.code, "Code", new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(m => m.code, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <input type="submit" value="submit" />
+                        </div>
+                    </div>
+                }
         </div>
     </div>
-
-    <div class="form-group">
-        <div class="col-md-10">
-            <input type="submit" value="submit" />
-        </div>
-    </div>
-}
-        </div>
-        </div>
