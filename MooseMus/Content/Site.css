@@ -2,12 +2,16 @@
 {
     padding-top: 2px;
     padding-bottom: 20px;
+<<<<<<< HEAD
     font-family: 'Open Sans', sans-serif !important;
+=======
+    font-family: Helvetica, sans-serif;
+>>>>>>> 0759fd334cab7a8d3b983091ece37d7eeb4b9929
     background-attachment: fixed;
     background-image: url("Images/BG-01.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
-
+    margin-bottom: 50px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -33,28 +37,34 @@ textarea
     max-width: 280px;
 }
 
-
 .navbar-brand > img 
 {
-    float:left;
-    display:block;
+    float: left;
+    display: block;
     width: 100px;
     height:100px;
 }
+<<<<<<< HEAD
 .navbar-nav > li > a:hover, a:active 
+=======
+
+.navbar-nav > li > a:hover 
+>>>>>>> 0759fd334cab7a8d3b983091ece37d7eeb4b9929
 {
-    text-decoration:none;
+    text-decoration: none;
     color: black;
     background-color: transparent !important;
 }
 
-.navbar-nav > li > a {
+.navbar-nav > li > a 
+{
     background-color: transparent !important;
     padding-top: 15px;
     color: black;
 }
 
-.navbar-nav > li > a:focus {
+.navbar-nav > li > a:focus 
+{
     background-color: transparent !important;
     color: black;
 }
@@ -64,14 +74,9 @@ textarea
     padding-top: 5px;
 }
 
-body
-{
-    margin-bottom:50px;
-}
-
 label 
 {
-    text-transform:lowercase;
+    text-transform: lowercase;
 }
 
 label:first-letter 
@@ -82,14 +87,15 @@ label:first-letter
 a 
 {
     text-decoration: none;
-    color: #000000;
+    color: black;
 }
 
-a:hover 
+a.dropdown-hover-color:hover 
 {
     text-decoration: none;
-    color: black;
+    color: white;
     font-size: 150%;
+    background-color: rgba(255, 0, 0, 0.2) !important;
 }
 
 li:hover a
@@ -103,11 +109,11 @@ li:hover a
 .navbar-brand:hover a
 {
     text-decoration: none;
-    color: #black;
+    color: black;
     font-size: 150%;
 }
 
- footer 
+footer 
 {
      position: fixed;
      bottom: 0;
@@ -131,18 +137,23 @@ li:hover a
 
 .actionlink:hover
 {
+<<<<<<< HEAD
     font-size: 100%;
     font-color: black;
+=======
+    font-size: 150%;
+    color: black;
+>>>>>>> 0759fd334cab7a8d3b983091ece37d7eeb4b9929
 }
 
 div
 {
-  margin-top:10px;
+    margin-top:10px;
 }
 
 .actionlink
 {
-  margin:40px;
+    margin:40px;
 }
 
 a:visited
@@ -151,20 +162,28 @@ a:visited
     color: black !important;
 }
 
-.dropdown-menu:hover
+.nav a:hover .caret
 {
-      background-color: transparent;
-      text-decoration: none;
-      font-size: 65%;
-      text-color: black;
+    border-top-color: black !important;
+    border-bottom-color: black !important;
 }
 
-.dropdown-menu
+.nav .caret
+{
+    border-top-color: black !important;
+    border-bottom-color: black !important;
+}
+
+.dropdown-menu 
 {
     background-color: transparent;
-     text-decoration: none;
-      font-size: 65%;
-      text-color: black;
+    text-decoration: none;
+    font-size: 65%;
+}
+
+.dropdown-menu:hover > li > a
+{
+    color: black;
 }
 
 .dropdown-toggle.visited
@@ -194,6 +213,7 @@ a:visited
 .makeblack:active
 {
     color: black !important;
+<<<<<<< HEAD
     text-decoration: none;
 }
 
@@ -223,3 +243,6 @@ html, body
 
 
 
+=======
+}
+>>>>>>> 0759fd334cab7a8d3b983091ece37d7eeb4b9929

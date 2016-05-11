@@ -1,22 +1,28 @@
-﻿@model MooseMus.Models.Entities.EnrolledCourseModel
+﻿@model MooseMus.Models.ViewModels.CourseUsersViewModel
 @{
-    ViewBag.Title = "Course Enrollement";
+    ViewBag.Title = "Populating course";
 }
-@using (Html.BeginForm("addUserToCourse" , "Admin"))
+@using (Html.BeginForm("addUserToCourse", "Admin"))
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
         <div>
             <dl>
-                <dt>Teachers in course</dt>
-                @foreach (var item in Model.teachers)
+                @if (Model.teachers != null)
                 {
-                    <dd>@item.name</dd>
+                    <dt>Teachers in course</dt>
+                    foreach (var item in Model.teachers)
+                    {
+                        <dd>@item.name</dd>
+                    }
                 }
-                <dt>Students in course</dt>
-                @foreach (var item in Model.enrolledStudents)
+                @if (Model.students != null)
                 {
-                    <dd>@item.name</dd>
+                    <dt>Students in course</dt>
+                    foreach (var item in Model.students)
+                    {
+                        <dd>@item.name</dd>
+                    }
                 }
             </dl>
         </div>

@@ -148,13 +148,18 @@ namespace MooseMus.Services
             foreach (var i in courses)
             {
                 var course = _db.course.SingleOrDefault(x => x.Id == i.courseID);
-                courseNames.Add(new CourseViewModel { name = course.name });
+                var listOfCourses = new CourseViewModel
+                {
+                    name = course.name,
+                    role = i.role
+                };
+                courseNames.Add(listOfCourses);
             };
             
             return courseNames;
         }
 
-        public EnrolledCourseModel getUserByCourse(int courseID)
+        public CourseUsersViewModel getUserByCourse(int courseID)
         {
             var courseUsers = _db.courseUser.Where(x => x.courseID == courseID).ToList();
             List<UserModel> usersIn = new List<UserModel> { };
@@ -175,8 +180,12 @@ namespace MooseMus.Services
             var allUsers = _db.user.ToList();
             List<UserModel> usersNotIn =  allUsers.Except(usersIn).ToList();
 
-            EnrolledCourseModel model = new EnrolledCourseModel { teachers = teachersIn, enrolledStudents = studentsIn, unEnrolledUsers = usersNotIn };
-           
+            CourseUsersViewModel model = new CourseUsersViewModel
+            {
+                teachers = teachersIn,
+                students = studentsIn,
+                unEnrolledUsers = usersNotIn
+            };
             return model;
         }
 
