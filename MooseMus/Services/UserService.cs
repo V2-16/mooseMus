@@ -148,7 +148,12 @@ namespace MooseMus.Services
             foreach (var i in courses)
             {
                 var course = _db.course.SingleOrDefault(x => x.Id == i.courseID);
-                courseNames.Add(new CourseViewModel { name = course.name });
+                var listOfCourses = new CourseViewModel
+                {
+                    name = course.name,
+                    role = i.role
+                };
+                courseNames.Add(listOfCourses);
             };
             
             return courseNames;
