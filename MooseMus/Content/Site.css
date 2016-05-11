@@ -2,7 +2,7 @@
 {
     padding-top: 2px;
     padding-bottom: 20px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif !important;
     background-attachment: fixed;
     background-image: url("Images/BG-01.png");
     background-repeat: no-repeat;
@@ -41,7 +41,7 @@ textarea
     width: 100px;
     height:100px;
 }
-.navbar-nav > li > a:hover 
+.navbar-nav > li > a:hover, a:active 
 {
     text-decoration:none;
     color: black;
@@ -51,10 +51,12 @@ textarea
 .navbar-nav > li > a {
     background-color: transparent !important;
     padding-top: 15px;
+    color: black;
 }
 
 .navbar-nav > li > a:focus {
     background-color: transparent !important;
+    color: black;
 }
 
 .navbar-collapse collapse > ul 
@@ -129,7 +131,8 @@ li:hover a
 
 .actionlink:hover
 {
-    font-size: 150%;
+    font-size: 100%;
+    font-color: black;
 }
 
 div
@@ -178,15 +181,45 @@ a:visited
 
 .makeblack:visited
 {
+    text-decoration: none;
     color: black !important;
 }
 
 .makeblack:focus
 {
     color: black !important;
+    text-decoration: none;
 }
 
 .makeblack:active
 {
     color: black !important;
+    text-decoration: none;
 }
+
+dt 
+{
+    margin-top: 6px;
+    margin-bottom: 2px;
+    font-size: 16px;
+}
+
+.nav a:hover .caret
+{
+    border-top-color: black !important;
+    border-bottom-color: black !important;
+}
+
+.nav .caret
+{
+    border-top-color: black !important;
+    border-bottom-color: black !important;
+}
+
+html, body
+{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+}
+
+
+
