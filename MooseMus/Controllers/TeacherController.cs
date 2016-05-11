@@ -90,24 +90,6 @@ namespace MooseMus.Controllers
             return View();
         }
 
-        //Kennari velur að breyta verkefni
-        public ActionResult editProject()
-        {
-            return View();
-        }
-
-        //Kennari velur verkefni til að breyta
-        public ActionResult selectProjectToEdit()
-        {
-            return View();
-        }
-
-        //Kennari breytir verkefni
-        public ActionResult projectEdit()
-        {
-            return View();
-        }
-
         public ActionResult viewStudentsByProject(int projectID)
         {
             var pro = _pservice.getProjectByID(projectID);
@@ -164,27 +146,42 @@ namespace MooseMus.Controllers
             return View();
         }
 
-        public ActionResult goBackHome()
+        /********************** KENNARY BREYTIR VERKEFNI *********************/
+        //Kennari velur verkefni til að breyta
+        public ActionResult projectSelectedToEdit(int projID)
         {
-            return View();
+            var model = _pservice.getProjectPartsByID(projID);
+            return PartialView(model);
         }
 
-        public ActionResult goBackToCourses()
+        public ActionResult editProjectPart(int projParID)
         {
-            return View();
+            var ppart = _pservice.getProjectPartByID(projParID);
+            var model = new TeacherAddProjectPartViewModel()
+            {
+                ID = ppart.ID,
+                projectID = ppart.projectID,
+                partName = ppart.title,
+                partDescription = ppart.description,
+                input = ppart.input,
+                output = ppart.output
+            };
+            return PartialView(model);
         }
 
-        public ActionResult goBackToProjects()
+        //Kennari velur að breyta verkefni
+        public ActionResult updateProjectPart(TeacherAddProjectPartViewModel toEdit)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                _pservice.updateProjectPart(toEdit);
+            }
+            var course = _pservice.getCourseByProjectID(toEdit.projectID);
+            return RedirectToAction("Index", "Teacher", new { course = course.name });
         }
 
-        public ActionResult goBackToStudents()
-        {
-            return View();
-        }
-
-        public ActionResult goBackToProject()
+        //Kennari breytir verkefni
+        public ActionResult projectEdit()
         {
             return View();
         }
