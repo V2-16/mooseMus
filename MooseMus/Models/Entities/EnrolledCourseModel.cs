@@ -10,7 +10,8 @@ namespace MooseMus.Models.Entities
     {
         public int courseID { get; set; }
         public int userID { get; set; }
-        public List<UserModel> enrolledUsers { get; set; }
+        public List<UserModel> teachers {get; set;}
+        public List<UserModel> enrolledStudents { get; set; }
         public List<UserModel> unEnrolledUsers { get; set; }
         public IEnumerable<SelectListItem> userNames
         {

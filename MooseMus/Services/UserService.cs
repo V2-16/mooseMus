@@ -12,6 +12,7 @@ namespace MooseMus.Services
     public class UserService
     {
         private ApplicationDbContext _db;
+        private CourseService _courseService = new CourseService();
 
         public UserService() 
         {
@@ -162,9 +163,19 @@ namespace MooseMus.Services
                 var user = _db.user.SingleOrDefault(x => x.ID == i.userID);
                 usersIn.Add(user);
             };
+            List<UserModel> teachersIn = new List<UserModel> { };
+            foreach(var i in usersIn)
+            {
+                if(teacherOrStudent(i.ID, _courseService.getCourseNameByID(courseID)) == "teacher")
+                {
+                    teachersIn.Add(i);
+                }
+            }
+            List<UserModel> studentsIn = usersIn.Except(teachersIn).ToList();
             var allUsers = _db.user.ToList();
             List<UserModel> usersNotIn =  allUsers.Except(usersIn).ToList();
-            EnrolledCourseModel model = new EnrolledCourseModel { enrolledUsers = usersIn, unEnrolledUsers = usersNotIn };
+
+            EnrolledCourseModel model = new EnrolledCourseModel { teachers = teachersIn, enrolledStudents = studentsIn, unEnrolledUsers = usersNotIn };
            
             return model;
         }

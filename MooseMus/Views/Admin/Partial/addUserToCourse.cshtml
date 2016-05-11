@@ -8,13 +8,18 @@
     <div class="form-horizontal">
         <hr />
         <div>
-            <h2>Users in course</h2>
-            <ul>
-                @foreach (var item in Model.enrolledUsers)
+            <dl>
+                <dt>Teachers in course</dt>
+                @foreach (var item in Model.teachers)
                 {
-                    <li>@item.name</li>
+                    <dd>@item.name</dd>
                 }
-            </ul>
+                <dt>Students in course</dt>
+                @foreach (var item in Model.enrolledStudents)
+                {
+                    <dd>@item.name</dd>
+                }
+            </dl>
         </div>
         <div>
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
