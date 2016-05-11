@@ -40,10 +40,9 @@
                 <ul class="dropdown-menu">
                     @if (Model.projects != null)
                     {
-                        foreach (var project in @Model.projects)
+                        foreach (var pro in @Model.projects)
                         {
-                            var projectName = project.name;
-                            <li>@Html.ActionLink(projectName, "Index", "Teacher", projectName, null)</li>
+                            <li><a href="#" onclick="viewProjectToEdit(@pro.projectID)">@pro.name</a></li>
                         }
                     }
                 </ul>
@@ -73,6 +72,9 @@
     function viewProject(pr)
     {      
         $('#proj').load('/Teacher/viewStudentsByProject?projectID=' + pr);
+    }
+    function viewProjectToEdit(pr) {
+        $('#proj').load('/Teacher/projectSelectedToEdit?projID=' + pr);
     }
 </script>
 
