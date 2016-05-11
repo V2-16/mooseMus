@@ -23,7 +23,7 @@ namespace MooseMus.Controllers
             return View(model);
         }
 
-        /********************** KENNARY SKOÐAR SKIL *********************/
+        /********************** KENNARi SKOÐAR SKIL *********************/
 
         //Kennari skoðar öll skil í lið hjá nemanda
         public ActionResult viewProjectPartByStudent(int studentID, int projectPartID)
@@ -122,7 +122,7 @@ namespace MooseMus.Controllers
             return RedirectToAction("Index", "Teacher", new { course = courseName });
         }
 
-        /********************** KENNARY BREYTIR LIÐ *********************/
+        /********************** KENNARI BREYTIR LIÐ *********************/
         //Kennari velur verkefni til að breyta
         public ActionResult projectSelectedToEdit(int projID)
         {

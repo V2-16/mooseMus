@@ -54,8 +54,9 @@ namespace MooseMus.Controllers
             {
                 return RedirectToAction("Index", "Teacher", new { course = course });
             }
-            return RedirectToAction("Index", "Student", course);
+            return RedirectToAction("Index", "Student", new { course = course, stuID = userID });
         }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
