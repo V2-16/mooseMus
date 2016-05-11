@@ -7,6 +7,7 @@ namespace MooseMus.Models.ViewModels
 {
     public class TeacherAddProjectPartViewModel
     {
+        public int ID { get; set; }
         public int courseID { get; set; }
         public List<ProjectViewModel> projects { get; set; }
         public string partName { get; set; }
