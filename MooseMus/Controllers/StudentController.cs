@@ -27,7 +27,7 @@ namespace MooseMus.Controllers
         {
             var student = _uservice.getUserByID(stuID);
             var project = _pservice.getProjectByID(projID);
-            List<SubmissionViewModel> part = _pservice.getBestSubmissionsByStudent(stuID, projID);
+            List<SubmissionViewModel> part = _pservice.getBestSubmissionsAndNoSubByStudent(stuID, projID);
             var model = new TeacherProjectStudentViewModel()
             {
                 studentName = student.name,

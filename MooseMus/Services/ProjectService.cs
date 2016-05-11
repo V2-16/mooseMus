@@ -95,6 +95,46 @@ namespace MooseMus.Services
             return best;
         }
 
+        public List<SubmissionViewModel> getBestSubmissionsAndNoSubByStudent(int stuID, int projID)
+        {
+            List<SubmissionViewModel> best = new List<SubmissionViewModel>();
+            var parts = _db.projectPart.Where(x => x.projectID == projID).ToList();
+
+            foreach (var sub in parts)
+            {
+                var submission = _db.result.FirstOrDefault(x => x.projectPartID == sub.ID && x.studentID == stuID && x.bestResult == true);
+                if (submission != null)
+                {
+                    var model = new SubmissionViewModel()
+                    {
+                        studentID = submission.studentID,
+                        submission = submission.ID,
+                        accepted = submission.accepted,
+                        best = submission.bestResult,
+                        title = sub.title,
+                        projParID = submission.projectPartID,
+                        value = sub.value
+                    };
+                    best.Add(model);
+                }
+                else
+                {
+                    var model = new SubmissionViewModel()
+                    {
+                        studentID = stuID,
+                        submission = 0,
+                        accepted = false,
+                        best = false,
+                        title = sub.title,
+                        projParID = sub.ID,
+                        value = sub.value
+                    };
+                    best.Add(model);
+                }
+            }
+            return best;
+        }
+
         public List<SubmissionViewModel> getSubmissionsByStudentAndPart(int stuID, int proPartID)
         {
             List<SubmissionViewModel> best = new List<SubmissionViewModel>();
