@@ -37,20 +37,31 @@ namespace MooseMus.Controllers
             return PartialView(model);
         }
 
-        public ActionResult selectProject()
+        public ActionResult viewProjectToSubmit(int stuID, int projID)
         {
-            return View();
-        }
-
-        public ActionResult selectProjectPart()
-        {
-            return View();
+            var student = _uservice.getUserByID(stuID);
+            var project = _pservice.getProjectByID(projID);
+            List<SubmissionViewModel> part = _pservice.getBestSubmissionsAndNoSubByStudent(stuID, projID);
+            var model = new TeacherProjectStudentViewModel()
+            {
+                studentName = student.name,
+                projectName = project.title,
+                parts = part
+            };
+            return PartialView(model);
         }
 
         //Nemandi fer í skilasvæði
-        public ActionResult submitAProjectPart()
+        public ActionResult submitAProjectPart(int stuID, int proParID)
         {
-            return View();
+            var proPar = _pservice.getProjectPartByID(proParID);
+            var model = new StudentSubmitViewModel()
+            {
+                studentID = stuID,
+                projectPartID = proPar.ID,
+                projectPartName = proPar.title
+            };
+            return View(model);
         }
 
         //Nemandi skilar inn

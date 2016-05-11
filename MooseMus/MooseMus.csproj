@@ -331,6 +331,8 @@
     <Content Include="Views\Teacher\projectSelectedToEdit.cshtml" />
     <Content Include="Views\Teacher\editProjectPart.cshtml" />
     <Content Include="Views\Student\viewProject.cshtml" />
+    <Content Include="Views\Student\viewProjectToSubmit.cshtml" />
+    <Content Include="Views\Student\submitAProjectPart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
