@@ -24,7 +24,7 @@
                     {
                         foreach (var pro in @Model.projects)
                         {
-                            <li><a href="#" onclick="viewProjectToEdit(@pro.projectID)">@pro.name</a></li>
+                            <li><a href="#" onclick="submitProject(@Model.studentID,@pro.projectID)">@pro.name</a></li>
                         }
                     }
                 </ul>
@@ -48,6 +48,9 @@
 <script type="text/javascript">
     function viewProjectByStudent(st,pr) {
         $('#proj').load('/Student/viewProject?stuID=' + st+ '&projID=' + pr);
+    }
+    function submitProject(st,pr) {
+        $('#proj').load('/Student/viewProjectToSubmit?stuID=' + st+ '&projID=' + pr);
     }
 </script>
 
