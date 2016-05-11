@@ -134,7 +134,7 @@ namespace MooseMus.Services
         }
 
      
-        public void addUserToCourse(EnrolledCourseModel model)
+        public void addUserToCourse(CourseUsersViewModel model)
         {
             CourseUsersModel newConnect = new CourseUsersModel();
 

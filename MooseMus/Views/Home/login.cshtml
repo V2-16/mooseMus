@@ -7,14 +7,25 @@
 <h2>@Model.name</h2>
 <h3>@Model.email</h3>
 
-<ul>
-        @if(Model.courses != null)
-        {
-            foreach (var course in @Model.courses)
+<div class="container">
+    <table class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.courses != null)
             {
-                var courseName = course.name;
-                <li>@Html.ActionLink(courseName, "CourseChoose", "Home", new { userID = Model.userID, course = courseName }, null)</li>
+                foreach (var course in @Model.courses)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(course.name, "CourseChoose", "Home", new { userID = Model.userID, course = course.name }, null)</td>
+                        <td>@course.role</td>
+                    </tr>
+                }
             }
-        }
-</ul>
-
+        </tbody>
+    </table>
+</div>
