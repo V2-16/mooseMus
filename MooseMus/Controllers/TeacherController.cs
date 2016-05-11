@@ -23,20 +23,56 @@ namespace MooseMus.Controllers
             return View(model);
         }
 
-        //Kennari fer inná svæði til þess að bæta við verkefni
-        public ActionResult addProjectPart()
+        /********************** KENNARi SKOÐAR SKIL *********************/
+
+        //Kennari skoðar öll skil í lið hjá nemanda
+        public ActionResult viewProjectPartByStudent(int studentID, int projectPartID)
         {
-            return PartialView("ProjectPartCreated");
+            var project = _pservice.getProjectPartByID(projectPartID);
+            var student = _uservice.getUserByID(studentID);
+            List<SubmissionViewModel> sub = _pservice.getSubmissionsByStudentAndPart(studentID, projectPartID);
+            var model = new StudentProjectPartViewModel()
+            {
+                partName = project.title,
+                projectPartID = projectPartID,
+                studentName = student.name,
+                submissions = sub
+            };
+            return PartialView(model);
         }
 
-        //Kennari fer inná svæði til þess að breyta verkefni
-        public ActionResult goToEditProject()
+        //Kennari skoðar alla nemendur sem skráðir eru í tiltekið námskeið/verkefni
+        public ActionResult viewStudentsByProject(int projectID)
         {
-            return View();
+            var pro = _pservice.getProjectByID(projectID);
+            var model = new TeacherProjectViewModel()
+            {
+                projectID = projectID,
+                project = pro.title,
+                students = _pservice.getStudentsInProject(projectID)
+            };
+            return PartialView(model);
         }
+
+        //Kennari skoðar bestu skil nemenda í tilteknu verkefni
+        public ActionResult viewProjectByStudent(int studentID, int projID)
+        {
+            var student = _uservice.getUserByID(studentID);
+            var project = _pservice.getProjectByID(projID);
+            List<SubmissionViewModel> part = _pservice.getBestSubmissionsByStudent(studentID, projID);
+            var model = new TeacherProjectStudentViewModel()
+            {
+                studentName = student.name,
+                projectName = project.title,
+                parts = part
+            };
+            return PartialView(model);
+        }
+
+        /********************** KENNARY BÆTIR VIÐ VERKEFNI *********************/
 
         //Kennari velur að bæta við verkefni
-        public ActionResult goToAddProject(string course)
+        public ActionResult createProject(string course)
         {
             ViewBag.Success = false;
             var courseId = _cservice.getCourseIDByName(course);
@@ -51,14 +87,16 @@ namespace MooseMus.Controllers
         }
 
         [HttpPost]
-        public ActionResult goToAddProject(TeacherAddEditViewModel project)
+        public ActionResult createProject(TeacherAddEditViewModel project)
         {
-            
+
             ViewBag.Success = true;
             var model = _cservice.getCourseProjects(project.courseID);
             _pservice.addProject(project);
             return View("Index", model);
         }
+
+        /********************** KENNARY BÆTIR VIÐ LIÐ *********************/
 
         public ActionResult createProjectPart(string course)
         {
@@ -84,69 +122,7 @@ namespace MooseMus.Controllers
             return RedirectToAction("Index", "Teacher", new { course = courseName });
         }
 
-        //Kennari bætir við verkefni
-        public ActionResult projectAdded()
-        {
-            return View();
-        }
-
-        public ActionResult viewStudentsByProject(int projectID)
-        {
-            var pro = _pservice.getProjectByID(projectID);
-            var model = new TeacherProjectViewModel()
-            {
-                projectID = projectID,
-                project = pro.title,
-                students = _pservice.getStudentsInProject(projectID)
-            };
-            return PartialView(model);
-        }
-
-        public ActionResult viewProjectByStudent(int studentID, int projID)
-        {
-            var student = _uservice.getUserByID(studentID);
-            var project = _pservice.getProjectByID(projID);
-            List<SubmissionViewModel> part = _pservice.getBestSubmissionsByStudent(studentID, projID);
-            var model = new TeacherProjectStudentViewModel()
-            {
-                studentName = student.name,
-                projectName = project.title,
-                parts = part
-            };
-            return PartialView(model);
-        }
-
-        public ActionResult viewProjectPartByStudent(int studentID, int projectPartID)
-        {
-            var project = _pservice.getProjectPartByID(projectPartID);
-            var student = _uservice.getUserByID(studentID);
-            List<SubmissionViewModel> sub = _pservice.getSubmissionsByStudentAndPart(studentID, projectPartID);
-            var model = new StudentProjectPartViewModel()
-            {
-                partName = project.title,
-                projectPartID = projectPartID,
-                studentName = student.name,
-                submissions = sub
-            };
-            return PartialView(model);
-        }
-
-        public ActionResult selectProject()
-        {
-            return View();
-        }
-
-        public ActionResult selectStudent()
-        {
-            return View();
-        }
-
-        public ActionResult selectProjectPart()
-        {
-            return View();
-        }
-
-        /********************** KENNARY BREYTIR VERKEFNI *********************/
+        /********************** KENNARI BREYTIR LIÐ *********************/
         //Kennari velur verkefni til að breyta
         public ActionResult projectSelectedToEdit(int projID)
         {
@@ -180,10 +156,5 @@ namespace MooseMus.Controllers
             return RedirectToAction("Index", "Teacher", new { course = course.name });
         }
 
-        //Kennari breytir verkefni
-        public ActionResult projectEdit()
-        {
-            return View();
-        }
     }
 }

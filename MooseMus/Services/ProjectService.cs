@@ -16,6 +16,7 @@ namespace MooseMus.Services
         {
             _db = new ApplicationDbContext();
         }
+
         /****************** KENNARI & NEMANDI **************************/
 
         public CourseModel getCourseByProjectID(int projID)
@@ -112,6 +113,7 @@ namespace MooseMus.Services
             }
             return best;
         }
+
         /****************** KENNARI **************************/
         //Skilar öllum nemendum sem hafa skilað tilteknu verkefni
         public List<UserViewModel> getStudentsInProject(int project)
