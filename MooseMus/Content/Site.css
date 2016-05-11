@@ -2,7 +2,11 @@
 {
     padding-top: 2px;
     padding-bottom: 20px;
+<<<<<<< HEAD
+    font-family: 'Open Sans', sans-serif !important;
+=======
     font-family: Helvetica, sans-serif;
+>>>>>>> 0759fd334cab7a8d3b983091ece37d7eeb4b9929
     background-attachment: fixed;
     background-image: url("Images/BG-01.png");
     background-repeat: no-repeat;
@@ -46,8 +50,12 @@ textarea
     width: 100px;
     height:100px;
 }
+<<<<<<< HEAD
+.navbar-nav > li > a:hover, a:active 
+=======
 
 .navbar-nav > li > a:hover 
+>>>>>>> 0759fd334cab7a8d3b983091ece37d7eeb4b9929
 {
     text-decoration: none;
     color: black;
@@ -58,11 +66,13 @@ textarea
 {
     background-color: transparent !important;
     padding-top: 15px;
+    color: black;
 }
 
 .navbar-nav > li > a:focus 
 {
     background-color: transparent !important;
+    color: black;
 }
 
 .navbar-collapse collapse > ul 
@@ -133,8 +143,13 @@ footer
 
 .actionlink:hover
 {
+<<<<<<< HEAD
+    font-size: 100%;
+    font-color: black;
+=======
     font-size: 150%;
     color: black;
+>>>>>>> 0759fd334cab7a8d3b983091ece37d7eeb4b9929
 }
 
 div
@@ -201,18 +216,52 @@ a:visited
 
 .makeblack:visited
 {
+    text-decoration: none;
     color: black !important;
 }
 
 .makeblack:focus
 {
     color: black !important;
+    text-decoration: none;
 }
 
 .makeblack:active
 {
     color: black !important;
+<<<<<<< HEAD
+    text-decoration: none;
 }
+
+dt 
+{
+    margin-top: 6px;
+    margin-bottom: 2px;
+    font-size: 16px;
+}
+
+.nav a:hover .caret
+{
+    border-top-color: black !important;
+    border-bottom-color: black !important;
+}
+
+.nav .caret
+{
+    border-top-color: black !important;
+    border-bottom-color: black !important;
+}
+
+html, body
+{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+}
+
+
+
+=======
+}
+<<<<<<< HEAD
 
 table > tbody > tr
 {
@@ -241,3 +290,6 @@ table.table.table-hover.table-condensed
 {
     margin-top: 45px;
 }
+=======
+>>>>>>> 0759fd334cab7a8d3b983091ece37d7eeb4b9929
+>>>>>>> 12849c7fa399a189e958c68aca1ea3abae6c6d38
