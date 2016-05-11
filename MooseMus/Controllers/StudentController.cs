@@ -64,9 +64,6 @@ namespace MooseMus.Controllers
             return View();
         }
 
-
-
-
         public ActionResult goBackToCourses()
         {
             return View();
