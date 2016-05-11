@@ -64,7 +64,7 @@ namespace MooseMus.Controllers
                 projectPartName = proPar.title,
                 description = proPar.description
             };
-            return View(model);
+            return PartialView(model);
         }
 
         [HttpPost]

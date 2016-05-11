@@ -8,6 +8,12 @@
     background-repeat: no-repeat;
     background-size: 100% 100%;
     margin-bottom: 50px;
+    font-size: 16px;
+}
+
+h2, h3
+{
+    padding-left: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -100,7 +106,7 @@ li:hover a
 {
     text-decoration: none;
     color: black;
-    font-size: 150%;
+    font-size: 100%;
 }
 
 footer 
@@ -159,6 +165,16 @@ a:visited
     border-bottom-color: black !important;
 }
 
+.dropdown.open
+{
+    padding-left: 20px;
+}
+
+.dropdown
+{
+    padding-left: 60px;
+}
+
 .dropdown-menu 
 {
     background-color: transparent;
@@ -196,4 +212,32 @@ a:visited
 .makeblack:active
 {
     color: black !important;
+}
+
+table > tbody > tr
+{
+    border-top: 10px;
+}
+
+ul.dropdown-menu
+{
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+label.col-md-2.control-label
+{
+    padding-top: 17px;
+}
+
+div.col-md-10
+{
+    padding-bottom: 14px;
+}
+
+table.table.table-hover.table-condensed
+{
+    margin-top: 45px;
 }
