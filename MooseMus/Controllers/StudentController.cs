@@ -1,4 +1,5 @@
 ﻿using MooseMus.Models.ViewModels;
+using MooseMus.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,31 @@ namespace MooseMus.Controllers
 {
     public class StudentController : Controller
     {
+        private CourseService _cservice = new CourseService();
+        private ProjectService _pservice = new ProjectService();
+        private UserService _uservice = new UserService();
+
         // GET: Student
-        public ActionResult Index()
+        public ActionResult Index(string course, int stuID)
         {
-            return View();
+            var courseID = _cservice.getCourseIDByName(course);
+            var model = _cservice.getCourseProjects(courseID);
+            model.studentID = stuID;
+            return View(model);
+        }
+
+        public ActionResult viewProject(int stuID, int projID)
+        {
+            var student = _uservice.getUserByID(stuID);
+            var project = _pservice.getProjectByID(projID);
+            List<SubmissionViewModel> part = _pservice.getBestSubmissionsAndNoSubByStudent(stuID, projID);
+            var model = new TeacherProjectStudentViewModel()
+            {
+                studentName = student.name,
+                projectName = project.title,
+                parts = part
+            };
+            return PartialView(model);
         }
 
         public ActionResult selectProject()
@@ -41,16 +63,6 @@ namespace MooseMus.Controllers
             return View();
         }
 
-        public ActionResult goBackToProjects()
-        {
-            return View();
-        }
-
-        public ActionResult goBackToProjectParts()
-        {
-            return View();
-        }
-
         [HttpGet]
         public ActionResult submission()
         {
@@ -59,15 +71,6 @@ namespace MooseMus.Controllers
 
         [HttpPost]
         public ActionResult submission(StudentSubmitViewModel model)
-        {
-
-            return View();
-        }
-
-
-
-
-        public ActionResult goBackToCourses()
         {
             return View();
         }

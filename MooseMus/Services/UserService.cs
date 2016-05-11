@@ -140,21 +140,16 @@ namespace MooseMus.Services
         }
 
         //Sækir lista af námskeiðum sem notandi er skráður í (sem nemandi eða kennari)
-        public List<CourseViewModel> getCoursesByUser(int userID)
+        public List<CourseViewModel> getCoursesByUser(int user)
         {
-            var coursesS = _db.courseStudent.Where(x => x.studentID == userID).ToList();
-            var coursesT = _db.courseTeacher.Where(x => x.teacherID == userID).ToList();
+            var courses = _db.courseUser.Where(x => x.userID == user).ToList();
             List<CourseViewModel> courseNames = new List<CourseViewModel> { };
-            foreach (var i in coursesS)
+            foreach (var i in courses)
             {
-                var course = _db.course.SingleOrDefault(x => x.Id == i.ID);
+                var course = _db.course.SingleOrDefault(x => x.Id == i.courseID);
                 courseNames.Add(new CourseViewModel { name = course.name });
             };
-            foreach (var i in coursesT)
-            {
-                var course = _db.course.SingleOrDefault(x => x.Id == i.ID);
-                courseNames.Add(new CourseViewModel { name = course.name });
-            };
+            
             return courseNames;
         }
 
