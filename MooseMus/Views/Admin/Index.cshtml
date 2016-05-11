@@ -10,7 +10,7 @@
     <div class="navleft">
         <ul>
             <li>
-                <a href="javascript:addUser();">Create User</a>
+                <a href="javascript:addUser();" class="makeblack">Create User</a>
                 <script type="text/javascript">
                     function addUser() {
                         $('#divResult').load("@Url.Action("addUser","Admin")");
@@ -19,7 +19,7 @@
                 </script>
             </li>
             <li>
-                <a href="javascript:editUser();">Edit User</a>
+                <a href="javascript:editUser();"class="makeblack">Edit User</a>
                 <script type="text/javascript">
                     function editUser() {
                         $('#divResult').load("@Url.Action("searchUser","Admin")");
@@ -27,7 +27,7 @@
                 </script>
             </li>
             <li>
-                <a href="javascript:addCourse();">Create Course</a>
+                <a href="javascript:addCourse();"class="makeblack">Create Course</a>
                 <script type="text/javascript">
                     function addCourse() {
                         $('#divResult').load("@Url.Action("addCourse","Admin")");
@@ -35,7 +35,7 @@
                 </script>
             </li>
             <li>
-                <a href="javascript:editCourse();">Edit Course</a>
+                <a href="javascript:editCourse();"class="makeblack">Edit Course</a>
                 <script type="text/javascript">
                     function editCourse() {
                         $('#divResult').load("@Url.Action("searchCourse","Admin")");
@@ -43,7 +43,7 @@
                 </script>
             </li>
             <li>
-                <a href="javascript:linkUser();">Link User to Course</a>
+                <a href="javascript:linkUser();"class="makeblack">Link User to Course</a>
                 <script type="text/javascript">
                     function linkUser()
                     {

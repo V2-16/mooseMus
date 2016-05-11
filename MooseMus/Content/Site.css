@@ -86,32 +86,36 @@ a
 a:hover 
 {
     text-decoration: none;
-    color: #ffffff;
+    color: black;
+    font-size: 150%;
 }
 
 li:hover a
 {
     text-decoration: none;
-    color: #ffffff;
+    color: black;
+    font-size: 150%;
 }
 
 
 .navbar-brand:hover a
 {
     text-decoration: none;
-    color: #ffffff;
+    color: #black;
+    font-size: 150%;
 }
 
  footer 
- {
+{
      position: fixed;
      bottom: 0;
- }
+}
 
 .form-horizontal
 {
-    float:right;
-    width: 800px;
+    margin-right:auto; 
+    margin-left:auto;
+    width: 400px;
     border: solid;
     border-radius: 16px;
     padding: 8px;
@@ -123,10 +127,66 @@ li:hover a
     width: 200px;
 }
 
-.actionlink:hover{
-    font-size: 2rem;
+.actionlink:hover
+{
+    font-size: 150%;
 }
 
-div{
+div
+{
   margin-top:10px;
+}
+
+.actionlink
+{
+  margin:40px;
+}
+
+a:visited
+{
+    text-decoration: none;
+    color: black !important;
+}
+
+.dropdown-menu:hover
+{
+      background-color: transparent;
+      text-decoration: none;
+      font-size: 65%;
+      text-color: black;
+}
+
+.dropdown-menu
+{
+    background-color: transparent;
+     text-decoration: none;
+      font-size: 65%;
+      text-color: black;
+}
+
+.dropdown-toggle.visited
+{
+    text-decoration: none;
+    color: black;
+}
+
+.navleft:visited
+{
+    text-decoration: none;
+    color: black;
+}
+
+.makeblack:visited
+{
+    color: black !important;
+}
+
+.makeblack:focus
+{
+    color: black !important;
+}
+
+.makeblack:active
+{
+    color: black !important;
 }
