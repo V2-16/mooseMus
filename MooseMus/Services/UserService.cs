@@ -193,12 +193,8 @@ namespace MooseMus.Services
         {
             var theCourse = _db.course.SingleOrDefault(x => x.name == course);
 
-            var user = _db.courseStudent.SingleOrDefault(x => x.studentID == userID && x.courseID == theCourse.Id);
-            if(user == null)
-            {
-                return "teacher";
-            }
-            return "student";
+            var user = _db.courseUser.SingleOrDefault(x => x.userID == userID && x.courseID == theCourse.Id);
+            return user.role;
         }
 
         public List<UserModel> getAllUsers()
