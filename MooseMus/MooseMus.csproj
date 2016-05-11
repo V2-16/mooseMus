@@ -327,7 +327,7 @@
     <Content Include="Views\Teacher\viewProjectByStudent.cshtml" />
     <Content Include="Views\Teacher\viewProjectPartByStudent.cshtml" />
     <Content Include="Views\Student\submission.cshtml" />
-    <Content Include="Views\Admin\Partial\courseEnrollmentTable.cshtml" />
+    <Content Include="Views\Admin\Partial\addUserToCourse.cshtml" />
     <Content Include="Views\Teacher\projectSelectedToEdit.cshtml" />
     <Content Include="Views\Teacher\editProjectPart.cshtml" />
     <Content Include="Views\Student\viewProject.cshtml" />
