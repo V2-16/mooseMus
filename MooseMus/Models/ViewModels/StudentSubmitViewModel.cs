@@ -13,5 +13,6 @@ namespace MooseMus.Models.ViewModels
         public string projectPartName { get; set; }
         [Required(ErrorMessage = "A file upload is required")]
         public HttpPostedFileBase file { get; set; }
+        public string description { get; set; }
     }
 }

@@ -209,7 +209,6 @@
     <Compile Include="Models\Entities\CourseStudentModel.cs" />
     <Compile Include="Models\Entities\CourseTeacherModel.cs" />
     <Compile Include="Models\Entities\CourseUsersModel.cs" />
-    <Compile Include="Models\Entities\EnrolledCourseModel.cs" />
     <Compile Include="Models\Entities\ProjectModel.cs" />
     <Compile Include="Models\Entities\ProjectPartModel.cs" />
     <Compile Include="Models\Entities\ResultModel.cs" />

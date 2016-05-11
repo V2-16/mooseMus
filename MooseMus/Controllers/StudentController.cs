@@ -2,6 +2,7 @@
 using MooseMus.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -46,7 +47,8 @@ namespace MooseMus.Controllers
             {
                 studentName = student.name,
                 projectName = project.title,
-                parts = part
+                parts = part,
+                description = project.description
             };
             return PartialView(model);
         }
@@ -59,14 +61,23 @@ namespace MooseMus.Controllers
             {
                 studentID = stuID,
                 projectPartID = proPar.ID,
-                projectPartName = proPar.title
+                projectPartName = proPar.title,
+                description = proPar.description
             };
             return View(model);
         }
 
-        //Nemandi skilar inn
-        public ActionResult submitProjectPart()
+        [HttpPost]
+        public ActionResult submitAProjectPart(StudentSubmitViewModel projParSent)
         {
+            if (ModelState.IsValid)
+            {
+                // Skoða http://stackoverflow.com/questions/304617/html-helper-for-input-type-file
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    projParSent.file.InputStream.CopyTo(memoryStream);
+                }
+            }
             return View();
         }
         public ActionResult uploadProjectPart()
