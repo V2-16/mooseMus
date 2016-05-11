@@ -9,6 +9,7 @@ namespace MooseMus.Models.ViewModels
     {
         public string studentName { get; set; }
         public string projectName { get; set; }
+        public string description { get; set; }
         public List<SubmissionViewModel> parts { get; set; }
 
     }

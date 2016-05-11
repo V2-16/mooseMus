@@ -10,6 +10,8 @@
             {
                 @Html.AntiForgeryToken()
                 <h4>Submit @Model.projectPartName</h4>
+                <p>@Model.description</p>
+
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
