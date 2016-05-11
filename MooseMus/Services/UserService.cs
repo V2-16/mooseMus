@@ -161,32 +161,39 @@ namespace MooseMus.Services
         public EnrolledCourseModel getUserByCourse(int courseID)
         {
             var courseUsers = _db.courseUser.Where(x => x.courseID == courseID).ToList();
-            List<UserModel> userIds = new List<UserModel> { };
+            List<UserModel> usersIn = new List<UserModel> { };
             var allUsers = _db.user.ToList();
             foreach (var i in courseUsers)
             {
                 var user = _db.user.SingleOrDefault(x => x.ID == i.userID);
-                userIds.Add(new UserModel {  ID = user.ID , name = user.name });
+                usersIn.Add(new UserModel {  ID = user.ID , name = user.name });
             };
             List<UserModel> usersNotIn = new List<UserModel> { };
             foreach (var i in allUsers)
             {
-                foreach(var j in userIds)
+                if (usersIn.Count != 0)
                 {
-                    var user = _db.user.Where(x => x.ID != j.ID && x.ID == i.ID).FirstOrDefault();
-                    if(user != null)
+                    foreach(var j in usersIn)
                     {
-                        usersNotIn.Add(new UserModel { ID = user.ID, name = user.name });
-                    }
-                };
+                        var user = _db.user.Where(x => x.ID != j.ID).FirstOrDefault();
+                        if(user != null && !usersIn.Contains(user))
+                        {
+                            usersNotIn.Add(new UserModel { ID = user.ID, name = user.name });
+                        }
+                    };
+                }
+                else
+                {
+                    var user = _db.user.Where(x => x.ID == i.ID).FirstOrDefault();
+                        if(user != null)
+                        {
+                            usersNotIn.Add(new UserModel { ID = user.ID, name = user.name });
+                        }
+                }  
             };
-            List<UserModel> usersIn = new List<UserModel> { };
-            foreach (var i in userIds)
-            {
-                var user = _db.user.Where(x => x.name == i.name).FirstOrDefault();
-                usersIn.Add(new UserModel { ID = user.ID , name = user.name });
-            };
-            EnrolledCourseModel model = new EnrolledCourseModel { enrolledUsers = usersIn, unEnrolledUsers = usersNotIn };
+            List<UserModel> distinctUsersIn = usersIn.Distinct().ToList();
+            List<UserModel> distinctUsersNotIn = usersNotIn.Distinct().ToList();
+            EnrolledCourseModel model = new EnrolledCourseModel { enrolledUsers = distinctUsersIn, unEnrolledUsers = distinctUsersNotIn };
             
             return model;
         }
