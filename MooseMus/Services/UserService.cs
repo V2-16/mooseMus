@@ -12,6 +12,7 @@ namespace MooseMus.Services
     public class UserService
     {
         private ApplicationDbContext _db;
+        private CourseService _courseService = new CourseService();
 
         public UserService() 
         {
@@ -157,39 +158,25 @@ namespace MooseMus.Services
         {
             var courseUsers = _db.courseUser.Where(x => x.courseID == courseID).ToList();
             List<UserModel> usersIn = new List<UserModel> { };
-            var allUsers = _db.user.ToList();
             foreach (var i in courseUsers)
             {
                 var user = _db.user.SingleOrDefault(x => x.ID == i.userID);
-                usersIn.Add(new UserModel {  ID = user.ID , name = user.name });
+                usersIn.Add(user);
             };
-            List<UserModel> usersNotIn = new List<UserModel> { };
-            foreach (var i in allUsers)
+            List<UserModel> teachersIn = new List<UserModel> { };
+            foreach(var i in usersIn)
             {
-                if (usersIn.Count != 0)
+                if(teacherOrStudent(i.ID, _courseService.getCourseNameByID(courseID)) == "teacher")
                 {
-                    foreach(var j in usersIn)
-                    {
-                        var user = _db.user.Where(x => x.ID != j.ID).FirstOrDefault();
-                        if(user != null && !usersIn.Contains(user))
-                        {
-                            usersNotIn.Add(new UserModel { ID = user.ID, name = user.name });
-                        }
-                    };
+                    teachersIn.Add(i);
                 }
-                else
-                {
-                    var user = _db.user.Where(x => x.ID == i.ID).FirstOrDefault();
-                        if(user != null)
-                        {
-                            usersNotIn.Add(new UserModel { ID = user.ID, name = user.name });
-                        }
-                }  
-            };
-            List<UserModel> distinctUsersIn = usersIn.Distinct().ToList();
-            List<UserModel> distinctUsersNotIn = usersNotIn.Distinct().ToList();
-            EnrolledCourseModel model = new EnrolledCourseModel { enrolledUsers = distinctUsersIn, unEnrolledUsers = distinctUsersNotIn };
-            
+            }
+            List<UserModel> studentsIn = usersIn.Except(teachersIn).ToList();
+            var allUsers = _db.user.ToList();
+            List<UserModel> usersNotIn =  allUsers.Except(usersIn).ToList();
+
+            EnrolledCourseModel model = new EnrolledCourseModel { teachers = teachersIn, enrolledStudents = studentsIn, unEnrolledUsers = usersNotIn };
+           
             return model;
         }
 

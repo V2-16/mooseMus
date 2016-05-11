@@ -2,22 +2,26 @@
 @{
     ViewBag.Title = "Course Enrollement";
 }
-
 @using (Html.BeginForm("addUserToCourse" , "Admin"))
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
         <hr />
         <div>
-            <ul>
-                @foreach (var item in Model.enrolledUsers)
+            <dl>
+                <dt>Teachers in course</dt>
+                @foreach (var item in Model.teachers)
                 {
-                    <li>@item.name</li>
+                    <dd>@item.name</dd>
                 }
-            </ul>
+                <dt>Students in course</dt>
+                @foreach (var item in Model.enrolledStudents)
+                {
+                    <dd>@item.name</dd>
+                }
+            </dl>
         </div>
         <div>
-
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.courseID)
             <div class="form-group">
@@ -35,7 +39,6 @@
                     @Html.RadioButtonFor(model => model.role, "Teacher")
                 </div>
             </div>
-
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" id="find-course" value="Submit" class="btn btn-default" />
@@ -43,6 +46,5 @@
             </div>
         </div>
     </div>
-
 }
 
