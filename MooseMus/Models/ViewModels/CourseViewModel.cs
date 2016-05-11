@@ -15,5 +15,6 @@ namespace MooseMus.Models.ViewModels
         public string semester { get; set; }
         [Required(ErrorMessage ="School is required")]
         public string school { get; set; }
+        public string role { get; set; }
     }
 }
