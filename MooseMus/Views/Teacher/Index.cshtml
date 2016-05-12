@@ -63,9 +63,6 @@
     </div>
 </nav>
 
-<div id="proj">
-</div>
-
 <script type="text/javascript">
     function viewProject(pr)
     {      
@@ -76,4 +73,11 @@
         $('#proj').load('/Teacher/projectSelectedToEdit?projID=' + pr);
     }
 </script>
+
+<div id="proj">
+    @if (ViewBag.Success != null && ViewBag.Success == true)
+    {
+        Html.RenderPartial("CreatedSuccessfully");
+    }
+</div>
 
