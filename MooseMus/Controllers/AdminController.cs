@@ -11,7 +11,7 @@ namespace MooseMus.Controllers
 {
     public class AdminController : Controller
     {
-        private UserService _userService = new UserService();
+        private UserService _userService = new UserService(null);
         private CourseService _courseService = new CourseService();
 
         // GET: Admin
@@ -29,7 +29,7 @@ namespace MooseMus.Controllers
                 {
                     return View();
                 }
-                return View();
+                return View("Home");
             }
         }
 
