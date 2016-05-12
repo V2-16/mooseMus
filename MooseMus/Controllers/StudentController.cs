@@ -157,7 +157,22 @@ namespace MooseMus.Controllers
                     {
                         lines.Add(processExe.StandardOutput.ReadLine());
                     }
-
+                    string[] seperators = new string[] { "\r\n", "\n" };
+                    var outputFromTeacher = _pservice.getOutput(data.projectPartID).Split(seperators, StringSplitOptions.None).ToList();
+                    lines.Add("***************RESULT***************");
+                    if (outputFromTeacher.SequenceEqual(lines))
+                    {
+                        lines.Add("Success! Your submission has been accepted");
+                    }
+                    else
+                    {
+                        lines.Add("Your submission has not been accepted");
+                        lines.Add("Your output should be:");
+                        for(int i = 0; i < outputFromTeacher.Count; i++)
+                        {
+                            lines.Add(outputFromTeacher[i]);
+                        }
+                    }
                     ViewBag.Output = lines;
                 }
             }

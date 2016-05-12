@@ -135,6 +135,10 @@ footer
 
 .actionlink:hover
 {
+<<<<<<< HEAD
+=======
+    color: black;
+>>>>>>> f7c7c21b3664465c90399e5bc609e50f3986b4f5
     font-size: 150%;
     color: black;
 }
@@ -179,9 +183,14 @@ a:visited
 
 .dropdown-menu 
 {
+<<<<<<< HEAD
     background-color: rgba(255, 0, 0, 0.2) !important;
+=======
+>>>>>>> f7c7c21b3664465c90399e5bc609e50f3986b4f5
     text-decoration: none;
     font-size: 65%;
+    background-color: #eeeeee;
+    border-right: 30px;
 }
 
 .dropdown-menu:hover > li > a
@@ -248,17 +257,9 @@ table > tbody > tr
     border-top: 10px;
 }
 
-ul.dropdown-menu
-{
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-right: 20px;
-    margin-left: 20px;
-}
-
 label.col-md-2.control-label
 {
-    padding-top: 17px;
+    padding-top: 14px;
 }
 
 div.col-md-10
@@ -282,6 +283,7 @@ table.table.table-hover.table-condensed
     font-size: 100%;
 }
 
+<<<<<<< HEAD
 select 
 {
      width: 180px;
@@ -292,3 +294,11 @@ select
     font-size:125%
 }
 
+=======
+input.btn.btn-primary
+{
+    background-color: #eeeeee;
+    color: black;
+    margin-left: 240px;
+}
+>>>>>>> f7c7c21b3664465c90399e5bc609e50f3986b4f5

@@ -54,7 +54,7 @@
                     {
                         foreach (var pro in @Model.projects)
                         {
-                            <li><a class="dropdown-hover-color" href="#" onclick="viewProject(@Model.studentID, @pro.projectID)">@pro.name</a></li>
+                            <li><a href="#" onclick="viewProject(@pro.projectID)">@pro.name</a></li>
                         }
                     }
                </ul>
@@ -63,16 +63,17 @@
     </div>
 </nav>
 
+<div id="proj">
+</div>
+
 <script type="text/javascript">
-    function viewProject(st, pr)
+    function viewProject(pr)
     {      
-        $('#proj').load('/Student/viewProject?stuID=' + st + '&proj=' + pr);
+        $('#proj').load('/Teacher/viewStudentsByProject?projectID=' + pr);
+    }
+    function viewProjectToEdit(pr)
+    {      
+        $('#proj').load('/Teacher/projectSelectedToEdit?projID=' + pr);
     }
 </script>
 
-<div id="proj">
-    @if (ViewBag.Success != null && ViewBag.Success == true)
-    {
-        Html.RenderPartial("CreatedSuccessfully");
-    }
-</div>
