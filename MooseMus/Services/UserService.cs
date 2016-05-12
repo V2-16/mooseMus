@@ -11,12 +11,13 @@ namespace MooseMus.Services
 {
     public class UserService
     {
-        private ApplicationDbContext _db;
+        //private ApplicationDbContext _db;
         private CourseService _courseService = new CourseService();
+        private readonly IAppDataContext _db;
 
-        public UserService() 
+        public UserService(IAppDataContext dbContext) 
         {
-            _db = new ApplicationDbContext();
+            _db = dbContext ?? new ApplicationDbContext();
         }
         public UserHomeViewModel getUserByID(int userID)
         {
@@ -188,7 +189,7 @@ namespace MooseMus.Services
         {
             var theCourse = _db.course.SingleOrDefault(x => x.name == course);
 
-            var user = _db.courseStudent.SingleOrDefault(x => x.studentID == userID && x.courseID == theCourse.Id);
+            var user = _db.courseUser.SingleOrDefault(x => x.userID == userID && x.courseID == theCourse.Id && x.role == "Student");
             if(user == null)
             {
                 return "teacher";

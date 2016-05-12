@@ -12,7 +12,7 @@ namespace MooseMus.Controllers
     {
         private CourseService _cservice = new CourseService();
         private ProjectService _pservice = new ProjectService();
-        private UserService _uservice = new UserService();
+        private UserService _uservice = new UserService(null);
 
         // GET: Teacher
         public ActionResult Index(string course)
