@@ -135,7 +135,7 @@ footer
 
 .actionlink:hover
 {
-    font-color: black;
+    color: black;
     font-size: 150%;
     color: black;
 }
@@ -180,9 +180,10 @@ a:visited
 
 .dropdown-menu 
 {
-    background-color: transparent;
     text-decoration: none;
     font-size: 65%;
+    background-color: #eeeeee;
+    border-right: 30px;
 }
 
 .dropdown-menu:hover > li > a
@@ -249,17 +250,9 @@ table > tbody > tr
     border-top: 10px;
 }
 
-ul.dropdown-menu
-{
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-right: 20px;
-    margin-left: 20px;
-}
-
 label.col-md-2.control-label
 {
-    padding-top: 17px;
+    padding-top: 14px;
 }
 
 div.col-md-10
@@ -280,4 +273,11 @@ table.table.table-hover.table-condensed
 #loginLink:hover
 {
     font-size: 100%;
+}
+
+input.btn.btn-primary
+{
+    background-color: #eeeeee;
+    color: black;
+    margin-left: 240px;
 }
