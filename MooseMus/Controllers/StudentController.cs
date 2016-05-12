@@ -90,8 +90,8 @@ namespace MooseMus.Controllers
             // real life scenario, there should probably be individual
             // folders for each user/assignment/milestone.
             var workingFolder = "C:\\Temp\\Mooshak2Code\\";
-            var cppFileName = "Hello.cpp";
-            var exeFilePath = workingFolder + "Hello.exe";
+            var cppFileName = "Hello2.cpp";
+            var exeFilePath = workingFolder + "Hello2.exe";
             data.fileUploaded.SaveAs(workingFolder + cppFileName);
             // Write the code to a file, such that the compiler
             // can find it:
@@ -138,6 +138,7 @@ namespace MooseMus.Controllers
             {
                 var processInfoExe = new ProcessStartInfo(exeFilePath, "");
                 processInfoExe.UseShellExecute = false;
+                processInfoExe.RedirectStandardInput = true;
                 processInfoExe.RedirectStandardOutput = true;
                 processInfoExe.RedirectStandardError = true;
                 processInfoExe.CreateNoWindow = true;
@@ -145,6 +146,16 @@ namespace MooseMus.Controllers
                 {
                     processExe.StartInfo = processInfoExe;
                     processExe.Start();
+
+
+
+
+                    string[] seperators = new string[] { "\r\n", "\n" };
+                    var inputFromTeacher = _pservice.getInput(data.projectPartID).Split(seperators, StringSplitOptions.None).ToList();
+                    var realInput = inputFromTeacher[0];
+                    processExe.StandardInput.WriteLine(realInput);
+
+                    
                     // In this example, we don't try to pass any input
                     // to the program, but that is of course also
                     // necessary. We would do that here, using
@@ -157,7 +168,7 @@ namespace MooseMus.Controllers
                     {
                         lines.Add(processExe.StandardOutput.ReadLine());
                     }
-                    string[] seperators = new string[] { "\r\n", "\n" };
+              
                     var outputFromTeacher = _pservice.getOutput(data.projectPartID).Split(seperators, StringSplitOptions.None).ToList();
                     lines.Add("***************RESULT***************");
                     if (outputFromTeacher.SequenceEqual(lines))
