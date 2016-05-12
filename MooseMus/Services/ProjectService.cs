@@ -198,20 +198,6 @@ namespace MooseMus.Services
             return model.name;
         }
 
-        //Sækir bestu skil í hverjum lið hjá nemanda
-        public TeacherProjectStudentViewModel getProjectByStudent(int studentID, int projectID)
-        {
-            //TODO;
-            return null;
-        }
-
-        //Sækir lið í verkefni fyrir kennara til þess að breyta (uppfærði nafn úr getProjectPartByID)
-        public TeacherAddEditViewModel getProjectPartByIDToEdit(int projectPartID)
-        {
-            //TODO;
-            return null;
-        }
-
         //Kennari uppfærir verkefnispart í námskeiði
         public void updateProjectPart(TeacherAddProjectPartViewModel projParToEdit)
         {

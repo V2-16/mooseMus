@@ -125,7 +125,7 @@ namespace MooseMus.Controllers
         {
             if (ModelState.IsValid)
             {
-                var courseID = _courseService.getCourseIDByCourseName(course.name);
+                var courseID = _courseService.getCourseIDByName(course.name);
                 if ( courseID != 0) 
                 {
                     var model = _courseService.getCourseByID(courseID);
@@ -151,7 +151,6 @@ namespace MooseMus.Controllers
             TeacherCourseViewModel model = new TeacherCourseViewModel { courses = courseList, users = userList  };
             return PartialView("Partial/addTeacher", model);
         }
-
 
         public ActionResult linkUser()
         {

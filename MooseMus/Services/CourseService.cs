@@ -39,29 +39,10 @@ namespace MooseMus.Services
             return course.name;
         }
 
-        public AddCourseViewModel getCourseByID(int courseID)
+        public CourseModel getCourseByID(int courseID)
         {
             var course = _db.course.FirstOrDefault(x => x.Id == courseID);
-
-            var model = new AddCourseViewModel
-            {
-                name = course.name,
-                semester = course.semester,
-                school = course.school
-            };
-
-            return model;
-        }
-
-        public int getCourseIDByCourseName(string name) //erum með tvö svona föll, þurfum að sameina. 
-        {
-            var course = _db.course.FirstOrDefault(x => x.name == name);
-            if (course == null)
-            {
-                //should we implement error catch here?
-                return 0;
-            }
-            return course.Id;
+            return course;
         }
 
         public CourseProjectsViewModel getCourseProjects(int cID)
@@ -82,7 +63,9 @@ namespace MooseMus.Services
         public List<ProjectViewModel> getProjectsByCourse(int courseID)
         {
             var projects = _db.project.Where(x => x.courseID == courseID).ToList();
+
             List<ProjectViewModel> projectList = new List<ProjectViewModel> { };
+
             foreach (var i in projects)
             {
                 var model = new ProjectViewModel()
@@ -95,45 +78,13 @@ namespace MooseMus.Services
 
             return projectList;
         }
-        public void addCourseByID(AddCourseViewModel courseToUpdate)
+
+        public List<CourseModel> getAllCourses()
         {
-            CourseModel newCourse = new CourseModel();
-
-            newCourse.name = courseToUpdate.name;
-            newCourse.semester = courseToUpdate.semester;
-            newCourse.school = courseToUpdate.school;
-
-            if (courseToUpdate != null)
-            {
-                _db.course.Add(newCourse);
-            }
-
-            try
-            {
-                _db.SaveChanges();
-            }
-            catch (Exception e)
-            {
-
-            }
+            return _db.course.ToList();
         }
 
-        public void updateCourseByID(AddCourseViewModel courseToUpdate)
-        {
-            var id = getCourseIDByCourseName(courseToUpdate.name);
-            CourseModel course = _db.course.Where(x => x.Id == id).FirstOrDefault();
-            if(course != null)
-            {
-                course.Id = id;
-                course.name = courseToUpdate.name;
-                course.semester = courseToUpdate.semester;
-                course.school = courseToUpdate.school;
-                _db.SaveChanges();
-            }
-            return;
-        }
-
-     
+        /******************** ADDING ******************/
         public void addUserToCourse(CourseUsersViewModel model)
         {
             CourseUsersModel newConnect = new CourseUsersModel();
@@ -157,9 +108,44 @@ namespace MooseMus.Services
             }
         }
 
-        public List<CourseModel> getAllCourses()
+        public void addCourseByID(AddCourseViewModel courseToUpdate)
         {
-            return _db.course.ToList();
+            CourseModel newCourse = new CourseModel();
+
+            newCourse.name = courseToUpdate.name;
+            newCourse.semester = courseToUpdate.semester;
+            newCourse.school = courseToUpdate.school;
+
+            if (courseToUpdate != null)
+            {
+                _db.course.Add(newCourse);
+            }
+
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
+        /******************** EDITING ******************/
+
+        public void updateCourseByID(AddCourseViewModel courseToUpdate)
+        {
+            var id = getCourseIDByName(courseToUpdate.name);
+            CourseModel course = _db.course.Where(x => x.Id == id).FirstOrDefault();
+            if (course != null)
+            {
+                course.Id = id;
+                course.name = courseToUpdate.name;
+                course.semester = courseToUpdate.semester;
+                course.school = courseToUpdate.school;
+                _db.SaveChanges();
+            }
+            return;
         }
     }
 }
