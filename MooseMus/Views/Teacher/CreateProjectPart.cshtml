@@ -10,11 +10,11 @@
             {
                 @Html.AntiForgeryToken()
                 <h4>Information About Project Part</h4>
-                <hr />
+                
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(m => m.projectID, "Project", new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.projectID, "Project", new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
                         <select name="projectID" class="form-control">
                             @if (Model.projects != null)
                             {
@@ -28,36 +28,36 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.partName, "Title", new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.partName, "Title", new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
                         @Html.TextBoxFor(m => m.partName, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.partName, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.partDescription, "Description", new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.partDescription, "Description", new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
                         @Html.TextBoxFor(m => m.partDescription, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.partDescription, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.input, "Input", new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.input, "Input", new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
                         @Html.TextAreaFor(m => m.input, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.input, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.output, "Output", new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.output, "Output", new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
                         @Html.TextAreaFor(m => m.output, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.output, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.value, "Value", new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.value, "Value", new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
                         @Html.ValidationMessageFor(m => m.value, "", new { @class = "text-danger" })
                         @Html.EditorFor(i => i.value, new { htmlAttributes = new { type = "number", min = 0, max = 100 } })
                     </div>

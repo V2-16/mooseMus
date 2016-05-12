@@ -8,6 +8,12 @@
     background-repeat: no-repeat;
     background-size: 100% 100%;
     margin-bottom: 50px;
+    font-size: 18px;
+}
+
+h2, h3
+{
+    padding-left: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -86,7 +92,7 @@ a.dropdown-hover-color:hover
 {
     text-decoration: none;
     color: white;
-    font-size: 150%;
+    font-size: 100%;
     background-color: rgba(255, 0, 0, 0.2) !important;
 }
 
@@ -94,7 +100,7 @@ li:hover a
 {
     text-decoration: none;
     color: black;
-    font-size: 150%;
+    font-size: 100%;
 }
 
 
@@ -102,7 +108,7 @@ li:hover a
 {
     text-decoration: none;
     color: black;
-    font-size: 150%;
+    font-size: 100%;
 }
 
 footer 
@@ -159,6 +165,16 @@ a:visited
 {
     border-top-color: black !important;
     border-bottom-color: black !important;
+}
+
+.dropdown.open
+{
+    padding-left: 20px;
+}
+
+.dropdown
+{
+    padding-left: 60px;
 }
 
 .dropdown-menu 
@@ -227,6 +243,52 @@ html, body
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 }
 
+table > tbody > tr
+{
+    border-top: 10px;
+}
+
+ul.dropdown-menu
+{
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+label.col-md-2.control-label
+{
+    padding-top: 17px;
+}
+
+div.col-md-10
+{
+    padding-bottom: 14px;
+}
+
+table.table.table-hover.table-condensed
+{
+    margin-top: 45px;
+}
 
 
+.text-danger
+{
+    color: white;
+}
+
+#loginLink:hover
+{
+    font-size: 100%;
+}
+
+select 
+{
+     width: 180px;
+}
+
+.navleft li:hover
+{
+    font-size:125%
+}
 
