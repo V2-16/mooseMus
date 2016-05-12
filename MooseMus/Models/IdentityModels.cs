@@ -19,16 +19,27 @@ namespace MooseMus.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public interface IAppDataContext
     {
-        public DbSet<CourseModel> course { get; set; }
-        public DbSet<CourseStudentModel> courseStudent { get; set; }
-        public DbSet<CourseTeacherModel> courseTeacher { get; set; }
-        public DbSet<ProjectModel> project { get; set; }
-        public DbSet<ProjectPartModel> projectPart { get; set; }
-        public DbSet<ResultModel> result { get; set; }
-        public DbSet<UserModel> user { get; set; }
-        public DbSet<CourseUsersModel> courseUser { get; set; }
+        IDbSet<CourseModel> course { get; set; }
+        IDbSet<CourseUsersModel> courseUser { get; set; }
+        IDbSet<ProjectModel> project { get; set; }
+        IDbSet<ProjectPartModel> projectPart { get; set; }
+        IDbSet<ResultModel> result { get; set; }
+        IDbSet<UserModel> user { get; set; }
+        int SaveChanges();
+    }
+
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser> , IAppDataContext
+    {
+        public IDbSet<CourseModel> course { get; set; }
+        public IDbSet<CourseStudentModel> courseStudent { get; set; }
+        public IDbSet<CourseTeacherModel> courseTeacher { get; set; }
+        public IDbSet<ProjectModel> project { get; set; }
+        public IDbSet<ProjectPartModel> projectPart { get; set; }
+        public IDbSet<ResultModel> result { get; set; }
+        public IDbSet<UserModel> user { get; set; }
+        public IDbSet<CourseUsersModel> courseUser { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
