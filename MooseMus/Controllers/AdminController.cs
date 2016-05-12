@@ -29,7 +29,7 @@ namespace MooseMus.Controllers
                 {
                     return View();
                 }
-                return View();
+                return View("Home");
             }
         }
 

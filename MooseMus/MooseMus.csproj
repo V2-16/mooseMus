@@ -308,8 +308,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Admin\Login.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Home.cshtml" />
     <Content Include="Views\Admin\Partial\addUser.cshtml" />
     <Content Include="Views\Admin\Partial\addCourse.cshtml" />
     <Content Include="Views\Teacher\Index.cshtml" />
