@@ -11,7 +11,7 @@ namespace MooseMus.Controllers
 {
     public class AdminController : Controller
     {
-        private UserService _userService = new UserService();
+        private UserService _userService = new UserService(null);
         private CourseService _courseService = new CourseService();
 
         // GET: Admin
@@ -25,18 +25,27 @@ namespace MooseMus.Controllers
             {
                 var userID1 = _userService.getUserIDByPassword(user.password);
                 var userID2 = _userService.getUserIDByUserName(user.userName);
-                if (userID1.Equals(userID2))
+                if (userID1.Equals(userID2) && userID1 == 3)
                 {
+                    System.Web.HttpContext.Current.Session["is_admin"] = true;
+                    return View("Home");
+                }
+                else
+                {
+                    System.Web.HttpContext.Current.Session["is_admin"] = false;
                     return View();
                 }
-                return View();
             }
         }
 
         [HttpGet]
         public ActionResult addUser()
         {
-            return PartialView("Partial/addUser");
+            if (System.Web.HttpContext.Current.Session["is_admin"].Equals(true))
+            {
+                return PartialView("Partial/addUser");
+            }
+            return View();
         }
 
         [HttpPost]
@@ -163,7 +172,7 @@ namespace MooseMus.Controllers
         [HttpPost]
         public ActionResult linkUser(CourseUsersViewModel model)
         {
-            var courseUsersModel = _userService.getUserByCourse(model.courseID);
+            var courseUsersModel = _userService.usersAssociated(model);
             return PartialView("Partial/addUserToCourse", courseUsersModel);
         }
 

@@ -12,7 +12,7 @@ namespace MooseMus.Controllers
     {
         private CourseService _cservice = new CourseService();
         private ProjectService _pservice = new ProjectService();
-        private UserService _uservice = new UserService();
+        private UserService _uservice = new UserService(null);
 
         // GET: Teacher
         public ActionResult Index(string course)
@@ -115,7 +115,7 @@ namespace MooseMus.Controllers
         [HttpPost]
         public ActionResult createProjectPart(TeacherAddProjectPartViewModel part)
         {
-            ViewBag.Success = true;
+            ViewBag.SuccessProjectPart = true;
             _pservice.addProjectPart(part);
             string courseName = _cservice.getCourseNameByID(part.courseID);
             return RedirectToAction("Index", "Teacher", new { course = courseName });

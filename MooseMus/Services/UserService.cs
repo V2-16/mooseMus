@@ -11,13 +11,15 @@ namespace MooseMus.Services
 {
     public class UserService
     {
-        private ApplicationDbContext _db;
         private CourseService _courseService = new CourseService();
+        private readonly IAppDataContext _db;
 
-        public UserService() 
+        public UserService(IAppDataContext dbContext) 
         {
-            _db = new ApplicationDbContext();
+            _db = dbContext ?? new ApplicationDbContext();
         }
+        
+        //Returns username and the courses associated to him/her using the user id
         public UserHomeViewModel getUserByID(int userID)
         {
             var user = _db.user.SingleOrDefault(x => x.ID == userID);
@@ -35,6 +37,7 @@ namespace MooseMus.Services
             return model;
         }
 
+        //Adding user to DB 
         public void addUserByID(AddUserViewModel newUser)
         {
             UserModel nUser = new UserModel();
@@ -60,6 +63,7 @@ namespace MooseMus.Services
             }
         }
 
+        //Updating user info in DB
         public void updateUserByID(AddUserViewModel editUser)
         {
             var id = getUserIDByUserSSN(editUser.ssn);
@@ -76,6 +80,7 @@ namespace MooseMus.Services
             return;
         }
 
+        //Returns userID using users name
         public int getUserIDByUserName(string name)
         {
             var user = _db.user.SingleOrDefault(x => x.name == name);
@@ -86,6 +91,7 @@ namespace MooseMus.Services
             return user.ID;
         }
 
+        //Returns userID byr users SSN
         public int getUserIDByUserSSN(string ssn)
         {
             var user = _db.user.SingleOrDefault(x => x.ssn == ssn);
@@ -96,6 +102,7 @@ namespace MooseMus.Services
             return user.ID;
         }
 
+        //Returns userId using users password
         public int getUserIDByPassword(string password)
         {
            var user = _db.user.SingleOrDefault(x => x.password == password);
@@ -106,6 +113,7 @@ namespace MooseMus.Services
            return user.ID;
         }
 
+        //Confirming userId and password match
         public int getUserIDByPasswordAndConfirm(string password, int userID)
         {
             var user = _db.user.SingleOrDefault(x => x.password == password && x.ID == userID);
@@ -116,6 +124,7 @@ namespace MooseMus.Services
             return user.ID;
         }
 
+        //Get userViewModel
         public AddUserViewModel getAddUserViewModelByID(int id)
         {
             var user = _db.user.SingleOrDefault(x => x.ID == id);
@@ -130,6 +139,7 @@ namespace MooseMus.Services
             return model;
         }
 
+        //Get users password by userID
         public string getPasswordByID(int userID)
         {
             var user = _db.user.SingleOrDefault(x => x.ID == userID);
@@ -140,7 +150,7 @@ namespace MooseMus.Services
             return user.password;
         }
 
-        //Sækir lista af námskeiðum sem notandi er skráður í (sem nemandi eða kennari)
+        //Returns a list that user is associated with
         public List<CourseViewModel> getCoursesByUser(int user)
         {
             var courses = _db.courseUser.Where(x => x.userID == user).ToList();
@@ -155,11 +165,11 @@ namespace MooseMus.Services
                 };
                 courseNames.Add(listOfCourses);
             };
-            
             return courseNames;
         }
 
-        public CourseUsersViewModel getUserByCourse(int courseID)
+        //returns a list of users(model entity) that are associated with given course
+        public List<UserModel> getUsersByCourse(int courseID)
         {
             var courseUsers = _db.courseUser.Where(x => x.courseID == courseID).ToList();
             List<UserModel> usersIn = new List<UserModel> { };
@@ -168,17 +178,47 @@ namespace MooseMus.Services
                 var user = _db.user.SingleOrDefault(x => x.ID == i.userID);
                 usersIn.Add(user);
             };
+            return usersIn;            
+        }
+        
+        //Return a list of teachers(user model-entities) teachers accociated with given course
+        public List<UserModel> getTeachersAssociated(List<UserModel> usersInCourse, int courseID)
+        {
             List<UserModel> teachersIn = new List<UserModel> { };
-            foreach(var i in usersIn)
+            var courseName = _courseService.getCourseNameByID(courseID);
+            foreach (var i in usersInCourse)
             {
-                if(teacherOrStudent(i.ID, _courseService.getCourseNameByID(courseID)) == "teacher")
+                if (teacherOrStudent(i.ID, courseName) == "Teacher   ")
                 {
                     teachersIn.Add(i);
                 }
             }
-            List<UserModel> studentsIn = usersIn.Except(teachersIn).ToList();
-            var allUsers = _db.user.ToList();
-            List<UserModel> usersNotIn =  allUsers.Except(usersIn).ToList();
+            return teachersIn;
+        }
+        
+        //Returns a list of students assoceiated with a given course
+        public List<UserModel> getStudentsAssociated(List<UserModel> usersIn, List<UserModel> teachers)
+        {
+            List<UserModel> studentsIn = usersIn.Except(teachers).ToList();
+            return studentsIn;  
+        }
+
+        //Returns a list of all users except the users in given course
+        public List<UserModel> getUsersNotAssociated(List<UserModel> users)
+        {
+            var allUsers = getAllUsers();
+            var admin = _db.user.Where(x => x.name == "Admin");
+            List<UserModel> usersNotIn = allUsers.Except(users).Except(admin).ToList();
+            return usersNotIn;
+        }
+
+        //Returns a viewmodel containing the lists of associated(non associated) users
+        public CourseUsersViewModel usersAssociated(CourseUsersViewModel courseModel)
+        {
+            var usersIn = getUsersByCourse(courseModel.courseID);
+            var teachersIn = getTeachersAssociated(usersIn, courseModel.courseID);
+            var studentsIn = getStudentsAssociated(usersIn, teachersIn);
+            var usersNotIn = getUsersNotAssociated(usersIn);
 
             CourseUsersViewModel model = new CourseUsersViewModel
             {
@@ -189,14 +229,15 @@ namespace MooseMus.Services
             return model;
         }
 
+        //Checks if user in given course is a teacher or studenf
         public string teacherOrStudent(int userID, string course)
         {
             var theCourse = _db.course.SingleOrDefault(x => x.name == course);
-
             var user = _db.courseUser.SingleOrDefault(x => x.userID == userID && x.courseID == theCourse.Id);
             return user.role;
         }
 
+        //returns a list of all users in the database
         public List<UserModel> getAllUsers()
         {
             return _db.user.ToList();

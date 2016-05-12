@@ -115,13 +115,14 @@ footer
 {
      position: fixed;
      bottom: 0;
+     word-spacing: 10px;
 }
 
-.form-horizontal
+.form-horizontal 
 {
-    margin-right:auto; 
-    margin-left:auto;
-    width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 600px;
     border: solid;
     border-radius: 16px;
     padding: 8px;
@@ -130,12 +131,11 @@ footer
 .navleft
 {
     float: left;
-    width: 200px;
+    width: 250px;
 }
 
 .actionlink:hover
 {
-    color: black;
     font-size: 150%;
     color: black;
 }
@@ -180,7 +180,6 @@ a:visited
 
 .dropdown-menu 
 {
-    background-color: rgba(255, 0, 0, 0.2) !important;
     text-decoration: none;
     font-size: 65%;
     background-color: #eeeeee;
@@ -254,6 +253,7 @@ table > tbody > tr
 label.col-md-2.control-label
 {
     padding-top: 14px;
+    font-size: 10;
 }
 
 div.col-md-10
@@ -266,10 +266,9 @@ table.table.table-hover.table-condensed
     margin-top: 45px;
 }
 
-
 .text-danger
 {
-    color: white;
+    color: black;
 }
 
 #loginLink:hover
@@ -284,9 +283,8 @@ select
 
 .navleft li:hover
 {
-    font-size:125%
+    font-size: 125%
 }
-
 
 input.btn.btn-primary
 {
@@ -295,7 +293,17 @@ input.btn.btn-primary
     margin-left: 240px;
 }
 
+.control-label 
+{
+    font-size: 18px;
+}
+
 input.btn.btn-default
 {
-    margin-left: 240px;
+    margin-left: 220px;
+}
+
+.form-horizontal
+{
+    background-color: #eeeeee !important;
 }

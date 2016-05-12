@@ -6,6 +6,7 @@
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
+        <h4>Link User to Course</h4>
         <div>
             <dl>
                 @if (Model.teachers != null)
@@ -51,7 +52,7 @@
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" id="find-course" value="Submit" class="btn btn-default" />
+                    <input type="submit" id="find-course" value="Submit" class="btn btn-default pull-right" />
                 </div>
             </div>
         </div>
