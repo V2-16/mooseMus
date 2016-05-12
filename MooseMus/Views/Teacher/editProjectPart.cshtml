@@ -43,8 +43,8 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.value, "Value", new { @class = "col-md-4 control-label" })
                     <div class="col-md-8">
-                        @Html.TextBoxFor(i => i.value, new { @Value = @Model.value, @type = "number", @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.value, "", new { @class = "text-danger" })
+                        @Html.EditorFor(i => i.value, new { htmlAttributes = new { type = "number", min = 0, max = 100 } })
                     </div>
                 </div>
                 <input type="hidden" name="courseID" value=@Model.courseID>

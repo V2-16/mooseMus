@@ -10,7 +10,7 @@ namespace MooseMus.Controllers
 {
     public class HomeController : Controller
     {
-        private UserService _service = new UserService();
+        private UserService _service = new UserService(null);
 
         [HttpGet]
         public ActionResult Index()
