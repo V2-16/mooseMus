@@ -180,7 +180,6 @@ a:visited
 
 .dropdown-menu 
 {
-    background-color: rgba(255, 0, 0, 0.2) !important;
     text-decoration: none;
     font-size: 65%;
     background-color: #eeeeee;
@@ -266,7 +265,6 @@ table.table.table-hover.table-condensed
     margin-top: 45px;
 }
 
-
 .text-danger
 {
     color: white;
@@ -284,9 +282,8 @@ select
 
 .navleft li:hover
 {
-    font-size:125%
+    font-size: 125%
 }
-
 
 input.btn.btn-primary
 {
@@ -297,5 +294,5 @@ input.btn.btn-primary
 
 input.btn.btn-default
 {
-    margin-left: 240px;
+    margin-left: 220px;
 }
