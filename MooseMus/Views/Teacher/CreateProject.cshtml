@@ -13,7 +13,6 @@
             {
                 @Html.AntiForgeryToken()
                 <h4>Information about Project</h4>
-                <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     @Html.LabelFor(m => m.title, "Title", new { @class = "col-md-2 control-label" })
