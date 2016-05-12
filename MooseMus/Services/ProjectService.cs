@@ -262,6 +262,13 @@ namespace MooseMus.Services
                 Debug.WriteLine(ex.Message);
             }
         }
+
+        public string getOutput(int projParID)
+        {
+            var output = _db.projectPart.FirstOrDefault(x => x.ID == projParID);
+            return output.output;
+        }
+
         public void addProjectPart(TeacherAddProjectPartViewModel partToAdd)
         {
             ProjectPartModel nPPart = new ProjectPartModel();
