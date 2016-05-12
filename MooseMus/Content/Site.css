@@ -135,7 +135,6 @@ footer
 
 .actionlink:hover
 {
-    color: black;
     font-size: 150%;
     color: black;
 }
@@ -253,6 +252,7 @@ table > tbody > tr
 label.col-md-2.control-label
 {
     padding-top: 14px;
+    font-size: 10;
 }
 
 div.col-md-10
@@ -291,6 +291,10 @@ input.btn.btn-primary
     color: black;
     margin-left: 240px;
 }
+
+.control-label
+{
+    font-size: 18px;
 
 input.btn.btn-default
 {

@@ -1,7 +1,7 @@
 ﻿@using MooseMus.Models.ViewModels
 @model TeacherAddProjectPartViewModel
 
-<h2>Change Project Part @Model.partName</ h2 >
+ @Model.partName
 
 <div class="row">
     <div class="col-md-8">
@@ -9,40 +9,40 @@
             @using (Html.BeginForm("updateProjectPart", "Teacher", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Upplýsingar um lið</h4>
-                <hr />
+                <h4>Edit Project Part</h4>
+                
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(m => m.partName, "Title", new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.partName, "Title", new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
                         @Html.TextBoxFor(m => m.partName, new { @Value= @Model.partName, @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.partName, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.partDescription, "Description", new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.partDescription, "Description", new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
                         @Html.TextBoxFor(m => m.partDescription, new { @Value = @Model.partDescription, @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.partDescription, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.input, "Input", new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.input, "Input", new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
                         @Html.TextAreaFor(m => m.input, new { @Value = @Model.input, @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.input, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.output, "Output", new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.output, "Output", new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
                         @Html.TextAreaFor(m => m.output, new { @Value = @Model.output, @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.output, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.value, "Value", new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.value, "Value", new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
                         @Html.TextBoxFor(i => i.value, new { @Value = @Model.value, @type = "number", @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.value, "", new { @class = "text-danger" })
                     </div>
