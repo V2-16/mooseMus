@@ -6,8 +6,10 @@
 @using (Html.BeginForm("addUser" , "Admin"))
 {
     @Html.AntiForgeryToken()
+    <h4>Create User</h4>
 
     <div class="form-horizontal">
+        <h4>Create User</h4>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-4" })

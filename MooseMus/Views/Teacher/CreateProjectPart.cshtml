@@ -1,7 +1,7 @@
 ﻿@using MooseMus.Models.ViewModels
 @model TeacherAddProjectPartViewModel
 
-<h2>New Project Part</h2>
+<h3>New Project Part</h3>
 
 <div class="row">
     <div class="col-md-8">
@@ -9,8 +9,8 @@
             @using (Html.BeginForm("createProjectPart", "Teacher", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Information About Project Part</h4>
-                
+                <h4>Create Project Part</h4>
+
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     @Html.LabelFor(m => m.projectID, "Project", new { @class = "col-md-4 control-label" })
