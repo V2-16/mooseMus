@@ -277,7 +277,6 @@ table.table.table-hover.table-condensed
     font-size: 100%;
 }
 
-
 select 
 {
      width: 180px;
@@ -299,4 +298,8 @@ input.btn.btn-primary
 .control-label
 {
     font-size: 18px;
+
+input.btn.btn-default
+{
+    margin-left: 240px;
 }
