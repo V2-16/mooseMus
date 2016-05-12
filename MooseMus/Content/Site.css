@@ -115,13 +115,14 @@ footer
 {
      position: fixed;
      bottom: 0;
+     word-spacing: 10px;
 }
 
-.form-horizontal
+.form-horizontal 
 {
-    margin-right:auto; 
-    margin-left:auto;
-    width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 600px;
     border: solid;
     border-radius: 16px;
     padding: 8px;
@@ -130,7 +131,7 @@ footer
 .navleft
 {
     float: left;
-    width: 200px;
+    width: 250px;
 }
 
 .actionlink:hover
@@ -267,7 +268,7 @@ table.table.table-hover.table-condensed
 
 .text-danger
 {
-    color: white;
+    color: black;
 }
 
 #loginLink:hover
@@ -292,11 +293,17 @@ input.btn.btn-primary
     margin-left: 240px;
 }
 
-.control-label
+.control-label 
 {
     font-size: 18px;
+}
 
 input.btn.btn-default
 {
     margin-left: 220px;
+}
+
+.form-horizontal
+{
+    background-color: #eeeeee !important;
 }
