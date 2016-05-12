@@ -50,7 +50,7 @@ namespace MooseMus.Controllers
         public ActionResult CourseChoose(int userID, string course)
         {
             var user = _service.teacherOrStudent(userID, course);
-            if(user == "teacher")
+            if(user == "Teacher   ")
             {
                 return RedirectToAction("Index", "Teacher", new { course = course });
             }

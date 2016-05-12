@@ -6,10 +6,15 @@
 
 <h2>New Project</h2>
 
+@if (ViewBag.Success != null && ViewBag.Success == true)
+{
+    Html.RenderPartial("CreatedSuccessfully");
+}
+
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
-            @using (Html.BeginForm("goToAddProject", "Teacher", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("createProject", "Teacher", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 <h4>Information about Project</h4>

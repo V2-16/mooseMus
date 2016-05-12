@@ -4,38 +4,34 @@
 <h2>Submit Project Part</h2>
 
 <div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("submitAProjectPart", "Student", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Submit @Model.projectPartName</h4>
-                <p>@Model.description</p>
-
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.file, "File", new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(i => i.file, new { @type = "file", @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.file, "", new { @class = "text-danger" })
-                    </div>
+    <div class="col-md-4">
+        @using (Html.BeginForm("submitAProjectPart", "Student", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.fileUploaded, "File", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.fileUploaded, null, new { type = "file", @class = "input-file" })
+                    @Html.ValidationMessageFor(m => m.fileUploaded, "", new { @class = "text-danger" })
                 </div>
-                <input type="hidden" name="studentID" value=@Model.studentID>
-                <input type="hidden" name="projectPartID" value=@Model.projectPartID>
-                <input type="hidden" name="projectPartName" value=@Model.projectPartName>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Submit" class="btn btn-default" />
-                    </div>
-                </div>
-            }
-        </section>
+            </div>
+            <input type="hidden" name="projectPartID" value=@Model.projectPartID>
+            <input type="hidden" name="studentID" value=@Model.studentID>
+            <input type="hidden" name="projectPartName" value=@Model.projectPartName>
+            <input type="hidden" name="description" value=@Model.description>
+            <input type="Submit" class="btn btn-primary" value="Compile Test Code" />
+        }
     </div>
 </div>
 
+<div id="result">
+    @if (ViewBag.Success != null && ViewBag.Success == true)
+    {
+        Html.RenderPartial("Result");
+    }
+</div>
+
 <script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
