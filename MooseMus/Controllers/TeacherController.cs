@@ -17,7 +17,6 @@ namespace MooseMus.Controllers
         // GET: Teacher
         public ActionResult Index(string course)
         {
-            ViewBag.Success = false;
             var courseID = _cservice.getCourseIDByName(course);
             var model = _cservice.getCourseProjects(courseID);
             return View(model);
@@ -96,7 +95,7 @@ namespace MooseMus.Controllers
             return View("Index", model);
         }
 
-        /********************** KENNARY BÆTIR VIÐ LIÐ *********************/
+        /********************** KENNARI BÆTIR VIÐ LIÐ *********************/
 
         public ActionResult createProjectPart(string course)
         {
