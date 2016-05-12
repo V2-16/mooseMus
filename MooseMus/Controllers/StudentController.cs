@@ -15,7 +15,7 @@ namespace MooseMus.Controllers
     {
         private CourseService _cservice = new CourseService();
         private ProjectService _pservice = new ProjectService();
-        private UserService _uservice = new UserService(null);
+        private UserService _uservice = new UserService();
 
         // GET: Student
         public ActionResult Index(string course, int stuID)
@@ -72,18 +72,6 @@ namespace MooseMus.Controllers
         [HttpPost]
         public ActionResult submitAProjectPart(StudentSubmitViewModel data)
         {
-
-            // To simplify matters, we declare the code here.
-            // The code would of course come from the student!
-           /* var code = "#include <iostream>\n" +
-            "using namespace std;\n" +
-            "int main()\n" +
-            "{\n" +
-            "cout << \"Hello world\" << endl;\n" +
-            "cout << \"The output should contain two lines\" << endl;\n" +
-            "return 0;\n" +
-            "}";*/
-
             // Read the file and display it line by line.
             // Set up our working folder, and the file names/paths.
             // In this example, this is all hardcoded, but in a
@@ -97,21 +85,8 @@ namespace MooseMus.Controllers
             // can find it:
            // System.IO.File.WriteAllText(workingFolder + cppFileName, code);
 
-            // In this case, we use the C++ compiler (cl.exe) which ships
-            // with Visual Studio. It is located in this folder:
             var compilerFolder = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\bin\\";
-            // There is a bit more to executing the compiler than
-            // just calling cl.exe. In order for it to be able to know
-            // where to find #include-d files (such as <iostream>),
-            // we need to add certain folders to the PATH.
-            // There is a .bat file which does that, and it is
-            // located in the same folder as cl.exe, so we need to execute
-            // that .bat file first.
 
-            // Using this approach means that:
-            // * the computer running our web application must have
-            //   Visual Studio installed. This is an assumption we can
-            //   make in this project.
             // * Hardcoding the path to the compiler is not an optimal
             //   solution. A better approach is to store the path in
             //   web.config, and access that value using ConfigurationManager.AppSettings.
@@ -147,12 +122,9 @@ namespace MooseMus.Controllers
                     processExe.StartInfo = processInfoExe;
                     processExe.Start();
 
-
-
-
                     string[] seperators = new string[] { "\r\n", "\n" };
-                    var inputFromTeacher = _pservice.getInput(data.projectPartID).Split(seperators, StringSplitOptions.None).ToList();
-                    var realInput = inputFromTeacher[0];
+                    var outputFromTeacher = _pservice.getOutput(data.projectPartID).Split(seperators, StringSplitOptions.None).ToList();
+                    var realInput = outputFromTeacher[0];
                     processExe.StandardInput.WriteLine(realInput);
 
                     
@@ -169,8 +141,8 @@ namespace MooseMus.Controllers
                         lines.Add(processExe.StandardOutput.ReadLine());
                     }
               
-                    var outputFromTeacher = _pservice.getOutput(data.projectPartID).Split(seperators, StringSplitOptions.None).ToList();
                     lines.Add("***************RESULT***************");
+
                     if (outputFromTeacher.SequenceEqual(lines))
                     {
                         lines.Add("Success! Your submission has been accepted");
