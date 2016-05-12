@@ -26,6 +26,20 @@ namespace MooseMus.Services
             return course;
         }
 
+        public CourseModel getCourseByProjectPart(int proParID)
+        {
+            var project = _db.projectPart.FirstOrDefault(x => x.ID == proParID);
+            var theProject = _db.project.FirstOrDefault(x => x.ID == project.ID);
+            var course = getCourseByProjectID(theProject.ID);
+            return course;
+        }
+        public ProjectModel getProjectByProjectPartID(int proParID)
+        {
+            var project = _db.projectPart.FirstOrDefault(x => x.ID == proParID);
+            var theProject = _db.project.FirstOrDefault(x => x.ID == project.ID);
+            return theProject;
+        }
+
         public ProjectModel getProjectByID(int projectID)
         {
             var project = _db.project.FirstOrDefault(x => x.ID == projectID);

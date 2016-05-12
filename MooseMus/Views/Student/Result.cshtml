@@ -1,0 +1,9 @@
+﻿@if (ViewBag.Output != null)
+{
+    <ul>
+        @foreach (var line in ViewBag.Output)
+        {
+            <li>@line</li>
+        }
+    </ul>
+}
