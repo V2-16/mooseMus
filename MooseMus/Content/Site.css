@@ -2,12 +2,18 @@
 {
     padding-top: 2px;
     padding-bottom: 20px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif !important;
     background-attachment: fixed;
     background-image: url("Images/BG-01.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    margin-bottom: 50px;
+    font-size: 18px;
+}
 
+h2, h3
+{
+    padding-left: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -33,28 +39,32 @@ textarea
     max-width: 280px;
 }
 
-
 .navbar-brand > img 
 {
-    float:left;
-    display:block;
+    float: left;
+    display: block;
     width: 100px;
     height:100px;
 }
-.navbar-nav > li > a:hover 
+
+.navbar-nav > li > a:hover, a:active 
 {
-    text-decoration:none;
+    text-decoration: none;
     color: black;
     background-color: transparent !important;
 }
 
-.navbar-nav > li > a {
+.navbar-nav > li > a 
+{
     background-color: transparent !important;
     padding-top: 15px;
+    color: black;
 }
 
-.navbar-nav > li > a:focus {
+.navbar-nav > li > a:focus 
+{
     background-color: transparent !important;
+    color: black;
 }
 
 .navbar-collapse collapse > ul 
@@ -62,14 +72,9 @@ textarea
     padding-top: 5px;
 }
 
-body
-{
-    margin-bottom:50px;
-}
-
 label 
 {
-    text-transform:lowercase;
+    text-transform: lowercase;
 }
 
 label:first-letter 
@@ -80,32 +85,33 @@ label:first-letter
 a 
 {
     text-decoration: none;
-    color: #000000;
+    color: black;
 }
 
-a:hover 
+a.dropdown-hover-color:hover 
 {
     text-decoration: none;
-    color: black;
-    font-size: 150%;
+    color: white;
+    font-size: 100%;
+    background-color: rgba(255, 0, 0, 0.2) !important;
 }
 
 li:hover a
 {
     text-decoration: none;
     color: black;
-    font-size: 150%;
+    font-size: 100%;
 }
 
 
 .navbar-brand:hover a
 {
     text-decoration: none;
-    color: #black;
-    font-size: 150%;
+    color: black;
+    font-size: 100%;
 }
 
- footer 
+footer 
 {
      position: fixed;
      bottom: 0;
@@ -129,17 +135,19 @@ li:hover a
 
 .actionlink:hover
 {
+    font-color: black;
     font-size: 150%;
+    color: black;
 }
 
 div
 {
-  margin-top:10px;
+    margin-top:10px;
 }
 
 .actionlink
 {
-  margin:40px;
+    margin:40px;
 }
 
 a:visited
@@ -148,20 +156,38 @@ a:visited
     color: black !important;
 }
 
-.dropdown-menu:hover
+.nav a:hover .caret
 {
-      background-color: transparent;
-      text-decoration: none;
-      font-size: 65%;
-      text-color: black;
+    border-top-color: black !important;
+    border-bottom-color: black !important;
 }
 
-.dropdown-menu
+.nav .caret
+{
+    border-top-color: black !important;
+    border-bottom-color: black !important;
+}
+
+.dropdown.open
+{
+    padding-left: 20px;
+}
+
+.dropdown
+{
+    padding-left: 60px;
+}
+
+.dropdown-menu 
 {
     background-color: transparent;
-     text-decoration: none;
-      font-size: 65%;
-      text-color: black;
+    text-decoration: none;
+    font-size: 65%;
+}
+
+.dropdown-menu:hover > li > a
+{
+    color: black;
 }
 
 .dropdown-toggle.visited
@@ -178,15 +204,80 @@ a:visited
 
 .makeblack:visited
 {
+    text-decoration: none;
     color: black !important;
 }
 
 .makeblack:focus
 {
     color: black !important;
+    text-decoration: none;
 }
 
 .makeblack:active
 {
     color: black !important;
+    text-decoration: none;
+}
+
+dt 
+{
+    margin-top: 6px;
+    margin-bottom: 2px;
+    font-size: 16px;
+}
+
+.nav a:hover .caret
+{
+    border-top-color: black !important;
+    border-bottom-color: black !important;
+}
+
+.nav .caret
+{
+    border-top-color: black !important;
+    border-bottom-color: black !important;
+}
+
+html, body
+{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+}
+
+table > tbody > tr
+{
+    border-top: 10px;
+}
+
+ul.dropdown-menu
+{
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+label.col-md-2.control-label
+{
+    padding-top: 17px;
+}
+
+div.col-md-10
+{
+    padding-bottom: 14px;
+}
+
+table.table.table-hover.table-condensed
+{
+    margin-top: 45px;
+}
+
+.text-danger
+{
+    color: white;
+}
+
+#loginLink:hover
+{
+    font-size: 100%;
 }

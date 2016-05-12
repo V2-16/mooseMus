@@ -16,7 +16,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">New project<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="javascript:addProject();">Add project</a>
+                        <a class="dropdown-hover-color" href="javascript:addProject();">Add project</a>
                         <script type="text/javascript">
                             function addProject()
                             {
@@ -25,7 +25,7 @@
                         </script>
                     </li> 
                     <li>
-                        <a href="javascript:addProjectPart();">Add project part</a>
+                        <a class="dropdown-hover-color" href="javascript:addProjectPart();">Add project part</a>
                         <script type="text/javascript">
                             function addProjectPart()
                             {
@@ -42,7 +42,7 @@
                     {
                         foreach (var pro in @Model.projects)
                         {
-                            <li><a href="#" onclick="viewProjectToEdit(@pro.projectID)">@pro.name</a></li>
+                            <li><a class="dropdown-hover-color" href="#" onclick="viewProjectToEdit(@pro.projectID)">@pro.name</a></li>
                         }
                     }
                 </ul>

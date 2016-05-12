@@ -5,6 +5,7 @@ using System.Web;
 using MooseMus.Models.Entities;
 using System.Web.Mvc;
 
+
 namespace MooseMus.Models.ViewModels
 {
     public class TeacherCourseViewModel

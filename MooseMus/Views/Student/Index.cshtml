@@ -24,7 +24,7 @@
                     {
                         foreach (var pro in @Model.projects)
                         {
-                            <li><a href="#" onclick="submitProject(@Model.studentID,@pro.projectID)">@pro.name</a></li>
+                            <li><a class="dropdown-hover-color" href="#" onclick="submitProject(@Model.studentID,@pro.projectID)">@pro.name</a></li>
                         }
                     }
                 </ul>
@@ -36,7 +36,7 @@
                     {
                         foreach (var pro in @Model.projects)
                         {
-                            <li><a href="#" onclick="viewProjectByStudent(@Model.studentID,@pro.projectID)">@pro.name</a></li>
+                            <li><a class="dropdown-hover-color" href="#" onclick="viewProjectByStudent(@Model.studentID,@pro.projectID)">@pro.name</a></li>
                         }
                     }
                 </ul>
