@@ -1,6 +1,8 @@
 ﻿using MooseMus.Models;
+using MooseMus.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
@@ -15,18 +17,29 @@ namespace MooseMus.Services
             _db = new ApplicationDbContext();
         }
         //skilar inntaki/úttaki forrits sem var sent inn
-        public string getFeedback()
+        public void saveResult(int stuID, int proParID, bool accepted, List<string> result)
         {
-            return null;
-        }
+            ResultModel nResult = new ResultModel();
 
-        public void submitProjectPart(string projectPath) //við gætum gert spes ViewModel fyrir þetta, er ekki viss um að það þurfi samt. 
-        {
+            nResult.studentID = stuID;
+            nResult.projectPartID = proParID;
+            nResult.accepted = accepted;
+            nResult.result = result.ToString();
 
-        }
+            if (nResult != null)
+            {
+                _db.result.Add(nResult);
+            }
 
-        public void uploadProjectPart(string projectPath) //tekur í raun bara inn path á það sem nemandi sendir inn? 
-        {
+            try
+            {
+                _db.SaveChanges();
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
 
         }
     }
