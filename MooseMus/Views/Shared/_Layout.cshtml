@@ -21,8 +21,8 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li><a class="navbar-brand" href='@Url.Action("Index", "Home")'><img src="~/Content/Images/mooseMus_logo-01.png" alt="Logo" width="150" height="150"></a></li>
-                            <li class="actionlink">@Html.ActionLink("About", "About", "Home", new { style = "color:black" })</li>
-                            <li class="actionlink">@Html.ActionLink("Contact", "Contact", "Home", new { style = "color:black" })</li>
+                            <li class="actionlink"><a href="/Home/About/" style="color: black;">About</a></li>
+                            <li class="actionlink"><a href="/Home/Content" style="color: black;">Content</a></li>
 
                         </ul>
                         @Html.Partial("_LoginPartial")

@@ -8,15 +8,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Net.Http;
+using MooseMus.Handlers;
 
 namespace MooseMus.Controllers
 {
+    [CustomHandleError]
     public class StudentController : Controller
     {
         private CourseService _cservice = new CourseService();
         private ProjectService _pservice = new ProjectService();
         private UserService _uservice = new UserService(null);
+<<<<<<< HEAD
         private SubmissionService _sservice = new SubmissionService();
+=======
+>>>>>>> refs/remotes/origin/master
 
         // GET: Student
         public ActionResult Index(string course, int stuID)
