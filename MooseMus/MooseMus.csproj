@@ -224,6 +224,7 @@
     <Compile Include="Models\ViewModels\CourseUsersViewModel.cs" />
     <Compile Include="Models\ViewModels\CourseViewModel.cs" />
     <Compile Include="Models\ViewModels\FrontPageViewModel.cs" />
+    <Compile Include="Models\ViewModels\OneSubmissionViewModel.cs" />
     <Compile Include="Models\ViewModels\ProjectPartsListViewModel.cs" />
     <Compile Include="Models\ViewModels\ProjectPartsViewModel.cs" />
     <Compile Include="Models\ViewModels\ProjectPartViewModel.cs" />
@@ -334,6 +335,7 @@
     <Content Include="Views\Student\viewProjectToSubmit.cshtml" />
     <Content Include="Views\Student\submitAProjectPart.cshtml" />
     <Content Include="Views\Student\Result.cshtml" />
+    <Content Include="Views\Student\getSubmission.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

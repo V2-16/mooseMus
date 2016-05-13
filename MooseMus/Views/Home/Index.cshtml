@@ -39,9 +39,10 @@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
+@if (ViewBag.Success != null && ViewBag.Success == true)
+{
+    Html.RenderPartial("CreatedSuccessfully");
+}
 <div id="proj">
-    @if (ViewBag.Success != null && ViewBag.Success == true)
-    {
-        Html.RenderPartial("CreatedSuccessfully");
-    }
 </div>
+

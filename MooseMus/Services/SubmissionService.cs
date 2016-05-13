@@ -25,11 +25,17 @@ namespace MooseMus.Services
             nResult.studentID = stuID;
             nResult.projectPartID = proParID;
             nResult.accepted = accepted;
-            nResult.result = result.ToString();
-
-            if(accepted == true)
+            var studentOutput = "";
+            foreach(string i in result)
             {
-                var best = _db.result.FirstOrDefault(x => x.bestResult == true);
+                studentOutput += i;
+                studentOutput += '\n';
+            }
+            nResult.result = studentOutput;
+
+            var best = _db.result.FirstOrDefault(x => x.bestResult == true);
+            if (accepted == true)
+            {
                 if (best != null)
                 {
                     best.bestResult = false;
@@ -38,7 +44,14 @@ namespace MooseMus.Services
             }
             else
             {
-                nResult.bestResult = false;
+                if(best == null)
+                {
+                    nResult.bestResult = true;
+                }
+                else
+                {
+                    nResult.bestResult = false;
+                }
             }
 
             if (nResult != null)
@@ -60,9 +73,9 @@ namespace MooseMus.Services
 
         public void cleanDir(string path)
         {
-            System.IO.DirectoryInfo di = new DirectoryInfo(path);
+            System.IO.DirectoryInfo dir = new DirectoryInfo(path);
 
-            foreach (FileInfo file in di.GetFiles())
+            foreach (FileInfo file in dir.GetFiles())
             {
                 file.Delete();
             }

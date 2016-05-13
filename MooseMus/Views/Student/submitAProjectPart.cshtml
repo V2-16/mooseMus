@@ -27,7 +27,7 @@
 <div id="result">
     @if (ViewBag.Success != null && ViewBag.Success == true)
     {
-        Html.RenderPartial("Result");
+        Html.RenderPartial("Result",  Model);
     }
 </div>
 

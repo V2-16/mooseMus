@@ -92,8 +92,8 @@ namespace MooseMus.Controllers
         {
 
             ViewBag.Success = true;
-            var model = _cservice.getCourseProjects(project.courseID);
             _pservice.addProject(project);
+            var model = _cservice.getCourseProjects(project.courseID);
             return View("Index", model);
         }
 
@@ -117,10 +117,11 @@ namespace MooseMus.Controllers
         [HttpPost]
         public ActionResult createProjectPart(TeacherAddProjectPartViewModel part)
         {
-            ViewBag.SuccessProjectPart = true;
+            ViewBag.Success = true;
             _pservice.addProjectPart(part);
             string courseName = _cservice.getCourseNameByID(part.courseID);
-            return RedirectToAction("Index", "Teacher", new { course = courseName });
+            var model = _cservice.getCourseProjects(part.courseID);
+            return View("Index", model);
         }
 
         /********************** KENNARI BREYTIR LIÐ *********************/
@@ -149,12 +150,14 @@ namespace MooseMus.Controllers
         //Kennari breytir lið
         public ActionResult updateProjectPart(TeacherAddProjectPartViewModel toEdit)
         {
+            ViewBag.Success = true;
             if (ModelState.IsValid)
             {
                 _pservice.updateProjectPart(toEdit);
             }
             var course = _pservice.getCourseByProjectID(toEdit.projectID);
-            return RedirectToAction("Index", "Teacher", new { course = course.name });
+            var model = _cservice.getCourseProjects(course.Id);
+            return View("Index", model);
         }
 
     }
