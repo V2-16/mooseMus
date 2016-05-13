@@ -11,21 +11,19 @@ namespace MooseMus.Services
 {
     public class CourseService
     {
-        private ApplicationDbContext _db;
+        private readonly IAppDataContext _db;
 
-        public CourseService() 
+        public CourseService(IAppDataContext dbContext) 
         {
-            _db = new ApplicationDbContext();
+            _db = dbContext ?? new ApplicationDbContext();
         }
 
         public int getCourseIDByName(string courseName)
         {
-            // XXX(snaedis): The page was faulting due to this, not sure how to handle
             try
             {
                 var course = _db.course.FirstOrDefault(x => x.name == courseName);
                 return course.Id;
-
             }
             catch
             {
@@ -36,7 +34,12 @@ namespace MooseMus.Services
         public string getCourseNameByID(int courseID)
         {
             var course = _db.course.FirstOrDefault(x => x.Id == courseID);
-            return course.name;
+            if(course != null)
+            {
+                return course.name;
+            }
+            return "";
+            
         }
 
         public CourseModel getCourseByID(int courseID)
