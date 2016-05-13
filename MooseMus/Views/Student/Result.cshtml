@@ -13,21 +13,23 @@
             </tr>
         </thead>
         <tbody>
+            @foreach (var res in Model.result) { 
             <tr>
                 <td>
-                    @foreach (var line in ViewBag.Output)
+                    @foreach (var line in res.outputObtained)
                     {
                         <p>@line</p>
                     }
                 </td>
                 <td>
-                    @foreach (var line in Model.output)
+                    @foreach (var line in res.outputExpected)
                     {
                         <p>@line</p>
                     }
                 </td>
-                <td>@Model.accepted</td>
+                <td>@res.accepted</td>
             </tr>
+            }
         </tbody>
     </table>
 </div>

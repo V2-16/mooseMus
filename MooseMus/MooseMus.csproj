@@ -225,6 +225,7 @@
     <Compile Include="Models\ViewModels\CourseViewModel.cs" />
     <Compile Include="Models\ViewModels\FrontPageViewModel.cs" />
     <Compile Include="Models\ViewModels\OneSubmissionViewModel.cs" />
+    <Compile Include="Models\ViewModels\OutputViewModel.cs" />
     <Compile Include="Models\ViewModels\ProjectPartsListViewModel.cs" />
     <Compile Include="Models\ViewModels\ProjectPartsViewModel.cs" />
     <Compile Include="Models\ViewModels\ProjectPartViewModel.cs" />
