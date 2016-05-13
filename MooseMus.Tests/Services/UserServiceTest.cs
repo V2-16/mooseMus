@@ -43,19 +43,15 @@ namespace MooseMus.Tests.Services
             
         }
 
-        //rename testmethod to fit function to be tested
         [TestMethod]
         public void findUserIdByNameTest()
         {
-            //Prepping-making test data
             // Arrange:
             const string user = "Fanney Ásta Águstsdóttir";
 
-            // run the function to be tested - usually one line
             // Act:
             var result = _service.getUserIDByUserName(user);
 
-            // Is the result/response correct
             // Assert:
             Assert.AreEqual(1, result);
         }
@@ -63,17 +59,40 @@ namespace MooseMus.Tests.Services
         [TestMethod]
         public void findUserIdByName2Test()
         {
-            //Prepping-making test data
             // Arrange:
             const string user = "Rakel Kjartansdóttir";
 
-            // run the function to be tested - usually one line
             // Act:
             var result = _service.getUserIDByUserName(user);
 
-            // Is the result/response correct
             // Assert:
-            Assert.AreEqual(1, result);
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void findUserIdBySSNTest()
+        {
+            // Arrange:
+            const string user = "2405853249";
+
+            // Act:
+            var result = _service.getUserIDByUserSSN(user);
+
+            // Assert:
+            Assert.AreEqual(4, result);
+        }
+
+        [TestMethod]
+        public void findUserIdBySSN2()
+        {
+            // Arrange:
+            const string user = "2233445566";
+
+            // Act:
+            var result = _service.getUserIDByUserSSN(user);
+
+            // Assert:
+            Assert.AreEqual("Database Error", result);
         }
     }
 }

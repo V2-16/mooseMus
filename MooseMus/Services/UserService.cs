@@ -11,7 +11,7 @@ namespace MooseMus.Services
 {
     public class UserService
     {
-        private CourseService _courseService = new CourseService();
+        private CourseService _courseService = new CourseService(null);
         private readonly IAppDataContext _db;
 
         public UserService(IAppDataContext dbContext) 
@@ -100,7 +100,7 @@ namespace MooseMus.Services
          
                 if (user == null)
                 {
-                    throw new System.ArgumentException("Database Error", "user");
+                    throw new ArgumentException("Database Error", "user");
                 }
                
             return user.ID;

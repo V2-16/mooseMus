@@ -207,8 +207,6 @@
     <Compile Include="Handlers\CustomHandleErrorAttribute.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Entities\CourseModel.cs" />
-    <Compile Include="Models\Entities\CourseStudentModel.cs" />
-    <Compile Include="Models\Entities\CourseTeacherModel.cs" />
     <Compile Include="Models\Entities\CourseUsersModel.cs" />
     <Compile Include="Models\Entities\ProjectModel.cs" />
     <Compile Include="Models\Entities\ProjectPartModel.cs" />
@@ -333,7 +331,6 @@
     <Content Include="Views\Student\viewProjectToSubmit.cshtml" />
     <Content Include="Views\Student\submitAProjectPart.cshtml" />
     <Content Include="Views\Student\Result.cshtml" />
-    <Content Include="Views\Student\getSubmission.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
