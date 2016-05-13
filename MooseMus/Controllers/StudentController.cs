@@ -85,6 +85,7 @@ namespace MooseMus.Controllers
             var workingFolder = "C:\\Temp\\Mooshak2Code\\";
             var cppFileName = data.projectPartID + ".cpp";
             var exeFilePath = workingFolder + data.projectPartID + ".exe";
+            System.IO.Directory.CreateDirectory(workingFolder);
             data.fileUploaded.SaveAs(workingFolder + cppFileName);
 
             var compilerFolder = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\bin\\";
