@@ -100,7 +100,7 @@ namespace MooseMus.Services
          
                 if (user == null)
                 {
-                    throw new System.ArgumentException("Database Error", "user");
+                    throw new ArgumentException("Database Error", "user");
                 }
                
             return user.ID;
