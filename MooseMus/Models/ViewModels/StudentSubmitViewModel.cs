@@ -19,6 +19,7 @@ namespace MooseMus.Models.ViewModels
         public List<OutputViewModel> result { get; set; }
 
         public List<Boolean> accepted { get; set; }
+        public string projectAccepted { get; set; }
 
     }
 }

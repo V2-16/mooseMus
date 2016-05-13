@@ -100,8 +100,8 @@ namespace MooseMus.Controllers
             List<List<String>> outputStudent = new List<List<String>>();
             List<bool> accepted = new List<Boolean>();
             List<OutputViewModel> results = new List<OutputViewModel>();
-
-
+            bool allAccepted = true;
+            string success = "Accepted!";
 
             // Check if the compile succeeded, and if it did,
             // we try to execute the code:
@@ -154,9 +154,9 @@ namespace MooseMus.Controllers
                     }
 
                 }
-                bool allAccepted = true;
                 if (accepted.Contains(false))
                 {
+                    success = "NOT accepted!";
                     allAccepted = false;
                 }
                 _sservice.saveResult(data.studentID, data.projectPartID, allAccepted, outputStudent); //Saving the data to database
@@ -177,7 +177,8 @@ namespace MooseMus.Controllers
                 projectPartName = data.projectPartName,
                 description = data.description,
                 accepted = accepted,
-                result = results
+                result = results,
+                projectAccepted = success
             };
             return View(model);
         }
