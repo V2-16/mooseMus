@@ -18,10 +18,7 @@ namespace MooseMus.Controllers
         private CourseService _cservice = new CourseService();
         private ProjectService _pservice = new ProjectService();
         private UserService _uservice = new UserService(null);
-<<<<<<< HEAD
         private SubmissionService _sservice = new SubmissionService();
-=======
->>>>>>> refs/remotes/origin/master
 
         // GET: Student
         public ActionResult Index(string course, int stuID)
@@ -70,7 +67,8 @@ namespace MooseMus.Controllers
                 studentID = stuID,
                 projectPartID = proPar.ID,
                 projectPartName = proPar.title,
-                description = proPar.description
+                description = proPar.description,
+                accepted = false
             };
             return PartialView(model);
         }
@@ -83,35 +81,20 @@ namespace MooseMus.Controllers
             // In this example, this is all hardcoded, but in a
             // real life scenario, there should probably be individual
             // folders for each user/assignment/milestone.
+            var projectAccepted = data.accepted;
             var workingFolder = "C:\\Temp\\Mooshak2Code\\";
             var cppFileName = data.projectPartID + ".cpp";
             var exeFilePath = workingFolder + data.projectPartID + ".exe";
             data.fileUploaded.SaveAs(workingFolder + cppFileName);
-            // Write the code to a file, such that the compiler
-            // can find it:
-           // System.IO.File.WriteAllText(workingFolder + cppFileName, code);
-
+            
             var compilerFolder = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\bin\\";
-
-            // * Hardcoding the path to the compiler is not an optimal
-            //   solution. A better approach is to store the path in
-            //   web.config, and access that value using ConfigurationManager.AppSettings.
-
             // Execute the compiler:
-            Process compiler = new Process();
-            compiler.StartInfo.FileName = "cmd.exe";
-            compiler.StartInfo.WorkingDirectory = workingFolder;
-            compiler.StartInfo.RedirectStandardInput = true;
-            compiler.StartInfo.RedirectStandardOutput = true;
-            compiler.StartInfo.UseShellExecute = false;
+            compile(workingFolder, compilerFolder, cppFileName);
 
-            compiler.Start();
-            compiler.StandardInput.WriteLine("\"" + compilerFolder + "vcvars32.bat" + "\"");
-            compiler.StandardInput.WriteLine("cl.exe /nologo /EHsc " + cppFileName);
-            compiler.StandardInput.WriteLine("exit");
-            string output = compiler.StandardOutput.ReadToEnd();
-            compiler.WaitForExit();
-            compiler.Close();
+            string[] seperators = new string[] { "\r\n", "\n" };
+            var outputFromTeacher = _pservice.getOutput(data.projectPartID).Split(seperators, StringSplitOptions.None).ToList();
+
+            var inputFromTeacher = _pservice.getInput(data.projectPartID).Split(seperators, StringSplitOptions.None).ToList();
 
             // Check if the compile succeeded, and if it did,
             // we try to execute the code:
@@ -128,20 +111,10 @@ namespace MooseMus.Controllers
                     processExe.StartInfo = processInfoExe;
                     processExe.Start();
 
-                    string[] seperators = new string[] { "\r\n", "\n" };
-                    var outputFromTeacher = _pservice.getOutput(data.projectPartID).Split(seperators, StringSplitOptions.None).ToList();
-                    var realoutput = outputFromTeacher[0];
-
-                    var inputFromTeacher = _pservice.getInput(data.projectPartID).Split(seperators, StringSplitOptions.None).ToList();
-                    var realInput = inputFromTeacher[0];
-
-                    processExe.StandardInput.WriteLine(realInput);
-                    
-                    // In this example, we don't try to pass any input
-                    // to the program, but that is of course also
-                    // necessary. We would do that here, using
-                    // processExe.StandardInput.WriteLine(), similar
-                    // to above.
+                    foreach(var inp in inputFromTeacher)
+                    {
+                        processExe.StandardInput.WriteLine(inp);
+                    }
 
                     // We then read the output of the program:
                     var lines = new List<string>();
@@ -150,27 +123,21 @@ namespace MooseMus.Controllers
                         lines.Add(processExe.StandardOutput.ReadLine());
                     }
 
-                    var accepted = outputFromTeacher.SequenceEqual(lines);
-                    _sservice.saveResult(data.studentID, data.projectPartID, accepted, lines);
-
-                    if (accepted)
-                    {
-                        lines.Add("Success! Your submission has been accepted");
-                    }
-                    else
-                    {
-                        lines.Add("Your submission has not been accepted");
-                        lines.Add("Your output should be:");
-                        for(int i = 0; i < outputFromTeacher.Count; i++)
-                        {
-                            lines.Add(outputFromTeacher[i]);
-                        }
-                    }
+                    projectAccepted = outputFromTeacher.SequenceEqual(lines);
+                    _sservice.saveResult(data.studentID, data.projectPartID, projectAccepted, lines); //Saving the data to database
                     ViewBag.Output = lines;
                 }
             }
+            else
+            {
+                ViewBag.Output = "Uh Oh! Your program did not compile, go back and fix it please..";
+            }
 
-            System.IO.DirectoryInfo di = new DirectoryInfo("YourPath");
+            List<String> outputExpected = new List<String>();
+            for (int i = 0; i < outputFromTeacher.Count; i++)
+            {
+                outputExpected.Add(outputFromTeacher[i]);
+            }
 
             _sservice.cleanDir(workingFolder);
             ViewBag.Success = true;
@@ -179,25 +146,29 @@ namespace MooseMus.Controllers
                 studentID = data.studentID,
                 projectPartID = data.projectPartID,
                 projectPartName = data.projectPartName,
-                description = data.description
+                description = data.description,
+                accepted = projectAccepted,
+                output = outputExpected
             };
             return View(model);
         }
-        public ActionResult uploadProjectPart()
-        {
-            return View();
-        }
 
-        [HttpGet]
-        public ActionResult submission()
+        public void compile(string workingFolder, string compilerFolder, string cppFileName)
         {
-            return View();
-        }
+            Process compiler = new Process();
+            compiler.StartInfo.FileName = "cmd.exe";
+            compiler.StartInfo.WorkingDirectory = workingFolder;
+            compiler.StartInfo.RedirectStandardInput = true;
+            compiler.StartInfo.RedirectStandardOutput = true;
+            compiler.StartInfo.UseShellExecute = false;
 
-        [HttpPost]
-        public ActionResult submission(StudentSubmitViewModel model)
-        {
-            return View();
+            compiler.Start();
+            compiler.StandardInput.WriteLine("\"" + compilerFolder + "vcvars32.bat" + "\"");
+            compiler.StandardInput.WriteLine("cl.exe /nologo /EHsc " + cppFileName);
+            compiler.StandardInput.WriteLine("exit");
+            string output = compiler.StandardOutput.ReadToEnd();
+            compiler.WaitForExit();
+            compiler.Close();
         }
     }
 

@@ -1,11 +1,33 @@
-﻿<h3>Result</h3>
+﻿@using MooseMus.Models.ViewModels
+@model StudentSubmitViewModel
 
-@if (ViewBag.Output != null)
-{
-    <ul>
-        @foreach (var line in ViewBag.Output)
-        {
-            <li>@line</li>
-        }
-    </ul>
-}
+<h3>Result</h3>
+
+<div class="container">
+    <table class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th>Output Obtained</th>
+                <th>OutPut Expected</th>
+                <th>Accepted</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @foreach (var line in ViewBag.Output)
+                    {
+                        <p>@line</p>
+                    }
+                </td>
+                <td>
+                    @foreach (var line in Model.output)
+                    {
+                        <p>@line</p>
+                    }
+                </td>
+                <td>@Model.accepted</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

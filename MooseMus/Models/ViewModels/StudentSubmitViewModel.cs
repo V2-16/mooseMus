@@ -15,7 +15,8 @@ namespace MooseMus.Models.ViewModels
         [DataType(DataType.Upload)]
         public HttpPostedFileBase fileUploaded { get; set; }
         [Required(ErrorMessage = "Code must be submitted")]
-        public string code { get; set; }
         public string description { get; set; }
+        public bool accepted { get; set; }
+        public List<String> output { get; set; }
     }
 }

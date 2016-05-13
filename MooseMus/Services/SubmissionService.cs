@@ -27,7 +27,7 @@ namespace MooseMus.Services
             nResult.accepted = accepted;
             nResult.result = result.ToString();
 
-            if(accepted == true)
+            if (accepted == true)
             {
                 var best = _db.result.FirstOrDefault(x => x.bestResult == true);
                 if (best != null)
@@ -60,9 +60,9 @@ namespace MooseMus.Services
 
         public void cleanDir(string path)
         {
-            System.IO.DirectoryInfo di = new DirectoryInfo(path);
+            System.IO.DirectoryInfo dir = new DirectoryInfo(path);
 
-            foreach (FileInfo file in di.GetFiles())
+            foreach (FileInfo file in dir.GetFiles())
             {
                 file.Delete();
             }
