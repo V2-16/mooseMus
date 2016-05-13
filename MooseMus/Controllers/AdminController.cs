@@ -14,7 +14,7 @@ namespace MooseMus.Controllers
     public class AdminController : Controller
     {
         private UserService _userService = new UserService(null);
-        private CourseService _courseService = new CourseService();
+        private CourseService _courseService = new CourseService(null);
 
         // GET: Admin
         public ActionResult Index(AdminFrontPageViewModel user)

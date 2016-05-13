@@ -9,7 +9,7 @@ namespace MooseMus.Controllers
     [CustomHandleError]
     public class TeacherController : Controller
     {
-        private CourseService _cservice = new CourseService();
+        private CourseService _cservice = new CourseService(null);
         private ProjectService _pservice = new ProjectService();
         private UserService _uservice = new UserService(null);
 
