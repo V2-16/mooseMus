@@ -18,6 +18,10 @@ namespace MooseMus.Controllers
         private CourseService _cservice = new CourseService();
         private ProjectService _pservice = new ProjectService();
         private UserService _uservice = new UserService(null);
+<<<<<<< HEAD
+        private SubmissionService _sservice = new SubmissionService();
+=======
+>>>>>>> refs/remotes/origin/master
 
         // GET: Student
         public ActionResult Index(string course, int stuID)
@@ -80,8 +84,8 @@ namespace MooseMus.Controllers
             // real life scenario, there should probably be individual
             // folders for each user/assignment/milestone.
             var workingFolder = "C:\\Temp\\Mooshak2Code\\";
-            var cppFileName = "Hello2.cpp";
-            var exeFilePath = workingFolder + "Hello2.exe";
+            var cppFileName = data.projectPartID + ".cpp";
+            var exeFilePath = workingFolder + data.projectPartID + ".exe";
             data.fileUploaded.SaveAs(workingFolder + cppFileName);
             // Write the code to a file, such that the compiler
             // can find it:
@@ -126,9 +130,12 @@ namespace MooseMus.Controllers
 
                     string[] seperators = new string[] { "\r\n", "\n" };
                     var outputFromTeacher = _pservice.getOutput(data.projectPartID).Split(seperators, StringSplitOptions.None).ToList();
-                    var realInput = outputFromTeacher[0];
-                    processExe.StandardInput.WriteLine(realInput);
+                    var realoutput = outputFromTeacher[0];
 
+                    var inputFromTeacher = _pservice.getInput(data.projectPartID).Split(seperators, StringSplitOptions.None).ToList();
+                    var realInput = inputFromTeacher[0];
+
+                    processExe.StandardInput.WriteLine(realInput);
                     
                     // In this example, we don't try to pass any input
                     // to the program, but that is of course also
@@ -142,10 +149,11 @@ namespace MooseMus.Controllers
                     {
                         lines.Add(processExe.StandardOutput.ReadLine());
                     }
-              
-                    lines.Add("***************RESULT***************");
 
-                    if (outputFromTeacher.SequenceEqual(lines))
+                    var accepted = outputFromTeacher.SequenceEqual(lines);
+                    _sservice.saveResult(data.studentID, data.projectPartID, accepted, lines);
+
+                    if (accepted)
                     {
                         lines.Add("Success! Your submission has been accepted");
                     }
@@ -162,8 +170,9 @@ namespace MooseMus.Controllers
                 }
             }
 
-            // TODO: We might want to clean up after the process, there
-            // may be files we should delete etc.
+            System.IO.DirectoryInfo di = new DirectoryInfo("YourPath");
+
+            _sservice.cleanDir(workingFolder);
             ViewBag.Success = true;
             var model = new StudentSubmitViewModel()
             {
@@ -191,7 +200,6 @@ namespace MooseMus.Controllers
             return View();
         }
     }
-
 
 }
 
