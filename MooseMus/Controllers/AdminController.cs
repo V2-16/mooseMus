@@ -111,7 +111,7 @@ namespace MooseMus.Controllers
         [HttpPost]
         public ActionResult searchUser(AddUserViewModel user)
         {
-            if (ModelState.IsValid)
+            if (user.ssn != null)
             {
                 var userID = _userService.getUserIDByUserSSN(user.ssn);
                 if (userID != 0)

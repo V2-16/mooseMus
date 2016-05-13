@@ -45,12 +45,27 @@ namespace MooseMus.Tests.Services
 
         //rename testmethod to fit function to be tested
         [TestMethod]
-        public void TestMethod1()
+        public void findUserIdByNameTest()
         {
             //Prepping-making test data
             // Arrange:
             const string user = "Fanney Ásta Águstsdóttir";
 
+            // run the function to be tested - usually one line
+            // Act:
+            var result = _service.getUserIDByUserName(user);
+
+            // Is the result/response correct
+            // Assert:
+            Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
+        public void findUserIdByName2Test()
+        {
+            //Prepping-making test data
+            // Arrange:
+            const string user = "Rakel Kjartansdóttir";
 
             // run the function to be tested - usually one line
             // Act:
