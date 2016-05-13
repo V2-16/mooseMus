@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.ComponentModel.DataAnnotations;
-
 
 namespace MooseMus.Models.ViewModels
 {
-    public class ProjectPartViewModel
+    public class OutputViewModel
     {
-        [Required(ErrorMessage ="Name is required")]
-        public string name { get; set; }
         public bool accepted { get; set; }
+        public List<String> outputObtained { get; set; }
+        public List<String> outputExpected { get; set; }
     }
 }

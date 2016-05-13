@@ -224,14 +224,13 @@
     <Compile Include="Models\ViewModels\CourseUsersViewModel.cs" />
     <Compile Include="Models\ViewModels\CourseViewModel.cs" />
     <Compile Include="Models\ViewModels\FrontPageViewModel.cs" />
+    <Compile Include="Models\ViewModels\IEnumerableList.cs" />
     <Compile Include="Models\ViewModels\OneSubmissionViewModel.cs" />
+    <Compile Include="Models\ViewModels\OutputViewModel.cs" />
     <Compile Include="Models\ViewModels\ProjectPartsListViewModel.cs" />
     <Compile Include="Models\ViewModels\ProjectPartsViewModel.cs" />
-    <Compile Include="Models\ViewModels\ProjectPartViewModel.cs" />
     <Compile Include="Models\ViewModels\ProjectViewModel.cs" />
-    <Compile Include="Models\ViewModels\StudentCourseViewModel.cs" />
     <Compile Include="Models\ViewModels\StudentProjectPartViewModel.cs" />
-    <Compile Include="Models\ViewModels\StudentProjectViewModel.cs" />
     <Compile Include="Models\ViewModels\StudentSubmitViewModel.cs" />
     <Compile Include="Models\ViewModels\SubmissionViewModel.cs" />
     <Compile Include="Models\ViewModels\TeacherAddEditViewModel.cs" />

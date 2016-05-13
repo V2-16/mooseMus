@@ -16,7 +16,10 @@ namespace MooseMus.Models.ViewModels
         public HttpPostedFileBase fileUploaded { get; set; }
         [Required(ErrorMessage = "Code must be submitted")]
         public string description { get; set; }
-        public bool accepted { get; set; }
-        public List<String> output { get; set; }
+        public List<OutputViewModel> result { get; set; }
+
+        public List<Boolean> accepted { get; set; }
+        public string projectAccepted { get; set; }
+
     }
 }

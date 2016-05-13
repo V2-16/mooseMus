@@ -18,7 +18,7 @@ namespace MooseMus.Services
             _db = new ApplicationDbContext();
         }
         //skilar inntaki/úttaki forrits sem var sent inn
-        public void saveResult(int stuID, int proParID, bool accepted, List<string> result)
+        public void saveResult(int stuID, int proParID, bool accepted, List<List<string>> result)
         {
             ResultModel nResult = new ResultModel();
 
@@ -26,10 +26,14 @@ namespace MooseMus.Services
             nResult.projectPartID = proParID;
             nResult.accepted = accepted;
             var studentOutput = "";
-            foreach(string i in result)
+            foreach(var res in result)
             {
-                studentOutput += i;
-                studentOutput += '\n';
+                foreach (var i in res)
+                {
+                    studentOutput += i;
+                    studentOutput += '\n';
+                }
+                studentOutput += "NewPair";
             }
             nResult.result = studentOutput;
 
