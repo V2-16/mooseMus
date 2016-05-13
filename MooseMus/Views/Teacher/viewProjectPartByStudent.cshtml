@@ -16,7 +16,7 @@
             @foreach (var sub in @Model.submissions)
             {
                 <tr>
-                    <td><a href="" onclick="getSubmission(@sub.submission)">@sub.submission</a></td>
+                    <td><a href="#" onclick="getSubmission(@sub.submission)">@sub.submission</a></td>
                     <td>@sub.accepted</td>
                     <td>@sub.best</td>
                 </tr>
@@ -26,10 +26,9 @@
 </div>
 
 <script type="text/javascript">
-    function getSubmission(st)
-    {
+    function getSubmission(st){
         $('#proj').load("/Student/getSubmission?submissionID=" + st);
-        return false;
+ //       return false;
     }
 </script>
 
