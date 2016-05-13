@@ -4,8 +4,6 @@
 <h2>Submit Project Part</h2>
 <p>@Model.description</p>
 
-@Html.ActionLink("GO BACK", "viewProjectToSubmit", "Student", new { stuID = Model.studentID, course = course.name }, null)
-
 <div class="row">
     <div class="col-md-4">
         @using (Html.BeginForm("submitAProjectPart", "Student", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
