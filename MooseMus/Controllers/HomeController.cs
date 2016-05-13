@@ -4,10 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using MooseMus.Handlers;
 using System.Web.Mvc;
 
 namespace MooseMus.Controllers
 {
+    [CustomHandleError]
     public class HomeController : Controller
     {
         private UserService _service = new UserService(null);

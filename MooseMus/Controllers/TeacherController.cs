@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MooseMus.Handlers;
 
 namespace MooseMus.Controllers
 {
+    [CustomHandleError]
     public class TeacherController : Controller
     {
         private CourseService _cservice = new CourseService();
