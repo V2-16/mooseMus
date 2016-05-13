@@ -54,7 +54,7 @@ namespace MooseMus.Controllers
         public ActionResult addUser(AddUserViewModel User)
         {
             _userService.addUserByID(User);
-            return View("Index");
+            return View("Home");
         }
 
         [HttpGet]
@@ -69,9 +69,9 @@ namespace MooseMus.Controllers
             if (ModelState.IsValid)
             {
                 _userService.updateUserByID(User);
-                return View("Index");
+                return View("Home");
             }
-            return View("Index");
+            return View("Home");
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace MooseMus.Controllers
         public ActionResult addCourse(AddCourseViewModel Course)
         {
             _courseService.addCourseByID(Course);
-            return View("Index");
+            return View("Home");
         }
 
         [HttpGet]
@@ -99,9 +99,9 @@ namespace MooseMus.Controllers
             if (ModelState.IsValid)
             {
                 _courseService.updateCourseByID(Course);
-                return View("Index");
+                return View("Home");
             }
-            return View("Index");
+            return View("Home");
         }
 
         [HttpGet]
@@ -166,7 +166,7 @@ namespace MooseMus.Controllers
         public ActionResult addUserToCourse(CourseUsersViewModel model)
         {
             _courseService.addUserToCourse(model);
-            return PartialView("Index");
+            return View("Home");
         }
 
         public ActionResult login()
