@@ -18,13 +18,10 @@ namespace MooseMus.Services
             _db = new ApplicationDbContext();
         }
         //skilar inntaki/úttaki forrits sem var sent inn
-        public void saveResult(int stuID, int proParID, bool accepted, List<List<string>> result)
+        public void saveResult(int stuID, int proParID, bool accepted, List<List<string>> result, List<Boolean> partsAccepted)
         {
             ResultModel nResult = new ResultModel();
 
-            nResult.studentID = stuID;
-            nResult.projectPartID = proParID;
-            nResult.accepted = accepted;
             var studentOutput = "";
             foreach(var res in result)
             {
@@ -35,7 +32,13 @@ namespace MooseMus.Services
                 }
                 studentOutput += "NewPair";
             }
-            nResult.result = studentOutput;
+
+            var partsAccept = "";
+            foreach(var res in partsAccepted)
+            {
+                partsAccept += res;
+                partsAccept += '\n';
+            }
 
             var best = _db.result.FirstOrDefault(x => x.bestResult == true);
             if (accepted == true)
@@ -58,6 +61,17 @@ namespace MooseMus.Services
                 }
             }
 
+            nResult.studentID = stuID;
+            nResult.projectPartID = proParID;
+            nResult.accepted = accepted;
+            nResult.partsAccepted = partsAccept;
+            nResult.result = studentOutput;
+
+            saveResults(nResult);
+        }
+
+        public void saveResults(ResultModel nResult)
+        {
             if (nResult != null)
             {
                 _db.result.Add(nResult);
@@ -72,7 +86,6 @@ namespace MooseMus.Services
             {
                 Debug.WriteLine(ex.Message);
             }
-
         }
 
         public void cleanDir(string path)
@@ -83,6 +96,27 @@ namespace MooseMus.Services
             {
                 file.Delete();
             }
+        }
+
+        public List<String> cleanUpInpOutp (string list)
+        {
+            string[] seperators = new string[] { "\r\n", "\n" };
+            List<String> listToReturn = list.Split(seperators, StringSplitOptions.None).ToList();
+            listToReturn.Remove("");
+
+            return listToReturn;
+        }
+
+        public ProcessStartInfo processStart(string exeFilePath)
+        {
+            var processInfoExe = new ProcessStartInfo(exeFilePath, "");
+            processInfoExe.UseShellExecute = false;
+            processInfoExe.RedirectStandardInput = true;
+            processInfoExe.RedirectStandardOutput = true;
+            processInfoExe.RedirectStandardError = true;
+            processInfoExe.CreateNoWindow = true;
+
+            return processInfoExe;
         }
     }
 }

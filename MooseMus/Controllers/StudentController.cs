@@ -58,7 +58,7 @@ namespace MooseMus.Controllers
             return PartialView(model);
         }
 
-        //Nemandi fer í skilasvæði
+        //Student goes into submission view
         public ActionResult submitAProjectPart(int stuID, int proParID)
         {
             var proPar = _pservice.getProjectPartByID(proParID);
@@ -91,7 +91,6 @@ namespace MooseMus.Controllers
             compile(workingFolder, compilerFolder, cppFileName);
 
             string[] pairSeperators = new string[] { "NewPair" };
-            string[] seperators = new string[] { "\r\n", "\n" };
 
             var outputFromTeacherPair = _pservice.getOutput(data.projectPartID).Split(pairSeperators, StringSplitOptions.None).ToList();
             var inputFromTeacherPair = _pservice.getInput(data.projectPartID).Split(pairSeperators, StringSplitOptions.None).ToList();
@@ -109,20 +108,14 @@ namespace MooseMus.Controllers
             {
                 for(int i = 0; i < outputFromTeacherPair.Count; i++)
                 {
-                    var outputFromTeacher = outputFromTeacherPair[i].Split(seperators, StringSplitOptions.None).ToList();
-                    var inputFromTeacher = inputFromTeacherPair[i].Split(seperators, StringSplitOptions.None).ToList();
+                    var outputFromTeacher = _sservice.cleanUpInpOutp(outputFromTeacherPair[i]);
+                    var inputFromTeacher = _sservice.cleanUpInpOutp(inputFromTeacherPair[i]);
                     List<String> outTeacher = new List<String>();
-                    inputFromTeacher.Remove("");
-                    outputFromTeacher.Remove("");
+                    
+                    outputTeacher.Add(outputFromTeacher);
 
-                    outputTeacher.Add(outputFromTeacher); 
-
-                    var processInfoExe = new ProcessStartInfo(exeFilePath, "");
-                    processInfoExe.UseShellExecute = false;
-                    processInfoExe.RedirectStandardInput = true;
-                    processInfoExe.RedirectStandardOutput = true;
-                    processInfoExe.RedirectStandardError = true;
-                    processInfoExe.CreateNoWindow = true;
+                    var processInfoExe = _sservice.processStart(exeFilePath);
+                       
                     using (var processExe = new Process())
                     {
                         processExe.StartInfo = processInfoExe;
@@ -159,16 +152,15 @@ namespace MooseMus.Controllers
                     success = "NOT accepted!";
                     allAccepted = false;
                 }
-                _sservice.saveResult(data.studentID, data.projectPartID, allAccepted, outputStudent); //Saving the data to database
+                _sservice.saveResult(data.studentID, data.projectPartID, allAccepted, outputStudent, accepted); //Saving the data to database
 
             }
             else
             {
-                ViewBag.Output = "Uh Oh! Your program did not compile, go back and fix it please..";
+                success = "Uh Oh! Your program did not compile, go back and fix it please..";
             }
 
-
-            _sservice.cleanDir(workingFolder);
+            _sservice.cleanDir(workingFolder); //Cleaning out the directory 
             ViewBag.Success = true;
             var model = new StudentSubmitViewModel()
             {
