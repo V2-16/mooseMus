@@ -41,9 +41,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.value, "Value", new { @class = "col-md-4 control-label" })
+                    @Html.LabelFor(m => m.value, "Value in %", new { @class = "col-md-4 control-label" })
                     <div class="col-md-8">
-                        @Html.ValidationMessageFor(m => m.value, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.value, "", new { @Value = @Model.value, @class = "text-danger" })
                         @Html.EditorFor(i => i.value, new { htmlAttributes = new { type = "number", min = 0, max = 100 } })
                     </div>
                 </div>
@@ -53,7 +53,7 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Edit" class="btn btn-default pull-right" />
+                        <input type="submit" value="Confirm changes" class="btn btn-default pull-right" />
                     </div>
                 </div>
             }

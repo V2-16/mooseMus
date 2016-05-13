@@ -3,6 +3,7 @@ using MooseMus.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -26,6 +27,20 @@ namespace MooseMus.Services
             nResult.accepted = accepted;
             nResult.result = result.ToString();
 
+            if(accepted == true)
+            {
+                var best = _db.result.FirstOrDefault(x => x.bestResult == true);
+                if (best != null)
+                {
+                    best.bestResult = false;
+                }
+                nResult.bestResult = true;
+            }
+            else
+            {
+                nResult.bestResult = false;
+            }
+
             if (nResult != null)
             {
                 _db.result.Add(nResult);
@@ -41,6 +56,16 @@ namespace MooseMus.Services
                 Debug.WriteLine(ex.Message);
             }
 
+        }
+
+        public void cleanDir(string path)
+        {
+            System.IO.DirectoryInfo di = new DirectoryInfo(path);
+
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
         }
     }
 }

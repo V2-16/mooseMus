@@ -2,13 +2,14 @@
 @model StudentSubmitViewModel
 
 <h2>Submit Project Part</h2>
+<p>@Model.description</p>
 
 <div class="row">
     <div class="col-md-4">
         @using (Html.BeginForm("submitAProjectPart", "Student", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
         {
             <div class="form-group">
-                @Html.LabelFor(m => m.fileUploaded, "File", new { @class = "col-md-2 control-label" })
+                @Html.LabelFor(m => m.fileUploaded, "Upload your file here", new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
                     @Html.TextBoxFor(m => m.fileUploaded, null, new { type = "file", @class = "input-file" })
                     @Html.ValidationMessageFor(m => m.fileUploaded, "", new { @class = "text-danger" })
@@ -18,7 +19,7 @@
             <input type="hidden" name="studentID" value=@Model.studentID>
             <input type="hidden" name="projectPartName" value=@Model.projectPartName>
             <input type="hidden" name="description" value=@Model.description>
-            <input type="Submit" class="btn btn-primary" value="Compile Test Code" />
+            <input type="Submit" class="btn btn-primary" value="Submit" />
         }
     </div>
 </div>
