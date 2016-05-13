@@ -73,7 +73,39 @@ namespace MooseMus.Tests.Services
 
             // Is the result/response correct
             // Assert:
-            Assert.AreEqual(1, result);
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void findUserIdBySSNTest()
+        {
+            //Prepping-making test data
+            // Arrange:
+            const string user = "2405853249";
+
+            // run the function to be tested - usually one line
+            // Act:
+            var result = _service.getUserIDByUserSSN(user);
+
+            // Is the result/response correct
+            // Assert:
+            Assert.AreEqual(4, result);
+        }
+
+        [TestMethod]
+        public void findUserIdBySSN2()
+        {
+            //Prepping-making test data
+            // Arrange:
+            const string user = "2233445566";
+
+            // run the function to be tested - usually one line
+            // Act:
+            var result = _service.getUserIDByUserSSN(user);
+
+            // Is the result/response correct
+            // Assert:
+            Assert.AreEqual("Database Error", result);
         }
     }
 }
