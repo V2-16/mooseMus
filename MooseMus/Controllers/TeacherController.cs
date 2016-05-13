@@ -1,9 +1,6 @@
 ﻿using MooseMus.Models.ViewModels;
 using MooseMus.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using MooseMus.Handlers;
 
@@ -24,9 +21,9 @@ namespace MooseMus.Controllers
             return View(model);
         }
 
-        /********************** KENNARi SKOÐAR SKIL *********************/
+        /********************** Teacher views projects *********************/
 
-        //Kennari skoðar öll skil í lið hjá nemanda
+        // Teacher views all projectparts
         public ActionResult viewProjectPartByStudent(int studentID, int projectPartID)
         {
             var project = _pservice.getProjectPartByID(projectPartID);
@@ -42,7 +39,7 @@ namespace MooseMus.Controllers
             return PartialView(model);
         }
 
-        //Kennari skoðar alla nemendur sem skráðir eru í tiltekið námskeið/verkefni
+        // Teacher views all students that have submitted given projects
         public ActionResult viewStudentsByProject(int projectID)
         {
             var pro = _pservice.getProjectByID(projectID);
@@ -55,7 +52,7 @@ namespace MooseMus.Controllers
             return PartialView(model);
         }
 
-        //Kennari skoðar bestu skil nemenda í tilteknu verkefni
+        // Teacher views best submitted projects
         public ActionResult viewProjectByStudent(int studentID, int projID)
         {
             var student = _uservice.getUserByID(studentID);
@@ -70,9 +67,9 @@ namespace MooseMus.Controllers
             return PartialView(model);
         }
 
-        /********************** KENNARY BÆTIR VIÐ VERKEFNI *********************/
+        /********************** Teacher adds a project *********************/
 
-        //Kennari velur að bæta við verkefni
+        // Teacher adds a project
         public ActionResult createProject(string course)
         {
             ViewBag.Success = false;
@@ -97,7 +94,7 @@ namespace MooseMus.Controllers
             return View("Index", model);
         }
 
-        /********************** KENNARI BÆTIR VIÐ LIÐ *********************/
+        /********************** Teacher adds a projectpart *********************/
 
         public ActionResult createProjectPart(string course)
         {
@@ -124,8 +121,9 @@ namespace MooseMus.Controllers
             return View("Index", model);
         }
 
-        /********************** KENNARI BREYTIR LIÐ *********************/
-        //Kennari velur verkefni til að breyta
+        /********************** Teacher edits project *********************/
+
+        // Teacher edits project
         public ActionResult projectSelectedToEdit(int projID)
         {
             var model = _pservice.getProjectPartsByID(projID);
@@ -147,7 +145,7 @@ namespace MooseMus.Controllers
             return PartialView(model);
         }
 
-        //Kennari breytir lið
+        // Teacher edits projectpart
         public ActionResult updateProjectPart(TeacherAddProjectPartViewModel toEdit)
         {
             ViewBag.Success = true;

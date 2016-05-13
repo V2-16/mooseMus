@@ -1,24 +1,19 @@
 ﻿@using MooseMus.Models.ViewModels
 @model StudentSubmitViewModel
-
 @{ 
     ViewBag.Title = "submission";
 }
-
-
-    <div class="form-horizontal">
-        <div class="form-group">s
-            <h2>submission</h2>
-
-                @using (Html.BeginForm("submission", "Student", FormMethod.Post, new { @class = "bla"}))
-                {
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            <input type="submit" value="submit" />
-                        </div>
+<div class="form-horizontal">
+    <div class="form-group">s
+        <h2>submission</h2>
+            @using (Html.BeginForm("submission", "Student", FormMethod.Post, new { @class = "bla"}))
+            {
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <input type="submit" value="submit" />
                     </div>
-                }
-        </div>
+                </div>
+            }
     </div>
+</div>

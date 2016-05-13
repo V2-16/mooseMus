@@ -18,7 +18,7 @@ namespace MooseMus.Services
         }
 
         
-        /****************** KENNARI & NEMANDI **************************/
+        /****************** Teacher and Student **************************/
         public OneSubmissionViewModel getSubmission(int submissionID)
         {
             var subm = _db.result.SingleOrDefault(x => x.ID == submissionID);
@@ -89,7 +89,7 @@ namespace MooseMus.Services
             return model;
         }
 
-        //Sækir öll skil nemanda í tilteknum lið
+        // Returns all submissions from  given projectpart
         public ProjectPartModel getProjectPartByID(int projectPartID)
         {
             var projectPart = _db.projectPart.FirstOrDefault(x => x.ID == projectPartID);
@@ -187,8 +187,8 @@ namespace MooseMus.Services
             return best;
         }
 
-        /****************** KENNARI **************************/
-        //Skilar öllum nemendum sem hafa skilað tilteknu verkefni
+        /****************** Teacher **************************/
+        // Returns all students that have submitted given project
         public List<UserViewModel> getStudentsInProject(int project)
         {
             var proj = _db.project.FirstOrDefault(x => x.ID == project);
@@ -217,7 +217,7 @@ namespace MooseMus.Services
             return model.name;
         }
 
-        //Kennari uppfærir verkefnispart í námskeiði
+        // Teacher updates projectpart
         public void updateProjectPart(TeacherAddProjectPartViewModel projParToEdit)
         {
             ProjectPartModel project = _db.projectPart.Where(x => x.ID == projParToEdit.ID).FirstOrDefault();
@@ -242,7 +242,7 @@ namespace MooseMus.Services
             return;
         }
 
-        //Kennari bætir við verkefni í námskeiði
+        // Teacher adds a project
         public void addProject(TeacherAddEditViewModel projectToAdd)
         {
             ProjectModel nProject = new ProjectModel();
@@ -254,14 +254,12 @@ namespace MooseMus.Services
 
             if (projectToAdd != null)
             {
-                    _db.project.Add(nProject);
+                _db.project.Add(nProject);
             }
-
             try
             {
                 _db.SaveChanges();
             }
-
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
@@ -279,6 +277,7 @@ namespace MooseMus.Services
             var input = _db.projectPart.FirstOrDefault(x => x.ID == projParID);
             return input.input;
         }
+
         public void addProjectPart(TeacherAddProjectPartViewModel partToAdd)
         {
             ProjectPartModel nPPart = new ProjectPartModel();
@@ -294,17 +293,14 @@ namespace MooseMus.Services
             {
                 _db.projectPart.Add(nPPart);
             }
-
             try
             {
                 _db.SaveChanges();
             }
-
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
         }
-
     }
 }

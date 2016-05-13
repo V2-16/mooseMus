@@ -1,9 +1,5 @@
 ﻿using MooseMus.Models.ViewModels;
 using MooseMus.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using MooseMus.Handlers;
 using System.Web.Mvc;
 
@@ -27,7 +23,7 @@ namespace MooseMus.Controllers
             {
                 var userID1 = _service.getUserIDByUserName(user.userName);
                 var userID2 = _service.getUserIDByPasswordAndConfirm(user.password, userID1);
-                if (userID2 != 0) //Athuga hvort password og notendanafn stemmi
+                if (userID2 != 0) //Checks if password is valid
                 {
                     var model = _service.getUserByID(userID1);
                     return View("Login", model);

@@ -12,7 +12,6 @@ namespace MooseMus.Models.ViewModels
     {
         public int userID { get; set; }
         public int courseID { get; set; }
-        [Required(ErrorMessage ="Role is required")]
         public string role { get; set; }
         public List<UserModel> users { get; set; }
         public List<CourseModel> courses { get; set; }

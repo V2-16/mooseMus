@@ -1,17 +1,13 @@
-﻿@using MooseMus.Models.ViewModels
-@model CourseProjectsViewModel
-
+﻿@model MooseMus.Models.ViewModels.CourseProjectsViewModel
 @{
     ViewBag.Title = @Model.name;
 }
-
 <nav class="navbar navbar-light bg-faded" role="navigation">
     <div class="navbar-header">
         <a class="navbar-brand" href="#">@Model.name</a>
     </div>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
-            
              <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">New project<b class="caret"></b></a>
                 <ul class="dropdown-menu">

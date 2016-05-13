@@ -12,7 +12,6 @@ namespace MooseMus.Models.ViewModels
         [Required(ErrorMessage = "Username is required")]
         [Remote("nameInDatabase", "Home", HttpMethod = "POST", ErrorMessage = "Username does not exist")]
         public string userName { get; set; }
-
         [Required(ErrorMessage = "Password is required")]
         public string password { get; set; }
     }

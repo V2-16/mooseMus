@@ -3,11 +3,8 @@ using MooseMus.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Net.Http;
 using MooseMus.Handlers;
 
 namespace MooseMus.Controllers
@@ -15,6 +12,7 @@ namespace MooseMus.Controllers
     [CustomHandleError]
     public class StudentController : Controller
     {
+        // Initializing services
         private CourseService _cservice = new CourseService();
         private ProjectService _pservice = new ProjectService();
         private UserService _uservice = new UserService(null);
@@ -29,6 +27,7 @@ namespace MooseMus.Controllers
             return View(model);
         }
 
+        // View of projectpart depending on given student and project
         public ActionResult viewProject(int stuID, int projID)
         {
             var student = _uservice.getUserByID(stuID);
@@ -43,6 +42,7 @@ namespace MooseMus.Controllers
             return PartialView(model);
         }
 
+        // View projectpart to submit depending on given student and project
         public ActionResult viewProjectToSubmit(int stuID, int projID)
         {
             var student = _uservice.getUserByID(stuID);
@@ -58,7 +58,7 @@ namespace MooseMus.Controllers
             return PartialView(model);
         }
 
-        //Nemandi fer í skilasvæði
+        // Overview of projects
         public ActionResult submitAProjectPart(int stuID, int proParID)
         {
             var proPar = _pservice.getProjectPartByID(proParID);
@@ -72,6 +72,7 @@ namespace MooseMus.Controllers
             return PartialView(model);
         }
 
+        // Given code from teacher with alterations
         [HttpPost]
         public ActionResult submitAProjectPart(StudentSubmitViewModel data)
         {
@@ -159,14 +160,14 @@ namespace MooseMus.Controllers
                     success = "NOT accepted!";
                     allAccepted = false;
                 }
+
                 _sservice.saveResult(data.studentID, data.projectPartID, allAccepted, outputStudent); //Saving the data to database
 
             }
             else
             {
-                ViewBag.Output = "Uh Oh! Your program did not compile, go back and fix it please..";
+                ViewBag.Output = "Your program did not compile, go back and fix it please..";
             }
-
 
             _sservice.cleanDir(workingFolder);
             ViewBag.Success = true;

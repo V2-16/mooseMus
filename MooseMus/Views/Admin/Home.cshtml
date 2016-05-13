@@ -1,27 +1,25 @@
 ﻿@model MooseMus.Models.ViewModels.AdminHomeViewModel
-
 @{
     ViewBag.Title = "Admin - Home";
 }
-
 <h2>Admin - home</h2>
-
 <div>
     <div class="navleft">
         <ul>
             <li>
                 <a href="javascript:addUser();" class="makeblack">Create User</a>
                 <script type="text/javascript">
-                    function addUser() {
+                    function addUser()
+                    {
                         $('#divResult').load("@Url.Action("addUser","Admin")");
-
                     }
                 </script>
             </li>
             <li>
                 <a href="javascript:editUser();"class="makeblack">Edit User</a>
                 <script type="text/javascript">
-                    function editUser() {
+                    function editUser()
+                    {
                         $('#divResult').load("@Url.Action("searchUser","Admin")");
                     }
                 </script>
@@ -29,7 +27,8 @@
             <li>
                 <a href="javascript:addCourse();"class="makeblack">Create Course</a>
                 <script type="text/javascript">
-                    function addCourse() {
+                    function addCourse()
+                    {
                         $('#divResult').load("@Url.Action("addCourse","Admin")");
                     }
                 </script>
@@ -37,7 +36,8 @@
             <li>
                 <a href="javascript:editCourse();"class="makeblack">Edit Course</a>
                 <script type="text/javascript">
-                    function editCourse() {
+                    function editCourse()
+                    {
                         $('#divResult').load("@Url.Action("searchCourse","Admin")");
                     }
                 </script>

@@ -1,16 +1,12 @@
-﻿@using MooseMus.Models.ViewModels
-@model TeacherAddEditViewModel
+﻿@model MooseMus.Models.ViewModels.TeacherAddEditViewModel
 @{
     ViewBag.Title = "New Project";
 }
-
 <h2>New Project</h2>
-
 @if (ViewBag.Success != null && ViewBag.Success == true)
 {
     Html.RenderPartial("CreatedSuccessfully");
 }
-
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
@@ -43,7 +39,6 @@
         </section>
     </div>
 </div>
-
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

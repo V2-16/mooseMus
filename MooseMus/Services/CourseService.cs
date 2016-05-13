@@ -20,12 +20,10 @@ namespace MooseMus.Services
 
         public int getCourseIDByName(string courseName)
         {
-            // XXX(snaedis): The page was faulting due to this, not sure how to handle
             try
             {
                 var course = _db.course.FirstOrDefault(x => x.name == courseName);
                 return course.Id;
-
             }
             catch
             {
@@ -104,7 +102,7 @@ namespace MooseMus.Services
             }
             catch (Exception e)
             {
-
+                throw new Exception("Error");
             }
         }
 
@@ -127,7 +125,7 @@ namespace MooseMus.Services
             }
             catch (Exception e)
             {
-
+                throw new Exception("Error");
             }
         }
 

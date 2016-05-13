@@ -1,10 +1,11 @@
 ﻿@using MooseMus.Models.ViewModels
 @model StudentSubmitViewModel
-
+@{
+    ViewBag.Title = @Model.projectPartName;
+}
 <h2>Submit Project Part</h2>
 <p>@Model.description</p>
-
-<div class="row">
+<div class="row">    
     <div class="col-md-4">
         @using (Html.BeginForm("submitAProjectPart", "Student", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
         {
@@ -23,14 +24,12 @@
         }
     </div>
 </div>
-
 <div id="result">
     @if (ViewBag.Success != null && ViewBag.Success == true)
     {
         Html.RenderPartial("Result",  Model);
     }
 </div>
-
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>

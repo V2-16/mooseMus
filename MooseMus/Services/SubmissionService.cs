@@ -17,7 +17,7 @@ namespace MooseMus.Services
         {
             _db = new ApplicationDbContext();
         }
-        //skilar inntaki/úttaki forrits sem var sent inn
+        // Saves optained input/output from students submission
         public void saveResult(int stuID, int proParID, bool accepted, List<List<string>> result)
         {
             ResultModel nResult = new ResultModel();
@@ -57,22 +57,18 @@ namespace MooseMus.Services
                     nResult.bestResult = false;
                 }
             }
-
             if (nResult != null)
             {
                 _db.result.Add(nResult);
             }
-
             try
             {
                 _db.SaveChanges();
             }
-
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
-
         }
 
         public void cleanDir(string path)

@@ -1,18 +1,15 @@
-﻿@using MooseMus.Models.ViewModels
-@model ProjectPartsViewModel
-
+﻿@model MooseMus.Models.ViewModels.ProjectPartsViewModel
 @{
     ViewBag.Title = @Model.projectName;
 }
-
 <ul>
-        @if (Model.parts != null)
+    @if (Model.parts != null)
+    {
+        foreach (var part in @Model.parts)
         {
-            foreach (var part in @Model.parts)
-            {
-                <li><a href="javascript:editProjectPart(@part.projectPartID);">@part.projectPartName</a></li>       
-            }
+            <li><a href="javascript:editProjectPart(@part.projectPartID);">@part.projectPartName</a></li>       
         }
+    }
 </ul>
 
 <script type="text/javascript">

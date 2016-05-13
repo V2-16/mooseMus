@@ -1,19 +1,15 @@
-﻿@using MooseMus.Models.ViewModels
-@model TeacherAddProjectPartViewModel
-    @{
-        ViewBag.Title = "Edit Project Part";
-    }
-
- @Model.partName
-
+﻿@model MooseMus.Models.ViewModels.TeacherAddProjectPartViewModel
+@{
+    ViewBag.Title = "Edit Project Part";
+}
+@Model.partName
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
             @using (Html.BeginForm("updateProjectPart", "Teacher", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Edit Project Part</h4>
-                
+                <h4>Edit Project Part</h4> 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     @Html.LabelFor(m => m.partName, "Title", new { @class = "col-md-4 control-label" })
@@ -63,7 +59,6 @@
         </section>
     </div>
 </div>
-
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
