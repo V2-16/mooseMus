@@ -17,8 +17,6 @@ namespace MooseMus.Models.ViewModels
         [Required(ErrorMessage = "Code must be submitted")]
         public string description { get; set; }
         public List<OutputViewModel> result { get; set; }
-
-        public List<Boolean> accepted { get; set; }
         public string projectAccepted { get; set; }
 
     }

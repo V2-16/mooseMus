@@ -19,24 +19,6 @@ namespace MooseMus.Services
 
         
         /****************** KENNARI & NEMANDI **************************/
-        public OneSubmissionViewModel getSubmission(int submissionID)
-        {
-            var subm = _db.result.SingleOrDefault(x => x.ID == submissionID);
-            var ppart = _db.projectPart.SingleOrDefault(x => x.ID == subm.projectPartID);
-            string[] seperators = new string[] { "\r\n", "\n" };
-            var outputExp = ppart.output.Split(seperators, StringSplitOptions.None).ToList();
-            var outputObt = subm.result.Split(seperators, StringSplitOptions.None).ToList();
-
-            OneSubmissionViewModel sub = new OneSubmissionViewModel()
-            {
-                outputObtained = outputObt,
-                outputExpected = outputExp,
-                title = ppart.title,
-                best = subm.bestResult,
-                accepted = subm.accepted
-            };
-            return sub;
-        }
 
         public CourseModel getCourseByProjectID(int projID)
         {

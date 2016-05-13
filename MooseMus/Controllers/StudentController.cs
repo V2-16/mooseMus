@@ -84,16 +84,14 @@ namespace MooseMus.Controllers
             var workingFolder = "C:\\Temp\\Mooshak2Code\\";
             var cppFileName = data.projectPartID + ".cpp";
             var exeFilePath = workingFolder + data.projectPartID + ".exe";
+            System.IO.Directory.CreateDirectory(workingFolder);
             data.fileUploaded.SaveAs(workingFolder + cppFileName);
-
             var compilerFolder = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\bin\\";
             // Execute the compiler:
-            compile(workingFolder, compilerFolder, cppFileName);
+            _sservice.compile(workingFolder, compilerFolder, cppFileName);
 
-            string[] pairSeperators = new string[] { "NewPair" };
-
-            var outputFromTeacherPair = _pservice.getOutput(data.projectPartID).Split(pairSeperators, StringSplitOptions.None).ToList();
-            var inputFromTeacherPair = _pservice.getInput(data.projectPartID).Split(pairSeperators, StringSplitOptions.None).ToList();
+            var outputFromTeacherPair = _sservice.splitByRun(_pservice.getOutput(data.projectPartID));
+            var inputFromTeacherPair = _sservice.splitByRun(_pservice.getInput(data.projectPartID));
 
             List<List<String>> outputTeacher = new List<List<String>>();
             List<List<String>> outputStudent = new List<List<String>>();
@@ -110,8 +108,7 @@ namespace MooseMus.Controllers
                 {
                     var outputFromTeacher = _sservice.cleanUpInpOutp(outputFromTeacherPair[i]);
                     var inputFromTeacher = _sservice.cleanUpInpOutp(inputFromTeacherPair[i]);
-                    List<String> outTeacher = new List<String>();
-                    
+                    List<String> outTeacher = new List<String>(); 
                     outputTeacher.Add(outputFromTeacher);
 
                     var processInfoExe = _sservice.processStart(exeFilePath);
@@ -120,7 +117,8 @@ namespace MooseMus.Controllers
                     {
                         processExe.StartInfo = processInfoExe;
                         processExe.Start();
-
+                        //Incase the process is stuck in a loop or any other problem that may cause an abnormal delay
+                        processExe.WaitForExit(10000); 
                         foreach (var inp in inputFromTeacher)
                         {
                             processExe.StandardInput.WriteLine(inp);
@@ -145,15 +143,14 @@ namespace MooseMus.Controllers
                         };
                         results.Add(oneModel);
                     }
-
                 }
                 if (accepted.Contains(false))
                 {
                     success = "NOT accepted!";
                     allAccepted = false;
                 }
-                _sservice.saveResult(data.studentID, data.projectPartID, allAccepted, outputStudent, accepted); //Saving the data to database
-
+                //Saving the data to database
+                _sservice.saveResult(data.studentID, data.projectPartID, allAccepted, outputStudent, accepted);
             }
             else
             {
@@ -168,34 +165,16 @@ namespace MooseMus.Controllers
                 projectPartID = data.projectPartID,
                 projectPartName = data.projectPartName,
                 description = data.description,
-                accepted = accepted,
                 result = results,
                 projectAccepted = success
             };
             return View(model);
         }
 
-        public void compile(string workingFolder, string compilerFolder, string cppFileName)
-        {
-            Process compiler = new Process();
-            compiler.StartInfo.FileName = "cmd.exe";
-            compiler.StartInfo.WorkingDirectory = workingFolder;
-            compiler.StartInfo.RedirectStandardInput = true;
-            compiler.StartInfo.RedirectStandardOutput = true;
-            compiler.StartInfo.UseShellExecute = false;
-
-            compiler.Start();
-            compiler.StandardInput.WriteLine("\"" + compilerFolder + "vcvars32.bat" + "\"");
-            compiler.StandardInput.WriteLine("cl.exe /nologo /EHsc " + cppFileName);
-            compiler.StandardInput.WriteLine("exit");
-            string output = compiler.StandardOutput.ReadToEnd();
-            compiler.WaitForExit();
-            compiler.Close();
-        }
         public ActionResult getSubmission(int submissionID)
         {
-            var model = _pservice.getSubmission(submissionID);
-            return PartialView(model);
+            var model = _sservice.getSubmission(submissionID);
+            return PartialView("Result", model);
         }
     }
 }
