@@ -18,7 +18,7 @@ namespace MooseMus.Handlers
 
             if (e is ArgumentException)
             {
-                viewName = "ErrorArgument";
+                viewName = "Error";
             }
 
             string currentController = (string)filterContext.RouteData.Values["controller"];
