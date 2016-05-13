@@ -86,7 +86,7 @@ namespace MooseMus.Controllers
             var cppFileName = data.projectPartID + ".cpp";
             var exeFilePath = workingFolder + data.projectPartID + ".exe";
             data.fileUploaded.SaveAs(workingFolder + cppFileName);
-            
+
             var compilerFolder = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\bin\\";
             // Execute the compiler:
             compile(workingFolder, compilerFolder, cppFileName);
@@ -111,7 +111,7 @@ namespace MooseMus.Controllers
                     processExe.StartInfo = processInfoExe;
                     processExe.Start();
 
-                    foreach(var inp in inputFromTeacher)
+                    foreach (var inp in inputFromTeacher)
                     {
                         processExe.StandardInput.WriteLine(inp);
                     }
@@ -170,7 +170,11 @@ namespace MooseMus.Controllers
             compiler.WaitForExit();
             compiler.Close();
         }
+        public ActionResult getSubmission(int submissionID)
+        {
+            var model = _pservice.getSubmission(submissionID);
+            return PartialView(model);
+        }
     }
-
 }
 

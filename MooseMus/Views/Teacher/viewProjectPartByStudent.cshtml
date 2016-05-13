@@ -1,14 +1,14 @@
 ﻿@using MooseMus.Models.ViewModels
 @model StudentProjectPartViewModel
 
-<h2>@Model.partName</h2>
+<h3>@Model.partName</h3>
 
 <div class="container">
     <table class="table table-hover table-condensed">
         <thead>
             <tr>
                 <th>Submission</th>
-                <th>Acceptec</th>
+                <th>Accepted</th>
                 <th>Best Submission</th>
             </tr>
         </thead>
@@ -16,7 +16,7 @@
             @foreach (var sub in @Model.submissions)
             {
                 <tr>
-                    <td><a href="#" onclick="getProject(@sub.submission)">@sub.submission</a></td>
+                    <td><a href="" onclick="getSubmission(@sub.submission)">@sub.submission</a></td>
                     <td>@sub.accepted</td>
                     <td>@sub.best</td>
                 </tr>
@@ -26,9 +26,10 @@
 </div>
 
 <script type="text/javascript">
-    function getProject(st)
+    function getSubmission(st)
     {
-        $('#proj').load("/Teacher/viewProjectByStudent?studentID" + st);
+        $('#proj').load("/Student/getSubmission?submissionID=" + st);
         return false;
     }
 </script>
+

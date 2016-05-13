@@ -1,0 +1,34 @@
+﻿@model MooseMus.Models.ViewModels.OneSubmissionViewModel
+
+<h3>Result</h3>
+
+<div class="container">
+    <table class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th>Output Obtained</th>
+                <th>OutPut Expected</th>
+                <th>Accepted</th>
+                <th>Best</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @foreach (var line in @Model.outputObtained)
+                    {
+                        <p>@line</p>
+                    }
+                </td>
+                <td>
+                    @foreach (var outp in Model.outputExpected)
+                    {
+                        <p>@outp</p>
+                    }
+                </td>
+                <td>@Model.accepted</td>
+                <td>@Model.best</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
