@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MooseMus.Handlers;
 using MooseMus.Models.Entities;
 
 namespace MooseMus.Controllers
 {
+    [CustomHandleError]
     public class AdminController : Controller
     {
         private UserService _userService = new UserService(null);
@@ -111,7 +113,7 @@ namespace MooseMus.Controllers
         [HttpPost]
         public ActionResult searchUser(AddUserViewModel user)
         {
-            if (ModelState.IsValid)
+            if (user.ssn != null)
             {
                 var userID = _userService.getUserIDByUserSSN(user.ssn);
                 if (userID != 0)

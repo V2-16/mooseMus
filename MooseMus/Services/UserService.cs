@@ -59,7 +59,7 @@ namespace MooseMus.Services
 
             catch (Exception e)
             {
-              
+                throw new Exception("Database Error",e);
             }
         }
 
@@ -94,13 +94,19 @@ namespace MooseMus.Services
         //Returns userID byr users SSN
         public int getUserIDByUserSSN(string ssn)
         {
+            
             var user = _db.user.SingleOrDefault(x => x.ssn == ssn);
-            if(user == null)
-            {
-                return 0;
-            }
+            
+         
+                if (user == null)
+                {
+                    throw new System.ArgumentException("Database Error", "user");
+                }
+               
             return user.ID;
-        }
+        
+
+         }
 
         //Returns userId using users password
         public int getUserIDByPassword(string password)
@@ -108,8 +114,8 @@ namespace MooseMus.Services
            var user = _db.user.SingleOrDefault(x => x.password == password);
            if (user == null)
            {
-                return 0;
-           }
+                throw new ArgumentException("Database Error", "user");
+            }
            return user.ID;
         }
 
@@ -119,7 +125,7 @@ namespace MooseMus.Services
             var user = _db.user.SingleOrDefault(x => x.password == password && x.ID == userID);
             if (user == null)
             {
-                return 0;
+                throw new ArgumentException("Database Error", "user");
             }
             return user.ID;
         }
@@ -145,7 +151,7 @@ namespace MooseMus.Services
             var user = _db.user.SingleOrDefault(x => x.ID == userID);
             if(user == null)
             {
-                return "0";
+                throw new ArgumentException("Database Error", "user");
             }
             return user.password;
         }

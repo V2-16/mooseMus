@@ -27,8 +27,7 @@ namespace MooseMus.Tests
         public IDbSet<ProjectPartModel> projectPart { get; set; }
         public IDbSet<ResultModel> result { get; set; }
         public IDbSet<UserModel> user { get; set; }
-        // TODO: bætið við fleiri færslum hér
-        // eftir því sem þeim fjölgar í AppDataContext klasanum ykkar!
+
 
         public int SaveChanges()
         {

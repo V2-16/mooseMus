@@ -6,11 +6,13 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using MooseMus.Handlers;
 using MooseMus.Models;
 
 namespace MooseMus.Controllers
 {
     [Authorize]
+    [CustomHandleError]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
