@@ -1,10 +1,8 @@
 ﻿@using MooseMus.Models.ViewModels
 @model FrontPageViewModel
-
 @{
     ViewBag.Title = "Front page";
 }
-
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
@@ -34,11 +32,9 @@
         </section>
     </div>
 </div>
-
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-
 @if (ViewBag.Success != null && ViewBag.Success == true)
 {
     Html.RenderPartial("CreatedSuccessfully");

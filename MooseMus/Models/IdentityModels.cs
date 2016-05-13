@@ -19,6 +19,7 @@ namespace MooseMus.Models
         }
     }
 
+    // Interface used for unittests
     public interface IAppDataContext
     {
         IDbSet<CourseModel> course { get; set; }
@@ -33,8 +34,6 @@ namespace MooseMus.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser> , IAppDataContext
     {
         public IDbSet<CourseModel> course { get; set; }
-        public IDbSet<CourseStudentModel> courseStudent { get; set; }
-        public IDbSet<CourseTeacherModel> courseTeacher { get; set; }
         public IDbSet<ProjectModel> project { get; set; }
         public IDbSet<ProjectPartModel> projectPart { get; set; }
         public IDbSet<ResultModel> result { get; set; }
@@ -44,6 +43,7 @@ namespace MooseMus.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+
         }
 
         public static ApplicationDbContext Create()

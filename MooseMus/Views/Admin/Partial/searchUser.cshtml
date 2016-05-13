@@ -1,15 +1,11 @@
 ﻿@model MooseMus.Models.ViewModels.AddUserViewModel
-<!DOCTYPE html>
 @{
     ViewBag.Title = "searchUser";
 }
-
 @using (Html.BeginForm("searchUser", "Admin"))
 {
     @Html.AntiForgeryToken()
-
     <div class="form-horizontal">
-
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.ssn, "SSN", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -18,13 +14,11 @@
                 @Html.ValidationMessageFor(model => model.ssn, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Search" class="btn btn-default pull-right" />
             </div>
         </div>
     </div>
-
 }
 

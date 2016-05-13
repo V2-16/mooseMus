@@ -21,7 +21,7 @@ namespace MooseMus.Controllers
         {
             if (user == null)
             {
-                return View();
+                throw new Exception("Error");
             }
             else
             {
@@ -146,23 +146,7 @@ namespace MooseMus.Controllers
             return View();
         }
 
-        //Admin tengir nemanda við námskeið
-        public ActionResult addStudent()
-        {
-            return View();
-        }
-
         [HttpGet]
-        //Admin tengir kennara við námskeið
-        public ActionResult addTeacher()
-        {
-            var courseList = _courseService.getAllCourses();
-            var userList = _userService.getAllUsers();
-
-            TeacherCourseViewModel model = new TeacherCourseViewModel { courses = courseList, users = userList  };
-            return PartialView("Partial/addTeacher", model);
-        }
-
         public ActionResult linkUser()
         {
             var courseList = _courseService.getAllCourses();

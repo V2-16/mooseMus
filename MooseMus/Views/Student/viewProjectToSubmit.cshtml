@@ -1,11 +1,9 @@
-﻿
-@using MooseMus.Models.ViewModels
-@model TeacherProjectStudentViewModel
-
+﻿@model MooseMus.Models.ViewModels.TeacherProjectStudentViewModel
+@{
+    ViewBag.Title = @Model.projectName;
+}
 <h3>@Model.projectName</h3>
 <p>@Model.description</p>
-
-
 <div class="container">
     <table class="table table-hover table-condensed">
         <thead>
@@ -29,9 +27,9 @@
         </tbody>
     </table>
 </div>
-
 <script type="text/javascript">
-    function submitProjPart(st, pp) {
+    function submitProjPart(st, pp)
+    {
         $('#proj').load('/Student/submitAProjectPart?stuID=' + st + '&proParID=' + pp);
         return false;
     }

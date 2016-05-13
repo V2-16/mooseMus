@@ -107,7 +107,7 @@ namespace MooseMus.Services
             }
             catch (Exception e)
             {
-
+                throw new Exception("Error");
             }
         }
 
@@ -130,7 +130,7 @@ namespace MooseMus.Services
             }
             catch (Exception e)
             {
-
+                throw new Exception("Error");
             }
         }
 

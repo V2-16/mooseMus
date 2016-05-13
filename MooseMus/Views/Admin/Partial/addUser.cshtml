@@ -2,11 +2,9 @@
 @{
     ViewBag.Title = "Create";
 }
-
 @using (Html.BeginForm("addUser" , "Admin"))
 {
     @Html.AntiForgeryToken()
-    
     <div class="ma-background">
         <div class="form-horizontal">
           <h4>Create User</h4>

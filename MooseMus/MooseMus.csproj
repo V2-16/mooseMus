@@ -207,8 +207,6 @@
     <Compile Include="Handlers\CustomHandleErrorAttribute.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Entities\CourseModel.cs" />
-    <Compile Include="Models\Entities\CourseStudentModel.cs" />
-    <Compile Include="Models\Entities\CourseTeacherModel.cs" />
     <Compile Include="Models\Entities\CourseUsersModel.cs" />
     <Compile Include="Models\Entities\ProjectModel.cs" />
     <Compile Include="Models\Entities\ProjectPartModel.cs" />
@@ -224,7 +222,6 @@
     <Compile Include="Models\ViewModels\CourseUsersViewModel.cs" />
     <Compile Include="Models\ViewModels\CourseViewModel.cs" />
     <Compile Include="Models\ViewModels\FrontPageViewModel.cs" />
-    <Compile Include="Models\ViewModels\IEnumerableList.cs" />
     <Compile Include="Models\ViewModels\OneSubmissionViewModel.cs" />
     <Compile Include="Models\ViewModels\OutputViewModel.cs" />
     <Compile Include="Models\ViewModels\ProjectPartsListViewModel.cs" />
@@ -253,7 +250,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\mooseMus_logo-01.png" />
     <Content Include="Content\Images\mooseMus_logo-02-01.png" />
-    <Content Include="Content\Images\mooseMus_logo_notext-02.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -338,7 +334,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\CourseUser\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
