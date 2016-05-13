@@ -114,7 +114,7 @@ namespace MooseMus.Services
            var user = _db.user.SingleOrDefault(x => x.password == password);
            if (user == null)
            {
-                throw new ArgumentException("Database Error", "user");
+                return 0;
             }
            return user.ID;
         }
