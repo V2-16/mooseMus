@@ -68,7 +68,6 @@ namespace MooseMus.Controllers
                 projectPartID = proPar.ID,
                 projectPartName = proPar.title,
                 description = proPar.description,
-                accepted = false
             };
             return PartialView(model);
         }
@@ -81,7 +80,7 @@ namespace MooseMus.Controllers
             // In this example, this is all hardcoded, but in a
             // real life scenario, there should probably be individual
             // folders for each user/assignment/milestone.
-            var projectAccepted = data.accepted;
+            var projectAccepted = false;
             var workingFolder = "C:\\Temp\\Mooshak2Code\\";
             var cppFileName = data.projectPartID + ".cpp";
             var exeFilePath = workingFolder + data.projectPartID + ".exe";
@@ -91,53 +90,83 @@ namespace MooseMus.Controllers
             // Execute the compiler:
             compile(workingFolder, compilerFolder, cppFileName);
 
+            string[] pairSeperators = new string[] { "NewPair" };
             string[] seperators = new string[] { "\r\n", "\n" };
-            var outputFromTeacher = _pservice.getOutput(data.projectPartID).Split(seperators, StringSplitOptions.None).ToList();
 
-            var inputFromTeacher = _pservice.getInput(data.projectPartID).Split(seperators, StringSplitOptions.None).ToList();
+            var outputFromTeacherPair = _pservice.getOutput(data.projectPartID).Split(pairSeperators, StringSplitOptions.None).ToList();
+            var inputFromTeacherPair = _pservice.getInput(data.projectPartID).Split(pairSeperators, StringSplitOptions.None).ToList();
+
+            List<List<String>> outputTeacher = new List<List<String>>();
+            List<List<String>> outputStudent = new List<List<String>>();
+            List<bool> accepted = new List<Boolean>();
+            List<OutputViewModel> results = new List<OutputViewModel>();
+
+
 
             // Check if the compile succeeded, and if it did,
             // we try to execute the code:
             if (System.IO.File.Exists(exeFilePath))
             {
-                var processInfoExe = new ProcessStartInfo(exeFilePath, "");
-                processInfoExe.UseShellExecute = false;
-                processInfoExe.RedirectStandardInput = true;
-                processInfoExe.RedirectStandardOutput = true;
-                processInfoExe.RedirectStandardError = true;
-                processInfoExe.CreateNoWindow = true;
-                using (var processExe = new Process())
+                for(int i = 0; i < outputFromTeacherPair.Count; i++)
                 {
-                    processExe.StartInfo = processInfoExe;
-                    processExe.Start();
+                    var outputFromTeacher = outputFromTeacherPair[i].Split(seperators, StringSplitOptions.None).ToList();
+                    var inputFromTeacher = inputFromTeacherPair[i].Split(seperators, StringSplitOptions.None).ToList();
+                    List<String> outTeacher = new List<String>();
+                    inputFromTeacher.Remove("");
+                    outputFromTeacher.Remove("");
 
-                    foreach (var inp in inputFromTeacher)
+                    outputTeacher.Add(outputFromTeacher); 
+
+                    var processInfoExe = new ProcessStartInfo(exeFilePath, "");
+                    processInfoExe.UseShellExecute = false;
+                    processInfoExe.RedirectStandardInput = true;
+                    processInfoExe.RedirectStandardOutput = true;
+                    processInfoExe.RedirectStandardError = true;
+                    processInfoExe.CreateNoWindow = true;
+                    using (var processExe = new Process())
                     {
-                        processExe.StandardInput.WriteLine(inp);
+                        processExe.StartInfo = processInfoExe;
+                        processExe.Start();
+
+                        foreach (var inp in inputFromTeacher)
+                        {
+                            processExe.StandardInput.WriteLine(inp);
+                        }
+
+                        var templines = new List<string>();
+
+                        // We then read the output of the program:
+                        while (!processExe.StandardOutput.EndOfStream)
+                        {
+                            templines.Add(processExe.StandardOutput.ReadLine());
+                        }
+
+                        projectAccepted = outputFromTeacher.SequenceEqual(templines);
+                        outputStudent.Add(templines);
+                        accepted.Add(projectAccepted);
+                        var oneModel = new OutputViewModel()
+                        {
+                            outputObtained = templines,
+                            outputExpected = outputFromTeacher,
+                            accepted = projectAccepted
+                        };
+                        results.Add(oneModel);
                     }
 
-                    // We then read the output of the program:
-                    var lines = new List<string>();
-                    while (!processExe.StandardOutput.EndOfStream)
-                    {
-                        lines.Add(processExe.StandardOutput.ReadLine());
-                    }
-
-                    projectAccepted = outputFromTeacher.SequenceEqual(lines);
-                    _sservice.saveResult(data.studentID, data.projectPartID, projectAccepted, lines); //Saving the data to database
-                    ViewBag.Output = lines;
                 }
+                bool allAccepted = true;
+                if (accepted.Contains(false))
+                {
+                    allAccepted = false;
+                }
+                _sservice.saveResult(data.studentID, data.projectPartID, allAccepted, outputStudent); //Saving the data to database
+
             }
             else
             {
                 ViewBag.Output = "Uh Oh! Your program did not compile, go back and fix it please..";
             }
 
-            List<String> outputExpected = new List<String>();
-            for (int i = 0; i < outputFromTeacher.Count; i++)
-            {
-                outputExpected.Add(outputFromTeacher[i]);
-            }
 
             _sservice.cleanDir(workingFolder);
             ViewBag.Success = true;
@@ -147,8 +176,8 @@ namespace MooseMus.Controllers
                 projectPartID = data.projectPartID,
                 projectPartName = data.projectPartName,
                 description = data.description,
-                accepted = projectAccepted,
-                output = outputExpected
+                accepted = accepted,
+                result = results
             };
             return View(model);
         }
