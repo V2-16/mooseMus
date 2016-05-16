@@ -13,5 +13,6 @@ namespace MooseMus.Models.Entities
         public string result { get; set; }
         public bool accepted { get; set; }
         public bool bestResult { get; set; }
+        public string partsAccepted { get; set; }
     }
 }

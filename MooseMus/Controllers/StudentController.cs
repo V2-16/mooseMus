@@ -90,13 +90,11 @@ namespace MooseMus.Controllers
 
             var compilerFolder = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\bin\\";
             // Execute the compiler:
-            compile(workingFolder, compilerFolder, cppFileName);
 
-            string[] pairSeperators = new string[] { "NewPair" };
-            string[] seperators = new string[] { "\r\n", "\n" };
+            _sservice.compile(workingFolder, compilerFolder, cppFileName);
 
-            var outputFromTeacherPair = _pservice.getOutput(data.projectPartID).Split(pairSeperators, StringSplitOptions.None).ToList();
-            var inputFromTeacherPair = _pservice.getInput(data.projectPartID).Split(pairSeperators, StringSplitOptions.None).ToList();
+            var outputFromTeacherPair = _sservice.splitByRun(_pservice.getOutput(data.projectPartID));
+            var inputFromTeacherPair = _sservice.splitByRun(_pservice.getInput(data.projectPartID));
 
             List<List<String>> outputTeacher = new List<List<String>>();
             List<List<String>> outputStudent = new List<List<String>>();
@@ -109,27 +107,21 @@ namespace MooseMus.Controllers
             // we try to execute the code:
             if (System.IO.File.Exists(exeFilePath))
             {
-                for(int i = 0; i < outputFromTeacherPair.Count; i++)
+                for (int i = 0; i < outputFromTeacherPair.Count; i++)
                 {
-                    var outputFromTeacher = outputFromTeacherPair[i].Split(seperators, StringSplitOptions.None).ToList();
-                    var inputFromTeacher = inputFromTeacherPair[i].Split(seperators, StringSplitOptions.None).ToList();
+                    var outputFromTeacher = _sservice.cleanUpInpOutp(outputFromTeacherPair[i]);
+                    var inputFromTeacher = _sservice.cleanUpInpOutp(inputFromTeacherPair[i]);
                     List<String> outTeacher = new List<String>();
-                    inputFromTeacher.Remove("");
-                    outputFromTeacher.Remove("");
+                    outputTeacher.Add(outputFromTeacher);
 
-                    outputTeacher.Add(outputFromTeacher); 
+                    var processInfoExe = _sservice.processStart(exeFilePath);
 
-                    var processInfoExe = new ProcessStartInfo(exeFilePath, "");
-                    processInfoExe.UseShellExecute = false;
-                    processInfoExe.RedirectStandardInput = true;
-                    processInfoExe.RedirectStandardOutput = true;
-                    processInfoExe.RedirectStandardError = true;
-                    processInfoExe.CreateNoWindow = true;
                     using (var processExe = new Process())
                     {
                         processExe.StartInfo = processInfoExe;
                         processExe.Start();
-
+                        //Incase the process is stuck in a loop or any other problem that may cause an abnormal delay
+                        processExe.WaitForExit(10000);
                         foreach (var inp in inputFromTeacher)
                         {
                             processExe.StandardInput.WriteLine(inp);
@@ -154,20 +146,18 @@ namespace MooseMus.Controllers
                         };
                         results.Add(oneModel);
                     }
-
                 }
                 if (accepted.Contains(false))
                 {
                     success = "NOT accepted!";
                     allAccepted = false;
                 }
-
-                _sservice.saveResult(data.studentID, data.projectPartID, allAccepted, outputStudent); //Saving the data to database
-
+                //Saving the data to database
+                _sservice.saveResult(data.studentID, data.projectPartID, allAccepted, outputStudent, accepted);
             }
             else
             {
-                ViewBag.Output = "Your program did not compile, go back and fix it please..";
+                success = "Your program did not compile, go back and fix it please..";
             }
 
             _sservice.cleanDir(workingFolder);
@@ -178,7 +168,6 @@ namespace MooseMus.Controllers
                 projectPartID = data.projectPartID,
                 projectPartName = data.projectPartName,
                 description = data.description,
-                accepted = accepted,
                 result = results,
                 projectAccepted = success
             };
@@ -204,8 +193,8 @@ namespace MooseMus.Controllers
         }
         public ActionResult getSubmission(int submissionID)
         {
-            var model = _pservice.getSubmission(submissionID);
-            return PartialView(model);
+            var model = _sservice.getSubmission(submissionID);
+            return PartialView("Result", model);
         }
     }
 }
